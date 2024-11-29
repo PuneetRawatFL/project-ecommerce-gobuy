@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Products</title>
+        <link rel="stylesheet" href="./style1.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav class="navbar">
+            <!-- insert logo -->
+            <div class="navbar-logo">
+                <img
+                    src="./images/Gobuy4copy.png"
+                    alt="GoBuy logo"
+                    class="logo"
+                />
+            </div>
+            <!-- list items -->
+            <div class="items">
+                <a href="./index.html">Home</a>
+                <a href="./products.html">Products</a>
+                <a href="#">About us</a>
+            </div>
+        </nav>
+
+        <!-- Navigation panel -->
+        <p class="navigation">
+            <a href="./index.html">HOME</a> /
+            <a href="./products.html">PRODUCTS</a>
+        </p>
+
+        <!-- PAGE HEADING  -->
+        <h2 class="page-name">Product List</h2>
+
+        <div class="loading-container">
+            <div class="loading-bar"></div>
+        </div>
+        <!-- div - one for filter - second for items -->
+        <div class="product-listing">
+            <!-- loading bar -->
+
+            <!-- div to apply filter -->
+            <div class="product-filtering">
+                <!-- accordian -->
+                <button class="accordion">Categories</button>
+                <div class="panel">
+                    <p id="cat1">All</p>
+                    <p id="cat2">Electronics</p>
+                    <p id="cat3">Jwellery</p>
+                    <p id="cat4">Men's Clothing</p>
+                    <p id="cat5">Women's Clothing</p>
+                </div>
+                <button class="accordion" id="sort-btn">Sort by</button>
+                <div class="panel">
+                    <p id="sort1">Ascending</p>
+                    <p id="sort2">Descending</p>
+                </div>
+
+                <!-- reset button -->
+                <button class="reset">Reset</button>
+            </div>
+
+            <!-- procudt div -->
+            <div class="items-list"></div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div class="footer-links">
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="customer-service">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nameTag">
+                <p>Made By Puneet Rawat</p>
+            </div>
+        </footer>
+
+        <!-- script -->
+        <script src="./script.js"></script>
+    </body>
+</html>
