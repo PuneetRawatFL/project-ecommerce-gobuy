@@ -14,8 +14,10 @@ body {
 /* navbar */
 .navbar {
     height: 80px;
+    /* position: fixed; */
+    top: 0;
     width: 100%;
-    background-color: #326273;
+    background-color: #36558f;
     display: flex;
     justify-content: space-between;
 }
@@ -74,7 +76,7 @@ body {
 .navigation a {
     font-size: 0.8rem;
     text-decoration: underline;
-    color: #5c9ead;
+    color: #6daedb;
 }
 .navbar .items a:hover {
     text-shadow: 0 5px 8px rgba(173, 216, 230, 1);
@@ -109,7 +111,7 @@ body {
     font-weight: 500;
     /* background-color: #c4cbca; */
     background-color: #f7f7ff;
-    color: #5c9ead;
+    color: #36558f;
     cursor: pointer;
     /* padding: 18px; */
     padding-left: 5px;
@@ -117,7 +119,7 @@ body {
     text-align: left;
     outline: none;
     transition: 0.4s;
-    border-bottom: 2px solid #326273;
+    border-bottom: 2px solid #36558f;
     border-radius: 5px;
 }
 .active {
@@ -131,6 +133,7 @@ body {
     height: auto;
     padding-left: 20px;
     background-color: white;
+    /* color: #71a9f7; */
     display: none;
     overflow: hidden;
     max-height: 0;
@@ -161,7 +164,7 @@ body {
     background-color: #f7f7ff;
     color: #326273;
     cursor: pointer;
-    border: 2px solid #326273;
+    border: 2px solid #36558f;
     border-radius: 10px;
 }
 
@@ -231,8 +234,8 @@ body {
     margin-top: 10px;
     height: 30px;
     width: 90%;
-    background-color: #595f72;
-    color: white;
+    /* background-color: #595f72; */
+    /* color: white; */
     border-radius: 20px;
     cursor: pointer;
     transition: 0.5s;
@@ -241,6 +244,7 @@ body {
     bottom: 10px;
     overflow: hidden;
     z-index: 1;
+    border: 2px solid #36558f;
 }
 
 /* div filling effect */
@@ -251,7 +255,8 @@ body {
     left: 0;
     width: 0;
     height: 100%;
-    background: #7c9eb2;
+    /* background: #6daedb; */
+    background: #71a9f7;
     z-index: -1;
     transition: 0.5s;
 }
@@ -264,7 +269,7 @@ footer {
     margin-top: 20vh;
     /* height: 150px; */
     width: 100%;
-    background-color: #326273;
+    background-color: #36558f;
     margin-bottom: 0%;
 }
 
@@ -289,6 +294,6 @@ footer {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 0%;
-    background-color: darkgray;
+    background-color: #96acb7;
     text-align: center;
 }
