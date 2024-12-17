@@ -256,12 +256,13 @@ body {
     width: 0;
     height: 100%;
     /* background: #6daedb; */
-    background: #71a9f7;
+    background: #36558f;
     z-index: -1;
     transition: 0.5s;
 }
 .product-listing .product-item .addButton:hover::before {
     width: 100%;
+    color: white;
 }
 
 /* footer style */

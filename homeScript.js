@@ -19,7 +19,7 @@ const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
 
 let index = 0;
-
+//carous
 function showNext() {
     if (index < carouselItems.length - 4) {
         index++;

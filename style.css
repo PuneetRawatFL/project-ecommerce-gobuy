@@ -223,7 +223,7 @@ footer {
     align-items: center;
 }
 .footer-links h3 {
-    color: #08070d;
+    color: white;
 }
 .footer-links ul {
     margin-top: 5px;
@@ -238,9 +238,15 @@ footer {
 }
 .nameTag {
     height: 30px;
+    color: white;
     width: 100%;
     margin-top: 20px;
     margin-bottom: 0%;
-    background-color: #7cb7df;
-    text-align: center;
+    background-color: #36558f;
+    text-align: right;
+    /* padding-right: 20px; */
+}
+
+.nameTag p {
+    margin-right: 10px;
 }
