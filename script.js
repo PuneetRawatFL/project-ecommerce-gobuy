@@ -8,13 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     //fetch footer
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch("footer.html")
-            .then((response) => response.text())
-            .then((data) => {
-                document.querySelector("footer").innerHTML = data;
-            });
-    });
+    fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+            document.querySelector("footer").innerHTML = data;
+        });
 
     //fetch announcement bar
     fetch("announcement-bar.html")
