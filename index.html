@@ -1,157 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>HomePage</title>
-		<link rel="stylesheet" href="./homepage.css" />
-		<!-- font family -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body>
-		<!-- navbar -->
-		<nav class="navbar"></nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HomePage</title>
+        <link rel="stylesheet" href="./homepage.css" />
+        <!-- font family -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- announcement bar -->
+        <div class="announcement-bar"></div>
 
-		<!-- banner -->
-		<div class="banner">
-			<img src="./images/sale_banner1.jpg" alt="" />
-		</div>
+        <!-- navbar -->
+        <nav class="navbar"></nav>
 
-		<!-- description -->
-		<div class="description">
-			<!-- text area -->
-			<p id="line1">
-				Welcome to GoBuy, your ultimate destination for quick and efficient
-				online shopping.
-			</p>
-			<p id="line2">
-				Experience the difference with GoBuy and shop faster than ever before.
-			</p>
-		</div>
-		<!-- button - go to shop - direct to product page -->
-		<button id="btn1" onclick="location.href='./products.html'">
-			Go To Shop
-		</button>
+        <!-- banner -->
+        <!-- <div class="banner">
+            <img src="./images/sale_banner1.jpg" alt="" />
+        </div> -->
+        <div class="deals-container">
+            <button class="prev-btn-slide">&lt;</button>
+            <div class="deals">
+                <div class="deal-item">
+                    <div class="deal-card">
+                        <img
+                            id="deal-card-img"
+                            src="./images/sale_banner1.jpg"
+                            alt="Product 1"
+                        />
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <div class="deal-card">
+                        <img src="./images/sale_banner1.jpg" alt="Product 2" />
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <div class="deal-card">
+                        <img src="./images/sale_banner1.jpg" alt="Product 3" />
+                    </div>
+                </div>
+            </div>
+            <button class="next-btn-slide">&gt;</button>
+        </div>
 
-		<!-- carousel title -->
-		<h1 id="carousel-title">Explore <span>Bestsellers</span></h1>
+        <!-- description -->
+        <div class="description">
+            <!-- text area -->
+            <p id="line1">
+                Welcome to GoBuy, your ultimate destination for quick and
+                efficient online shopping.
+            </p>
+            <p id="line2">
+                Experience the difference with GoBuy and shop faster than ever
+                before.
+            </p>
+        </div>
+        <!-- button - go to shop - direct to product page -->
+        <div class="go-to-shop">
+            <button id="btn1" onclick="location.href='./products.html'">
+                Go To Shop
+            </button>
+        </div>
 
-		<!-- products carousel -->
-		<div class="carousel-container">
-			<button class="prev-btn">&lt;</button>
-			<div class="carousel">
-				<div class="carousel-item">
-					<div class="product-card">
-						<img id="product-card-img" src="/" alt="Product 1" />
-						<p id="product-card-price">$19.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 2" />
-						<p>$29.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 3" />
-						<p>$39.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 4" />
-						<p>$39.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 5" />
-						<p>$39.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 6" />
-						<p>$39.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 7" />
-						<p>$39.99</p>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="product-card">
-						<img src="" alt="Product 8" />
-						<p>$39.99</p>
-					</div>
-				</div>
-			</div>
-			<button class="next-btn">&gt;</button>
-		</div>
+        <!-- carousel title -->
+        <h1 id="carousel-title">Explore <span>Bestsellers</span></h1>
 
-		<!-- FAQ section -->
-		<div class="faq-section">
-			<h1 class="faq-title">Frequently Asked Questions (FAQs)</h1>
-			<button class="accordion">Q1: What is GoBuy?</button>
-			<div class="panel">
-				<p>
-					A: GoBuy is an online marketplace that connects buyers with a wide
-					variety of products across different categories. We aim to provide a
-					seamless shopping experience with great deals and customer service.
-				</p>
-			</div>
-			<button class="accordion">Q2: What is your return policy?</button>
-			<div class="panel">
-				<p>
-					A: We have a hassle-free return policy. If you are not satisfied with
-					your purchase, you can return the product within 30 days of delivery.
-					Please ensure the product is in its original condition and packaging.
-				</p>
-			</div>
-			<button class="accordion">Q3: When will I receive my refund?</button>
-			<div class="panel">
-				<p>
-					A: Refunds are processed within 7-10 business days after we receive
-					the returned product. The refund will be credited to your original
-					payment method.
-				</p>
-			</div>
-			<button class="accordion">Q4: What payment methods do you accept?</button>
-			<div class="panel">
-				<p>
-					A: We accept various payment methods, including credit/debit cards,
-					net banking, UPI, and popular digital wallets. You can choose your
-					preferred payment method during checkout.
-				</p>
-			</div>
-			<button class="accordion">Q5: Is my payment information secure?</button>
-			<div class="panel">
-				<p>
-					A: Yes, we use industry-standard encryption technologies to ensure
-					your payment information is secure. We never store your payment
-					details on our servers.
-				</p>
-			</div>
-			<button class="accordion">Q6: How can I contact customer support?</button>
-			<div class="panel">
-				<p>
-					A: You can contact our customer support team by clicking on the
-					"Contact Us" link at the bottom of the homepage. We offer support via
-					email, phone, and live chat.
-				</p>
-			</div>
-		</div>
+        <!-- products carousel -->
+        <div class="carousel-container">
+            <button class="prev-btn">&lt;</button>
+            <div class="carousel">
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img id="product-card-img" src="/" alt="Product 1" />
+                        <p id="product-card-price"></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 2" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 3" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 4" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 5" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 6" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 7" />
+                        <p></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="product-card">
+                        <img src="" alt="Product 8" />
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <button class="next-btn">&gt;</button>
+        </div>
 
-		<!-- footer -->
-		<footer></footer>
+        <!-- FAQ section -->
+        <div class="faq-section">
+            <h1 class="faq-title">Frequently Asked Questions (FAQs)</h1>
+            <button class="accordion">Q1: What is GoBuy?</button>
+            <div class="panel">
+                <p>
+                    A: GoBuy is an online marketplace that connects buyers with
+                    a wide variety of products across different categories. We
+                    aim to provide a seamless shopping experience with great
+                    deals and customer service.
+                </p>
+            </div>
+            <button class="accordion">Q2: What is your return policy?</button>
+            <div class="panel">
+                <p>
+                    A: We have a hassle-free return policy. If you are not
+                    satisfied with your purchase, you can return the product
+                    within 30 days of delivery. Please ensure the product is in
+                    its original condition and packaging.
+                </p>
+            </div>
+            <button class="accordion">
+                Q3: When will I receive my refund?
+            </button>
+            <div class="panel">
+                <p>
+                    A: Refunds are processed within 7-10 business days after we
+                    receive the returned product. The refund will be credited to
+                    your original payment method.
+                </p>
+            </div>
+            <button class="accordion">
+                Q4: What payment methods do you accept?
+            </button>
+            <div class="panel">
+                <p>
+                    A: We accept various payment methods, including credit/debit
+                    cards, net banking, UPI, and popular digital wallets. You
+                    can choose your preferred payment method during checkout.
+                </p>
+            </div>
+            <button class="accordion">
+                Q5: Is my payment information secure?
+            </button>
+            <div class="panel">
+                <p>
+                    A: Yes, we use industry-standard encryption technologies to
+                    ensure your payment information is secure. We never store
+                    your payment details on our servers.
+                </p>
+            </div>
+            <button class="accordion">
+                Q6: How can I contact customer support?
+            </button>
+            <div class="panel">
+                <p>
+                    A: You can contact our customer support team by clicking on
+                    the "Contact Us" link at the bottom of the homepage. We
+                    offer support via email, phone, and live chat.
+                </p>
+            </div>
+        </div>
 
-		<!-- script -->
-		<script src="./homeScript.js"></script>
-	</body>
+        <!-- footer -->
+        <footer></footer>
+
+        <!-- script -->
+        <script src="./homeScript.js"></script>
+    </body>
 </html>
