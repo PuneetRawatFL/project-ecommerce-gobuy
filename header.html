@@ -1,33 +1,35 @@
 <!-- logo -->
 <div class="navbar-logo">
-    <img src="./images/Gobuy4copy.png" alt="GoBuy logo" class="logo" />
+    <a href="./index.html">
+        <img
+            src="./images/Screenshot_2024-12-19_124340-removebg-preview.png"
+            alt="GoBuy logo"
+            class="logo"
+            onclick=""
+        />
+    </a>
 </div>
 <!-- list items -->
 <div class="items">
     <a href="./index.html">Home</a>
     <a href="./products.html">Products</a>
     <a href="#">About us</a>
+    <div class="shopping-cart">
+        <img src="./images/shopping-bag.png" alt="" />
+        <div class="cart-item-count">1</div>
+    </div>
 </div>
 
 <style>
     /* navbar */
-    .navbar {
-        margin-top: 30px;
-        height: 80px;
-        position: fixed;
-        z-index: 100;
-        top: 0;
-        width: 100%;
-        /* background-color: #326273; */
-        background-color: #36558f;
-        display: flex;
-        justify-content: space-between;
-    }
+
     .navbar-logo {
         height: 80px;
+        cursor: pointer;
     }
     .navbar-logo img {
         margin-top: 10px;
+        margin-left: 5px;
         height: 80%;
         object-fit: cover;
         max-height: 100%;
@@ -42,6 +44,27 @@
     .navbar .items a {
         color: #eeeeee;
         font-size: 1.1rem;
+    }
+    .navbar .items .shopping-cart {
+        position: relative;
+        cursor: pointer;
+    }
+    .navbar .items .shopping-cart img {
+        height: 30px;
+    }
+    .navbar .items .cart-item-count {
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        font-size: 0.8rem;
+        color: #eeeeee;
+        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
     .navbar .items a:hover {
         text-shadow: 0 5px 8px rgba(173, 216, 230, 1);

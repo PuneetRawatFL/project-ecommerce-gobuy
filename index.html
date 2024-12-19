@@ -10,20 +10,43 @@
             href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
         />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
+        </style>
+
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            $(function () {
+                // $("#header").load("header.html");
+                $(".navbar").load("header.html");
+                $("#footer").load("footer.html");
+            });
+        </script>
+
+        <!-- script -->
+        <script src="./homeScript.js" defer></script>
     </head>
     <body>
         <!-- announcement bar -->
         <div class="announcement-bar"></div>
 
         <!-- navbar -->
-        <nav class="navbar"></nav>
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
+        <!-- <include src="header.html"></include> -->
 
-        <!-- banner -->
-        <!-- <div class="banner">
-            <img src="./images/sale_banner1.jpg" alt="" />
-        </div> -->
+        <!-- deals banner -->
+
         <div class="deals-container">
-            <button class="prev-btn-slide">&lt;</button>
+            <!-- previous button -->
+            <button class="prev-btn-slide"><span>&lt;</span></button>
+
             <div class="deals">
                 <div class="deal-item">
                     <div class="deal-card">
@@ -36,16 +59,26 @@
                 </div>
                 <div class="deal-item">
                     <div class="deal-card">
-                        <img src="./images/sale_banner1.jpg" alt="Product 2" />
+                        <img src="./images/deal banner2.jpg" alt="Product 2" />
                     </div>
                 </div>
                 <div class="deal-item">
                     <div class="deal-card">
-                        <img src="./images/sale_banner1.jpg" alt="Product 3" />
+                        <img src="./images/deal banner3.jpg" alt="Product 3" />
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <div class="deal-card">
+                        <img src="./images/deal banner4.jpg" alt="Product 3" />
+                    </div>
+                </div>
+                <div class="deal-item">
+                    <div class="deal-card">
+                        <img src="./images/deal banner5.jpg" alt="Product 3" />
                     </div>
                 </div>
             </div>
-            <button class="next-btn-slide">&gt;</button>
+            <button class="next-btn-slide"><span>&gt;</span></button>
         </div>
 
         <!-- description -->
@@ -190,9 +223,8 @@
         </div>
 
         <!-- footer -->
-        <footer></footer>
-
-        <!-- script -->
-        <script src="./homeScript.js"></script>
+        <footer>
+            <div id="footer"></div>
+        </footer>
     </body>
 </html>

@@ -1,18 +1,18 @@
-//fetch header navbar and navbar
+// fetch header navbar and navbar
 document.addEventListener("DOMContentLoaded", () => {
     //fetch header
-    fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-            document.querySelector(".navbar").innerHTML = data;
-        });
+    // fetch("header.html")
+    //     .then((response) => response.text())
+    //     .then((data) => {
+    //         document.querySelector(".navbar").innerHTML = data;
+    //     });
 
     //fetch footer
-    fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-            document.querySelector("footer").innerHTML = data;
-        });
+    // fetch("footer.html")
+    //     .then((response) => response.text())
+    //     .then((data) => {
+    //         document.querySelector("footer").innerHTML = data;
+    //     });
 
     //fetch announcement bar
     fetch("announcement-bar.html")
@@ -59,6 +59,7 @@ function showPrevDeal() {
     }
 }
 
+//adding event listener to buttons
 nextBtnSlide.addEventListener("click", showNextDeal);
 prevBtnSlide.addEventListener("click", showPrevDeal);
 
@@ -109,3 +110,7 @@ var productCard = document.querySelectorAll(".product-card");
             });
         });
 })();
+
+//
+let header = document.querySelector("#header");
+console.log(header.innerHTML);
