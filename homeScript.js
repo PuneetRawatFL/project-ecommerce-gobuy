@@ -1,11 +1,13 @@
 // fetch header navbar and navbar
 document.addEventListener("DOMContentLoaded", () => {
-    //fetch header
-    // fetch("header.html")
-    //     .then((response) => response.text())
-    //     .then((data) => {
-    //         document.querySelector(".navbar").innerHTML = data;
-    //     });
+    // fetch header
+    fetch("header.html")
+        .then((response) => {
+            response.text();
+        })
+        .then((data) => {
+            console.log(data);
+        });
 
     //fetch footer
     // fetch("footer.html")
@@ -112,5 +114,3 @@ var productCard = document.querySelectorAll(".product-card");
 })();
 
 //
-let header = document.querySelector("#header");
-console.log(header.innerHTML);

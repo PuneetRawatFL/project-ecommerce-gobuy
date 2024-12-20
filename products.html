@@ -9,13 +9,37 @@
             href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
         />
+
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            $(function () {
+                // $("#header").load("header.html");
+                $(".navbar").load("header.html", function () {
+                    $(".shopping-cart").on("click", function () {
+                        popup();
+                    });
+                });
+                $("#footer").load("footer.html");
+                $(".cart-modal").load("cart.html");
+            });
+        </script>
+
+        <!-- script -->
+        <script src="./script.js" defer></script>
     </head>
     <body>
         <!-- announcement bar -->
         <div class="announcement-bar"></div>
 
         <!-- Navbar -->
-        <nav class="navbar"></nav>
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
 
         <!-- Navigation panel -->
         <p class="navigation">
@@ -58,9 +82,8 @@
         </div>
 
         <!-- footer -->
-        <footer></footer>
-
-        <!-- script -->
-        <script src="./script.js"></script>
+        <footer>
+            <div id="footer"></div>
+        </footer>
     </body>
 </html>

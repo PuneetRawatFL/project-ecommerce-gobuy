@@ -24,13 +24,23 @@ body {
     margin-top: 30px;
     height: 80px;
     position: fixed;
-    z-index: 100;
+    z-index: 5;
     top: 0;
     width: 100%;
     /* background-color: #326273; */
     background-color: #36558f;
     display: flex;
     justify-content: space-between;
+}
+
+/* cart modal */
+.cart-modal {
+    position: relative;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 6;
+    transition: transform 0.5s ease;
 }
 
 /* deal slider buttons */

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HomePage</title>
         <link rel="stylesheet" href="./homepage.css" />
+
         <!-- font family -->
         <link
             href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -23,8 +24,26 @@
         <script>
             $(function () {
                 // $("#header").load("header.html");
-                $(".navbar").load("header.html");
-                $("#footer").load("footer.html");
+                $(".navbar").load("header.html", function () {
+                    $.getScript("header-script.js");
+                    //cart modal
+                    $.getScript("cart-script.js");
+                    // $(".cart-modal").load("cart.html"); //remove after designing
+                    let visible = "false";
+                    $(".shopping-cart").on("click", function () {
+                        // popup();
+                        if (visible === "false") {
+                            $(".cart-modal").load("cart.html");
+                            visible = "true";
+                        } else {
+                            $(".cart-modal").empty();
+                            visible = "false";
+                        }
+                    });
+                });
+                $("#footer").load("footer.html", function () {
+                    $.getScript("footer-script.js");
+                });
             });
         </script>
 
@@ -40,6 +59,9 @@
             <div id="header"></div>
         </nav>
         <!-- <include src="header.html"></include> -->
+
+        <!-- cart modal -->
+        <div class="cart-modal"></div>
 
         <!-- deals banner -->
 
