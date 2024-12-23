@@ -1,175 +1,176 @@
 <div class="cart-container">
-	<div class="cart-area">
-		<div class="cart-title">
-			<p class="cart-head">Your Cart</p>
-			<p class="cart-close">&#10005;</p>
-		</div>
-		<div class="cart-items">
-			<div class="item-image item">
-				<img src="./images/sale_banner1.jpg" alt="" />
-			</div>
-			<div class="stack-items">
-				<div class="item-details item">
-					<p>detail<br />detail</p>
-				</div>
-				<div class="item-quantity item">
-					<div class="item-quantity-container">
-						<button id="itemIncrease" class="counter">+</button>
-						<div id="itemCount"><p></p></div>
-						<button id="itemDecrease" class="counter">-</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="cart-area">
+        <div class="cart-title">
+            <p class="cart-head">Your Cart</p>
+            <p class="cart-close">&#10005;</p>
+        </div>
+        <div class="cart-items">
+            <div class="item-image item">
+                <img id="item-image" src="./images/sale_banner1.jpg" alt="" />
+            </div>
+            <div class="stack-items">
+                <div class="item-details item">
+                    <p id="item-details">this is a detail</p>
+                    <p id="item-price"></p>
+                </div>
+                <div class="item-quantity item">
+                    <div class="item-quantity-container">
+                        <button id="itemIncrease" class="counter">+</button>
+                        <div id="itemCount"><p></p></div>
+                        <button id="itemDecrease" class="counter">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	.cart-container {
-		z-index: 6;
-		/* position: relative; */
-		/* visibility: visible; */
-	}
-	.cart-area {
-		background-color: #f6f2ff;
-		width: 300px;
-		height: 100vh;
-		/* position: absolute; */
-		/* top: 0; */
-		/* right: 0; */
-		padding: 10px;
-	}
-	.cart-title {
-		/* background-color: blue; */
-		height: 40px;
-		width: 100%;
-		/* padding: 10px; */
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	.cart-head {
-		font-size: 1.5rem;
-	}
-	.cart-close {
-		font-size: 1.5rem;
-		font-weight: 900;
-		cursor: pointer;
-	}
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .cart-container {
+        z-index: 6;
+        /* position: relative; */
+        /* visibility: visible; */
+    }
+    .cart-area {
+        background-color: #f6f2ff;
+        width: 300px;
+        height: 100vh;
+        /* position: absolute; */
+        /* top: 0; */
+        /* right: 0; */
+        padding: 10px;
+    }
+    .cart-title {
+        /* background-color: blue; */
+        height: 40px;
+        width: 100%;
+        /* padding: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .cart-head {
+        font-size: 1.5rem;
+    }
+    .cart-close {
+        font-size: 1.5rem;
+        font-weight: 900;
+        cursor: pointer;
+    }
 
-	/* cart item list */
-	.cart-items {
-		margin-top: 20px;
-		height: 100px;
-		width: 100%;
-		/* background-color: blue; */
-		display: flex;
-		justify-content: space-between;
-		padding: 2px;
-		gap: 5px;
-	}
-	.item {
-		background-color: #f6f2ff;
-	}
-	.item-image {
-		padding: 5px;
-		height: 90px;
-		width: 30%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.item-image img {
-		height: 100%;
-		max-width: 100%;
-		/* object-fit: cover; */
-	}
-	/*  */
-	.stack-items {
-		width: 70%;
-		height: 100%;
-		display: flex;
-		align-items: start;
-		justify-content: space-between;
-		flex-direction: column;
-	}
+    /* cart item list */
+    .cart-items {
+        margin-top: 20px;
+        height: 100px;
+        width: 100%;
+        /* background-color: blue; */
+        display: flex;
+        justify-content: space-between;
+        padding: 2px;
+        gap: 5px;
+    }
+    .item {
+        background-color: #f6f2ff;
+    }
+    .item-image {
+        padding: 5px;
+        height: 90px;
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .item-image img {
+        height: 100%;
+        max-width: 100%;
+        /* object-fit: cover; */
+    }
+    /*  */
+    .stack-items {
+        width: 70%;
+        height: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        flex-direction: column;
+    }
 
-	.item-details {
-		/* width: 50%; */
-		margin-top: 5px;
-		/* background-color: aqua; */
-	}
-	.item-quantity {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: end;
-	}
-	.item-quantity-container {
-		height: 25px;
-		width: 80%;
-		display: flex;
-		align-items: center;
-		justify-content: end;
-	}
-	#itemCount {
-		max-height: 100%;
-		/* height: 100%; */
-		height: 23px;
-		font-weight: 300;
-		color: #2c2c2c; /* Dark text color */
-		text-align: center;
-		width: 40px;
-		background-color: #eeeeee;
-		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-		/* padding: 1px; */
-		border: 1px solid #36558f;
-		/* border: 1px solid gray; */
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	#itemCount p {
-		max-height: 100%;
-		/* font-size: 1rem; */
-		/* height: 50%;
+    .item-details {
+        /* width: 50%; */
+        margin-top: 5px;
+        /* background-color: aqua; */
+    }
+    .item-quantity {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .item-quantity-container {
+        height: 25px;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    #itemCount {
+        max-height: 100%;
+        /* height: 100%; */
+        height: 23px;
+        font-weight: 300;
+        color: #2c2c2c; /* Dark text color */
+        text-align: center;
+        width: 40px;
+        background-color: #eeeeee;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        /* padding: 1px; */
+        border: 1px solid #36558f;
+        /* border: 1px solid gray; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #itemCount p {
+        max-height: 100%;
+        /* font-size: 1rem; */
+        /* height: 50%;
         border-top: 1px solid gray;
         border-bottom: 1px solid gray; */
-	}
-	.item-quantity-container .counter {
-		width: 20px;
-		max-height: 100%;
-		height: 25px;
-		background: none;
-		background-color: #36558f;
-		font-weight: 400;
-		border: none;
-		font-weight: bold;
-		color: white;
-		cursor: pointer;
-		outline: none;
-	}
-	.item-quantity-container #itemIncrease {
-		border-top-left-radius: 70%;
-		border-bottom-left-radius: 70%;
-	}
-	.item-quantity-container #itemDecrease {
-		border-top-right-radius: 70%;
-		border-bottom-right-radius: 70%;
-	}
+    }
+    .item-quantity-container .counter {
+        width: 20px;
+        max-height: 100%;
+        height: 25px;
+        background: none;
+        background-color: #36558f;
+        font-weight: 400;
+        border: none;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        outline: none;
+    }
+    .item-quantity-container #itemIncrease {
+        border-top-left-radius: 70%;
+        border-bottom-left-radius: 70%;
+    }
+    .item-quantity-container #itemDecrease {
+        border-top-right-radius: 70%;
+        border-bottom-right-radius: 70%;
+    }
 </style>
 
 <script>
-	console.log("cartscript");
+    console.log("cartscript");
 
-	let incBtn = document.querySelector("#itemIncrease");
-	let decBtn = document.querySelector("#itemDecrease");
-	let count = document.querySelector("#itemCount");
+    let incBtn = document.querySelector("#itemIncrease");
+    let decBtn = document.querySelector("#itemDecrease");
+    let count = document.querySelector("#itemCount");
 
-	let itemCount = 1;
-	count.innerText = itemCount;
+    let itemCount = 1;
+    count.innerText = itemCount;
 </script>
 <script src="./cart-script.js"></script>

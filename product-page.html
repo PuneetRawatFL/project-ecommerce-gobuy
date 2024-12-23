@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Product Page</title>
+
+        <!-- font family -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- style file -->
+        <link rel="stylesheet" href="product-page.css" />
+
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- script file -->
+        <script src="product-page.js" defer></script>
+    </head>
+    <body>
+        <!-- announcement bar -->
+        <div class="announcement-bar"></div>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
+
+        <!-- Navigation panel -->
+        <p class="navigation">
+            <a href="./index.html">HOME</a> >
+            <a href="./products.html">PRODUCTS</a> >
+            <a id="product-navigation"></a>
+        </p>
+
+        <!-- PAGE HEADING  -->
+
+        <!-- loading bar -->
+        <div class="loading-container">
+            <div class="loading-bar"></div>
+        </div>
+
+        <!-- product container -->
+        <div class="product-container">
+            <div class="image-container">
+                <img id="product-image" src="" alt="product image" />
+            </div>
+            <div class="details-container">
+                <p>
+                    <img
+                        id="rating-star"
+                        src=""
+                        alt=""
+                        style="width: 15px; height: 15px"
+                    />
+                    <span id="rating-stars"></span>
+                    (
+                    <img
+                        src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152"
+                        alt=""
+                        style="width: 15px; height: 15px"
+                    />)
+                </p>
+                <p id="product-rating">
+                    <span id="rating-count"></span>
+                </p>
+                <p id="product-title"></p>
+                <div class="price-details">
+                    <p id="product-price"></p>
+                    <p id="price-mrp"></p>
+                </div>
+                <p id="product-description"></p>
+
+                <!-- buy options -->
+                <div class="button-container">
+                    <button id="addToCart">Add to cart</button>
+                    <button id="buyNow">Buy now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- benefits container  -->
+        <div class="benefits-container">
+            <div class="benefits1 benefits">
+                <img
+                    src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_334305_small.svg?v=1682336123"
+                    alt=""
+                />
+                <p>1 year warranty</p>
+            </div>
+            <div class="benefits2 benefits">
+                <img
+                    src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_334304_small.svg?v=1682336123"
+                    alt=""
+                />
+                <p>7day replacement</p>
+            </div>
+            <div class="benefits3 benefits">
+                <img
+                    src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_334303_small.svg?v=1682336123"
+                    alt=""
+                />
+                <p>free express delivery</p>
+            </div>
+            <div class="benefits4 benefits">
+                <img
+                    src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Group_334302_small.svg?v=1682336123"
+                    alt=""
+                />
+                <p>gst billing</p>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>
