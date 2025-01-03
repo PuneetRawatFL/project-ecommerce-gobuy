@@ -1,41 +1,41 @@
 // fetch header navbar and navbar
 document.addEventListener("DOMContentLoaded", () => {
-	// fetch header
-	fetch("header.html")
-		.then((response) => {
-			response.text();
-		})
-		.then((data) => {
-			console.log(data);
-		});
+  // fetch header
+  fetch("header.html")
+    .then((response) => {
+      response.text();
+    })
+    .then((data) => {
+      console.log(data);
+    });
 
-	//fetch footer
-	// fetch("footer.html")
-	//     .then((response) => response.text())
-	//     .then((data) => {
-	//         document.querySelector("footer").innerHTML = data;
-	//     });
+  //fetch footer
+  // fetch("footer.html")
+  //     .then((response) => response.text())
+  //     .then((data) => {
+  //         document.querySelector("footer").innerHTML = data;
+  //     });
 
-	//fetch announcement bar
-	fetch("announcement-bar.html")
-		.then((response) => response.text())
-		.then((data) => {
-			document.querySelector(".announcement-bar").innerHTML = data;
-		});
+  //fetch announcement bar
+  fetch("announcement-bar.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.querySelector(".announcement-bar").innerHTML = data;
+    });
 });
 
 var acc = document.getElementsByClassName("accordion");
 var i;
 for (i = 0; i < acc.length; i++) {
-	acc[i].addEventListener("click", function () {
-		this.classList.toggle("active");
-		var panel = this.nextElementSibling;
-		if (panel.style.maxHeight) {
-			panel.style.maxHeight = null;
-		} else {
-			panel.style.maxHeight = panel.scrollHeight + "px";
-		}
-	});
+  acc[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
 }
 
 //deals-slider-scroll
@@ -46,19 +46,19 @@ const nextBtnSlide = document.querySelector(".next-btn-slide");
 
 let slideIndex = 0;
 function showNextDeal() {
-	if (slideIndex < dealsItems.length - 1) {
-		slideIndex++;
-	} else {
-		slideIndex = 0;
-	}
-	deals.style.transform = `translateX(-${slideIndex * 100}%)`; // Adjust percentage based on items shown
+  if (slideIndex < dealsItems.length - 1) {
+    slideIndex++;
+  } else {
+    slideIndex = 0;
+  }
+  deals.style.transform = `translateX(-${slideIndex * 100}%)`; // Adjust percentage based on items shown
 }
 
 function showPrevDeal() {
-	if (slideIndex > 0) {
-		slideIndex--;
-		deals.style.transform = `translateX(-${slideIndex * 100}%)`; // Adjust percentage based on items shown
-	}
+  if (slideIndex > 0) {
+    slideIndex--;
+    deals.style.transform = `translateX(-${slideIndex * 100}%)`; // Adjust percentage based on items shown
+  }
 }
 
 //adding event listener to buttons
@@ -76,17 +76,17 @@ const nextBtn = document.querySelector(".next-btn");
 let index = 0;
 //carousal click
 function showNext() {
-	if (index < carouselItems.length - 4) {
-		index++;
-		carousel.style.transform = `translateX(-${index * 25}%)`; // Adjust percentage based on items shown
-	}
+  if (index < carouselItems.length - 4) {
+    index++;
+    carousel.style.transform = `translateX(-${index * 25}%)`; // Adjust percentage based on items shown
+  }
 }
 
 function showPrev() {
-	if (index > 0) {
-		index--;
-		carousel.style.transform = `translateX(-${index * 25}%)`; // Adjust percentage based on items shown
-	}
+  if (index > 0) {
+    index--;
+    carousel.style.transform = `translateX(-${index * 25}%)`; // Adjust percentage based on items shown
+  }
 }
 
 nextBtn.addEventListener("click", showNext);
@@ -100,22 +100,23 @@ const productCardPrice = document.querySelector("#product-card-price");
 var productCard = document.querySelectorAll(".product-card");
 
 (function displayProductCard() {
-	fetch("https://fakestoreapi.com/products")
-		.then((res) => res.json())
-		.then((data) => {
-			productCard.forEach((product) => {
-				var rand = Math.floor(Math.random() * 10);
-				//to display image
-				product.children[0].src = data[rand].image;
-				//to display price
-				product.children[1].innerText = `$${data[rand].price}`;
-			});
-		});
+  fetch("https://fakestoreapi.com/products")
+    .then((res) => res.json())
+    .then((data) => {
+      productCard.forEach((product) => {
+        var rand = Math.floor(Math.random() * 10);
+        product.children[0].href = `product-page.html?id=${rand}`;
+        //to display image
+        product.children[0].children[0].src = data[rand].image;
+        //to display price
+        product.children[1].innerText = `$${data[rand].price}`;
+      });
+    });
 })();
 
 //loading header script
 $(function () {
-	$(".navbar").load("header.html", function () {
-		$.getScript("header-script.js");
-	});
+  $(".navbar").load("header.html", function () {
+    $.getScript("header-script.js");
+  });
 });

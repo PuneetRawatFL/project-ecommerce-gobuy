@@ -63,7 +63,19 @@ fetch(`https://fakestoreapi.com/products/${productId}`)
 
         //product content
         productTitle.innerText = json.title;
-        productPrice.innerText = `$${json.price}`;
+        //product price
+        productPrice.innerHTML = `$${json.price} <span class="old-mrp">$${(json.price + 10).toFixed(2)}</span> <span class="discount-offer">${Math.round((10 / json.price) * 100)}% off</span>`;
+        //styling line-through mrp
+        const oldmrp = document.querySelector(".old-mrp");
+        oldmrp.style.fontSize = "1rem";
+        oldmrp.style.fontWeight = "200";
+        oldmrp.style.textDecoration = 'line-through';
+        //styling discount percentage
+        const discountOffer= document.querySelector(".discount-offer");
+        discountOffer.style.fontSize = "1.1rem";
+        discountOffer.style.color = "green";
+        discountOffer.style.fontWeight = "400";
+
         productPriceMrp.innerText = "MRP(Inclusive of all taxes)";
         productImage.src = json.image;
         productDescription.innerText = json.description;
@@ -73,7 +85,7 @@ fetch(`https://fakestoreapi.com/products/${productId}`)
         removeLoadingBar();
     });
 
-//add
+//add to cart count
 let addToCart = document.querySelector("#addToCart");
 addToCart.addEventListener("click", () => {
     console.log("Button click");

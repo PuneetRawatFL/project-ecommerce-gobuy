@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Shipping & Return, Terms of Services, and Privacy Policy - GoBuy
+    </title>
+
+    <!-- font family -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- css styling -->
+    <style>
+      * {
+        font-family: "Kanit", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        /* letter-spacing: 0.5px; */
+      }
+      body {
+        background-color: #f7f7f7;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        margin-top: 150px;
+        padding: 40px 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 2px solid #36558f;
+      }
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        color: #36558f;
+      }
+      .section {
+        margin-top: 40px;
+      }
+      .section-title {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #36558f;
+        border-left: 5px solid #36558f;
+        padding-left: 10px;
+      }
+      .section-content {
+        font-size: 1.1em;
+        line-height: 1.8;
+      }
+      .section ul {
+        list-style-type: disc;
+        padding-left: 40px;
+      }
+      .section ul li {
+        margin-bottom: 10px;
+      }
+    </style>
+
+    <!-- script file -->
+    <!-- including header and footer using jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+
+    <!--  -->
+    <script>
+      $(function () {
+        //announcement bar
+        $(".announcement-bar").load("announcement-bar.html");
+        //header
+        $(".navbar").load("header.html", function () {
+          $.getScript("header-script.js");
+        });
+        //footer
+        $("#footer").load("footer.html");
+      });
+    </script>
+  </head>
+  <body>
+    <!-- announcement bar -->
+    <div class="announcement-bar"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div id="header"></div>
+    </nav>
+
+    <!-- cart modal -->
+    <div class="cart-modal"></div>
+
+    <div class="container">
+      <div class="header">
+        <h1>Policies & Information</h1>
+        <p>
+          Get to know our policies to make your shopping experience seamless and
+          transparent.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Shipping & Return</h2>
+        <p class="section-content">
+          At GoBuy, we strive to provide fast and reliable shipping services.
+          Here are the details:
+        </p>
+        <ul class="section-content">
+          <li>
+            <span class="highlight">Shipping Time:</span> Orders are typically
+            processed and shipped within 1-2 business days. Delivery times vary
+            based on your location and chosen shipping method.
+          </li>
+          <li>
+            <span class="highlight">Shipping Costs:</span> Shipping costs are
+            calculated at checkout based on the weight and dimensions of your
+            order, as well as the shipping destination.
+          </li>
+          <li>
+            <span class="highlight">Returns:</span> If you are not completely
+            satisfied with your purchase, you can return it within 30 days of
+            delivery for a full refund or exchange. Items must be returned in
+            their original condition and packaging.
+          </li>
+          <li>
+            <span class="highlight">Return Process:</span> To initiate a return,
+            please contact our customer service team with your order details. We
+            will provide you with return instructions and a prepaid return
+            label.
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Terms of Services</h2>
+        <p class="section-content">
+          By using the GoBuy website and services, you agree to the following
+          terms:
+        </p>
+        <ul class="section-content">
+          <li>
+            <span class="highlight">User Conduct:</span> Users are expected to
+            use the website responsibly and respectfully. Any misuse or abuse of
+            the website will not be tolerated.
+          </li>
+          <li>
+            <span class="highlight">Account Security:</span> Users are
+            responsible for maintaining the confidentiality of their account
+            information and password. GoBuy is not liable for any unauthorized
+            access to your account.
+          </li>
+          <li>
+            <span class="highlight">Intellectual Property:</span> All content on
+            the GoBuy website, including text, images, and logos, is the
+            property of GoBuy and is protected by intellectual property laws.
+          </li>
+          <li>
+            <span class="highlight">Limitation of Liability:</span> GoBuy is not
+            liable for any direct, indirect, incidental, or consequential
+            damages arising from the use of our website or services.
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Privacy Policy</h2>
+        <p class="section-content">
+          GoBuy is committed to protecting your privacy. Our privacy policy
+          outlines how we collect, use, and safeguard your information:
+        </p>
+        <ul class="section-content">
+          <li>
+            <span class="highlight">Information Collection:</span> We collect
+            personal information such as your name, email address, and shipping
+            address when you place an order or create an account.
+          </li>
+          <li>
+            <span class="highlight">Information Use:</span> We use your
+            information to process orders, provide customer support, and improve
+            our services. We may also send you promotional emails if you have
+            opted in to receive them.
+          </li>
+          <li>
+            <span class="highlight">Information Sharing:</span> We do not sell
+            or share your personal information with third parties, except as
+            required by law or to provide services (e.g., shipping carriers).
+          </li>
+          <li>
+            <span class="highlight">Data Security:</span> We implement
+            industry-standard security measures to protect your information from
+            unauthorized access, disclosure, or misuse.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <div id="footer"></div>
+    </footer>
+  </body>
+</html>
