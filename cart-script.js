@@ -7,100 +7,140 @@
 let cartTotal = document.querySelector("#cart-total-price-span");
 
 function addItemInCart(arr) {
-  console.log(arr[arr.length - 1]);
-  console.log(arr[arr.length - 1].id);
-  // let cartItemDiv = document.querySelector(".cart-items");
-  let cartItemDiv = document.createElement("div");
-  cartItemDiv.classList.add("cart-items");
-  //creating img div
-  const itemImgDiv = document.createElement("div");
-  itemImgDiv.classList.add("item-image");
-  itemImgDiv.classList.add("item");
+    console.log(arr[arr.length - 1]);
+    console.log(arr[arr.length - 1].id);
 
-  // creating img tag
-  const itemImg = document.createElement("img");
-  itemImg.id = "item-image";
-  itemImg.src = arr[arr.length - 1].image;
+    // let cartItemDiv = document.querySelector(".cart-items");
+    let cartItemDiv = document.createElement("div");
+    cartItemDiv.classList.add("cart-items");
+    cartItemDiv.id = `${arr[arr.length - 1].id}-cart`;
+    console.log("Cart id", cartItemDiv.id);
 
-  //appending img tag to div
-  itemImgDiv.append(itemImg);
+    //creating img div
+    const itemImgDiv = document.createElement("div");
+    itemImgDiv.classList.add("item-image");
+    itemImgDiv.classList.add("item");
 
-  //creating stack items div
-  const stackItems = document.createElement("div");
-  stackItems.classList.add("stack-items");
+    // creating img tag
+    const itemImg = document.createElement("img");
+    itemImg.id = "item-image";
+    itemImg.src = arr[arr.length - 1].image;
 
-  // div for item detail and price
-  const itemDetails = document.createElement("div");
-  itemDetails.classList.add("itemDetails");
-  itemDetails.classList.add("item");
+    //appending img tag to div
+    itemImgDiv.append(itemImg);
 
-  //p tags for detail and price
-  const cartItemName = document.createElement("p");
-  cartItemName.id = "item-details";
-  cartItemName.textContent = arr[arr.length - 1].title;
+    //creating stack items div
+    const stackItems = document.createElement("div");
+    stackItems.classList.add("stack-items");
 
-  const cartItemPrice = document.createElement("p");
-  cartItemPrice.id = "item-price";
-  cartItemPrice.textContent = arr[arr.length - 1].price;
+    // div for item detail and price
+    const itemDetails = document.createElement("div");
+    itemDetails.classList.add("itemDetails");
+    itemDetails.classList.add("item");
 
-  // appending p tags to item detail div
-  itemDetails.append(cartItemName);
-  itemDetails.append(cartItemPrice);
+    //p tags for detail and price
+    const cartItemName = document.createElement("p");
+    cartItemName.id = "item-details";
+    cartItemName.textContent = arr[arr.length - 1].title;
 
-  //creating quantity counter div
-  const itemQuantityDiv = document.createElement("div");
-  itemQuantityDiv.classList.add("item-quantity");
-  itemQuantityDiv.classList.add("item");
+    const cartItemPrice = document.createElement("p");
+    cartItemPrice.id = "item-price";
+    cartItemPrice.textContent = arr[arr.length - 1].price;
 
-  //creating quantity counter container
-  const itemQuantityContainer = document.createElement("div");
-  itemQuantityContainer.classList.add("item-quantity-container");
+    // appending p tags to item detail div
+    itemDetails.append(cartItemName);
+    itemDetails.append(cartItemPrice);
 
-  //creating buttons and div for item count
-  //increase btn
-  const itemIncrease = document.createElement("button");
-  itemIncrease.classList.add("counter");
-  itemIncrease.id = "itemIncrease";
-  itemIncrease.innerText = "+";
+    //creating quantity counter div
+    const itemQuantityDiv = document.createElement("div");
+    itemQuantityDiv.classList.add("item-quantity");
+    itemQuantityDiv.classList.add("item");
 
-  //count div
-  const itemCount = document.createElement("div");
-  itemCount.id = "itemCount";
-  //p tag for count
-  const pItemCount = document.createElement("p");
-  pItemCount.textContent = "1";
-  //appending
-  itemCount.append(pItemCount);
+    //creating quantity counter container
+    const itemQuantityContainer = document.createElement("div");
+    itemQuantityContainer.classList.add("item-quantity-container");
 
-  //decrease btn
-  const itemDecrease = document.createElement("button");
-  itemDecrease.classList.add("counter");
-  itemDecrease.id = "itemDecrease";
-  itemDecrease.innerText = "-";
+    //creating buttons and div for item count
+    //increase btn
+    const itemIncrease = document.createElement("button");
+    itemIncrease.classList.add("counter");
+    itemIncrease.id = "itemIncrease";
+    itemIncrease.innerText = "+";
 
-  //appending buttons and counter to parent container
-  itemQuantityContainer.append(itemIncrease);
-  itemQuantityContainer.append(itemCount);
-  itemQuantityContainer.append(itemDecrease);
+    //count div
+    const itemCount = document.createElement("div");
+    itemCount.id = "itemCount";
+    //p tag for count
+    const pItemCount = document.createElement("p");
+    pItemCount.innerText = "1";
+    //appending
+    itemCount.append(pItemCount);
 
-  // appending
-  itemQuantityDiv.append(itemQuantityContainer);
+    //decrease btn
+    const itemDecrease = document.createElement("button");
+    itemDecrease.classList.add("counter");
+    itemDecrease.id = "itemDecrease";
+    itemDecrease.innerText = "-";
 
-  //appending to item stack items div
-  stackItems.append(itemDetails);
-  stackItems.append(itemQuantityDiv);
+    //appending buttons and counter to parent container
+    itemQuantityContainer.append(itemIncrease);
+    itemQuantityContainer.append(itemCount);
+    itemQuantityContainer.append(itemDecrease);
 
-  //appending to main div
-  cartItemDiv.append(itemImgDiv);
-  cartItemDiv.append(stackItems);
+    // appending
+    itemQuantityDiv.append(itemQuantityContainer);
 
-  // append to list
-  document.querySelector(".cart-items-list").append(cartItemDiv);
+    //appending to item stack items div
+    stackItems.append(itemDetails);
+    stackItems.append(itemQuantityDiv);
 
-  //change cart total
-  cartTotal.innerText = `${
-    parseFloat(cartTotal.innerText) + parseFloat(arr[arr.length - 1].price)
-  }`;
+    //appending to main div
+    cartItemDiv.append(itemImgDiv);
+    cartItemDiv.append(stackItems);
+
+    // append to list
+    document.querySelector(".cart-items-list").append(cartItemDiv);
+
+    //change cart total
+    cartTotal.innerText = `${(
+        parseFloat(cartTotal.innerText) + parseFloat(arr[arr.length - 1].price)
+    ).toFixed(2)}`;
+
+    //increase decrease counter
+    itemIncrease.addEventListener("click", () => {
+        let counterCount = pItemCount.innerText;
+        counterCount++;
+        pItemCount.innerText = counterCount;
+        console.log("item increase");
+    });
+
+    itemDecrease.addEventListener("click", () => {
+        let counterCount = pItemCount.innerText;
+        counterCount--;
+        console.log(cartItemDiv.id);
+        if (counterCount == 0) {
+            let index;
+            console.log(cartItemDiv.id[0]);
+            for (let x = 0; x < window.globalCartArray.length; x++) {
+                if (cartItemDiv.id[0] == window.globalCartArray[x].id) {
+                    index = arr.indexOf(window.globalCartArray[x]);
+                    console.log("item found to remove", index);
+
+                    // --------------------------------
+                    // to remove the item from the cart list
+                    // - from list
+                    let cartList = document.querySelector(".cart-items-list");
+                    let removeItem = cartList.children[index];
+                    console.log(removeItem);
+                    cartList.removeChild(removeItem);
+                    // - from array ----------------------------- pending
+                }
+            }
+            console.log("index", index);
+        }
+        pItemCount.innerText = counterCount;
+        console.log("item decrease");
+    });
 }
 
 //making this function global
