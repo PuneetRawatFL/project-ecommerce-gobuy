@@ -1,165 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- font family -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <!-- font family -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- style file -->
-    <link rel="stylesheet" href="about-us.css" />
+        <!-- style file -->
+        <link rel="stylesheet" href="about-us.css" />
 
-    <!-- including header and footer using jquery -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.js"
-      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-      crossorigin="anonymous"
-    ></script>
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
 
-    <!-- script file -->
-    <script src="about-us.js" defer></script>
-  </head>
-  <body>
-    <!-- announcement bar -->
-    <div class="announcement-bar"></div>
+        <!-- script file -->
+        <script src="about-us.js" defer></script>
+    </head>
+    <body>
+        <!-- announcement bar -->
+        <div class="announcement-bar"></div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div id="header"></div>
-    </nav>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
 
-    <!-- cart modal -->
-    <div class="cart-modal"></div>
+        <!-- cart modal -->
+        <div class="cart-modal"></div>
 
-    <!-- content -->
-    <div class="container">
-      <div class="header">
-        <h1>About GoBuy</h1>
-        <p>Welcome to GoBuy, where shopping meets sophistication.</p>
-      </div>
-      <div class="mission">
-        <h2 class="section-title">Our Mission</h2>
-        <p class="section-content">
-          At GoBuy, our mission is to
-          <span class="highlight">revolutionize your shopping experience</span>.
-          We are committed to providing a seamless, enjoyable, and secure online
-          shopping journey, where every click brings you closer to the products
-          you love.
-        </p>
-      </div>
-      <div class="values">
-        <h2 class="section-title">Our Values</h2>
-        <p class="section-content">
-          At the heart of GoBuy are our core values:
-        </p>
-        <ul class="section-content">
-          <li>
-            <span class="highlight">Customer First:</span> We prioritize your
-            satisfaction above all else.
-          </li>
-          <li>
-            <span class="highlight">Integrity:</span> We operate with
-            transparency and honesty in all our interactions.
-          </li>
-          <li>
-            <span class="highlight">Innovation:</span> We continuously seek new
-            ways to improve and innovate.
-          </li>
-          <li>
-            <span class="highlight">Community:</span> We believe in giving back
-            and supporting our community.
-          </li>
-        </ul>
-      </div>
-      <div class="success">
-        <h2 class="section-title">Our Success</h2>
-        <p class="section-content">
-          Since our launch, we have achieved remarkable milestones, driven by
-          our <span class="highlight">dedication to excellence</span>:
-        </p>
-        <ul class="section-content">
-          <li>
-            Serving over
-            <span class="highlight">500,000 satisfied customers</span> globally.
-          </li>
-          <li>
-            Offering a curated selection of
-            <span class="highlight">top-quality products</span>.
-          </li>
-          <li>
-            Receiving numerous accolades for
-            <span class="highlight">excellence in customer service</span>.
-          </li>
-          <li>
-            Building a
-            <span class="highlight">community of loyal shoppers</span> who trust
-            us for their every need.
-          </li>
-        </ul>
-      </div>
-      <div class="team">
-        <h2 class="section-title">Meet Our Team</h2>
-        <div class="section-content">
-          <p>
-            Our team is composed of dedicated professionals who are passionate
-            about delivering the best shopping experience:
-          </p>
-          <div class="team-member">
-            <h3>Jane Doe - CEO</h3>
-            <p>
-              Jane leads GoBuy with a vision for innovation and a commitment to
-              excellence.
-            </p>
-          </div>
-          <div class="team-member">
-            <h3>John Smith - CTO</h3>
-            <p>
-              John is the tech genius behind GoBuy, ensuring a smooth and secure
-              online experience.
-            </p>
-          </div>
-          <div class="team-member">
-            <h3>Emily White - Head of Customer Service</h3>
-            <p>
-              Emily's team is dedicated to providing outstanding support and
-              ensuring customer satisfaction.
-            </p>
-          </div>
+        <!-- main-section -->
+        <div class="intro-container">
+            <div class="intro-section">
+                <div class="intro-content">
+                    <p class="welcome">Welcome to GoBuy</p>
+                    <p class="slogan">Where shopping meets sophistication.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="testimonials">
-        <h2 class="section-title">Customer Testimonials</h2>
-        <div class="section-content">
-          <div class="testimonial">
-            <p>
-              <strong>Maria L.</strong> - "GoBuy has transformed my shopping
-              experience! Their customer service is exceptional and the product
-              quality is top-notch."
-            </p>
-          </div>
-          <div class="testimonial">
-            <p>
-              <strong>David R.</strong> - "I love shopping at GoBuy. They always
-              have the best deals and their website is so easy to use."
-            </p>
-          </div>
-          <div class="testimonial">
-            <p>
-              <strong>Linda K.</strong> - "GoBuy's commitment to customer
-              satisfaction is evident in every interaction. Highly recommend!"
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- footer -->
-    <footer>
-      <div id="footer"></div>
-    </footer>
-  </body>
+        <!-- mission section -->
+        <div class="mission">
+            <h2 class="mission-title">Our Mission</h2>
+            <div class="mission-content">
+                <p class="section-content">
+                    At GoBuy, our mission is to
+                    <span class="highlight"
+                        >revolutionize your shopping experience</span
+                    >. We are committed to providing a seamless, enjoyable, and
+                    secure online shopping journey, where every click brings you
+                    closer to the testimonials you love.
+                </p>
+            </div>
+        </div>
+
+        <!-- success -->
+        <div class="success">
+            <h2 class="success-title">Our Success</h2>
+            <p class="section-content">
+                Since our launch, we have achieved remarkable milestones, driven
+                by our
+                <span class="highlight">dedication to excellence</span>:
+            </p>
+            <ul class="section-content">
+                <li>
+                    Serving over
+                    <span class="highlight">500,000 satisfied customers</span>
+                    globally.
+                </li>
+                <li>
+                    Offering a curated selection of
+                    <span class="highlight">top-quality testimonials</span>.
+                </li>
+                <li>
+                    Receiving numerous accolades for
+                    <span class="highlight">excellence in customer service</span
+                    >.
+                </li>
+                <li>
+                    Building a
+                    <span class="highlight">community of loyal shoppers</span>
+                    who trust us for their every need.
+                </li>
+            </ul>
+        </div>
+
+        <!-- team members -->
+        <div class="team">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="section-content">
+                <p>
+                    Our team is composed of dedicated professionals who are
+                    passionate about delivering the best shopping experience:
+                </p>
+                <div class="team-member">
+                    <h3>Jane Doe - CEO</h3>
+                    <p>
+                        Jane leads GoBuy with a vision for innovation and a
+                        commitment to excellence.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <h3>John Smith - CTO</h3>
+                    <p>
+                        John is the tech genius behind GoBuy, ensuring a smooth
+                        and secure online experience.
+                    </p>
+                </div>
+                <div class="team-member">
+                    <h3>Emily White - Head of Customer Service</h3>
+                    <p>
+                        Emily's team is dedicated to providing outstanding
+                        support and ensuring customer satisfaction.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- customer reviews -->
+        <!-- carousel title -->
+        <h1 id="carousel-title">Customer <span>Testimonials</span></h1>
+
+        <!-- testimonials carousel -->
+        <div class="carousel-container">
+            <button class="prev-btn">&lt;</button>
+            <div class="carousel">
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-1.png" alt="" />
+                        <h3>John D.</h3>
+                        <p>
+                            "GoBuy never disappoints. The prices are unbeatable,
+                            and the product quality is top-notch. I always find
+                            what I need."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-2.png" alt="" />
+                        <h3>Emily T.</h3>
+                        <p>
+                            "I love how user-friendly the GoBuy website is. It
+                            makes online shopping so convenient and fun!"
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-3.png" alt="" />
+                        <h3>Samantha W.</h3>
+                        <p>
+                            "Shopping at GoBuy has been a game-changer for me!
+                            The variety of products is amazing and the delivery
+                            service is super quick."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-4.png" alt="" />
+                        <h3>Michael B.</h3>
+                        <p>
+                            "GoBuy's customer service is exceptional. They
+                            always go above and beyond to ensure I'm satisfied
+                            with my purchases."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-5.png" alt="" />
+                        <h3>Sarah H.</h3>
+                        <p>
+                            "The selection at GoBuy is fantastic! I can find
+                            everything I need in one place, from electronics to
+                            groceries."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-6.png" alt="" />
+                        <h3>James F.</h3>
+                        <p>
+                            "I've been a loyal GoBuy customer for years. Their
+                            consistent service and great deals keep me coming
+                            back."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-7.png" alt="" />
+                        <h3>Chloe R.</h3>
+                        <p>
+                            "GoBuy has transformed my online shopping
+                            experience. The website is easy to navigate and the
+                            delivery is always timely."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-8.png" alt="" />
+                        <h3>Ethan K.</h3>
+                        <p>
+                            "GoBuy is my go-to online shopping destination. The
+                            product descriptions are accurate, and the checkout
+                            process is smooth."
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-9.png" alt="" />
+                        <h3>Olivia M.</h3>
+                        <p>
+                            "The deals and discounts at GoBuy are incredible. I
+                            save so much money shopping here!"
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card">
+                        <img src="./images/cust-10.png" alt="" />
+                        <h3>Lucas P.</h3>
+                        <p>
+                            "I highly recommend GoBuy to everyone. Their
+                            commitment to quality and customer satisfaction is
+                            unparalleled."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button class="next-btn">&gt;</button>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div id="footer"></div>
+        </footer>
+    </body>
 </html>
