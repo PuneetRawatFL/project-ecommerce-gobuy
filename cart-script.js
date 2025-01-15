@@ -153,8 +153,7 @@ function addItemInCart(json) {
                     index = window.globalCartArray.indexOf(
                         window.globalCartArray[x]
                     );
-                    // --------------------------------
-                    // to remove the item from the cart list
+                    // to remove the item
                     // - from list
                     let cartList = document.querySelector(".cart-items-list");
                     let removeItem = document.querySelector(
@@ -215,10 +214,6 @@ function modifyCartTotal() {
 }
 //making this function global
 window.modifyCartTotal = modifyCartTotal;
-
-// window.hello = hello;
-// window.addItemInCart();
-// window.addItemInCart();
 
 //model for above cart item
 //<div class="item-image item">

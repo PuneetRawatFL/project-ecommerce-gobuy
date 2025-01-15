@@ -1,0 +1,54 @@
+database - gobuy
+
+PRODUCTS-
+product_id
+product_price
+product_category
+product_description
+product_image_path
+
+create table products(
+	product_id int auto_increment primary key,
+	product_price decimal(10,2) not null,
+	product_category varchar(100) not null,
+	product_description varchar(100) not null,
+	product_image_path varchar(100) not null
+
+)
+
+CUSTOMERS-
+customer_id
+customer_name
+customer_email
+customer_password
+customer_address
+created_at
+
+create table customers (
+	customer_id int auto_increment primary key,
+	customer_name varchar(100) not null,
+	customer_email varchar(100) not null,
+	customer_password varchar(100) not null,
+	customer_address varchar(100),
+	created_at timestamp default current timestamp
+)
+
+
+ORDERS-
+order_id
+order_date
+order_quantity
+order_total
+customer_id
+product_id
+
+create table orders (
+	order_id int auto_increment primary key,
+	order_date timestamp default current timestamp,
+	order_quantity int not null,
+	order_total decimal(10,2) not null,
+	foreign key (customer_id) references customers(customer_id),
+	foreign key (product_id) references products(product_id)
+	
+)
+

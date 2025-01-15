@@ -65,7 +65,7 @@ body {
     width: 100%;
     /* background-image: url("./images/our-mission.jpg"); */
     background-image: url("./images/our-mission.png");
-    background-size: 90vh 50vh;
+    background-size: 80vh 50vh;
     background-position: right 20vh center;
     background-repeat: no-repeat;
     display: flex;
