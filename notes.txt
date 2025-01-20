@@ -1,20 +1,19 @@
 database - gobuy
 
-PRODUCTS-
-product_id
-product_price
-product_category
-product_description
-product_image_path
+PRODUCTS schema-
+const productSchema = {
+    id: { type: Number },
+    title: { type: String },
+    price: { type: Number },
+    description: { type: String },
+    category: { type: String },
+    image: { type: String },
+    rating: {
+        rate: { type: Number },
+        count: { type: Number },
+    },
+};
 
-create table products(
-	product_id int auto_increment primary key,
-	product_price decimal(10,2) not null,
-	product_category varchar(100) not null,
-	product_description varchar(100) not null,
-	product_image_path varchar(100) not null
-
-)
 
 CUSTOMERS-
 customer_id
@@ -22,33 +21,50 @@ customer_name
 customer_email
 customer_password
 customer_address
+customer_pincode
 created_at
 
 create table customers (
 	customer_id int auto_increment primary key,
-	customer_name varchar(100) not null,
-	customer_email varchar(100) not null,
-	customer_password varchar(100) not null,
-	customer_address varchar(100),
+	customer_name varchar(255) not null,
+	customer_email varchar(255) not null,
+	customer_password varchar(255) not null,
+	customer_address varchar(255),
+	customer_pincode int not null,
 	created_at timestamp default current timestamp
+)
+
+CART-
+cart_id
+cart_date
+customer_id
+product_id
+product_quantity
+total_price
+
+create table cart(
+	cart int auto_increment primary key,
+	cart_date timestamp default current timestamp,
+	foreign key (customer_id) references customers(customer_id),
+	foreign key (product_id) references products(product_id),
+	product_quantity int not null,
+	total_price decimal(10,2) not null
 )
 
 
 ORDERS-
 order_id
 order_date
-order_quantity
 order_total
 customer_id
-product_id
+cart_id
 
 create table orders (
 	order_id int auto_increment primary key,
 	order_date timestamp default current timestamp,
-	order_quantity int not null,
 	order_total decimal(10,2) not null,
 	foreign key (customer_id) references customers(customer_id),
-	foreign key (product_id) references products(product_id)
+	foreign key (cart_id) references cart(cart_id)
 	
 )
 
