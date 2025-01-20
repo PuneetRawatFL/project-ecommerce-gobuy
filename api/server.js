@@ -1,12 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
+const cors = require("cors");
 const app = express();
 const PORT = 8000;
 //importing schema
 const Product = require("./Models/productSchema.js");
 
+//cors
+app.use(cors());
+
 //middleware to parse json
 app.use(express.json());
+
+//to use static images for product items
+app.use("/product-images", express.static("product-images"));
 
 //crating connection mongoose database
 mongoose

@@ -30,7 +30,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 
 //fetching product details from product id
-fetch(`https://fakestoreapi.com/products/${productId}`)
+fetch(`http://localhost:8000/products/${productId}`)
     .then((res) => res.json())
     .then((json) => {
         //making body visible
@@ -80,7 +80,9 @@ fetch(`https://fakestoreapi.com/products/${productId}`)
         discountOffer.style.fontWeight = "400";
 
         productPriceMrp.innerText = "MRP(Inclusive of all taxes)";
-        productImage.src = json.image;
+        // productImage.src = json.image;
+        productImage.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+
         productDescription.innerText = json.description;
         productRatingCount.innerText = json.rating.count;
         productRatingStar.innerText = json.rating.rate;

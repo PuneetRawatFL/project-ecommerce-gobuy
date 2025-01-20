@@ -87,7 +87,8 @@ function getProducts(url) {
                 //adding image
                 const image = document.createElement("img");
                 image.classList.add("prod-image");
-                image.src = product.image;
+                // image.src = product.image;
+                image.src = `http://localhost:8000/product-images/product_${product.id}.jpg`;
                 image.alt = product.title;
                 imgDiv.appendChild(image);
 
@@ -117,7 +118,8 @@ function getProducts(url) {
         });
 }
 //invoke function by default
-getProducts("https://fakestoreapi.com/products");
+// getProducts("http://localhost:8000/products");
+getProducts("http://localhost:8000/products");
 
 //adding filters fetch
 
@@ -131,24 +133,24 @@ let cat5 = document.querySelector("#cat5"); //womens clothing
 
 //all clothing category
 cat1.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products");
+    getProducts("http://localhost:8000/products");
     console.log("category 4");
 });
 //electronics category
 cat2.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products/category/electronics");
+    getProducts("http://localhost:8000/products/category/electronics");
 });
 //jewelry category
 cat3.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products/category/jewelery");
+    getProducts("http://localhost:8000/products/category/jewelery");
 });
 //men clothing category
 cat4.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products/category/men's clothing");
+    getProducts("http://localhost:8000/products/category/men's clothing");
 });
 //women clothing category
 cat5.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products/category/women's clothing");
+    getProducts("http://localhost:8000/products/category/women's clothing");
 });
 
 //sort by filter
@@ -156,19 +158,19 @@ let sort1 = document.querySelector("#sort1");
 let sort2 = document.querySelector("#sort2");
 //ascending
 sort1.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products?sort=asc");
+    getProducts("http://localhost:8000/products?sort=asc");
     console.log("category 4");
 });
 //descending
 sort2.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products?sort=desc");
+    getProducts("http://localhost:8000/products?sort=desc");
     console.log("category 4");
 });
 
 //reset button
 let resetBtn = document.querySelector(".reset");
 resetBtn.addEventListener("click", () => {
-    getProducts("https://fakestoreapi.com/products");
+    getProducts("http://localhost:8000/products");
 });
 
 //loading header script
@@ -214,7 +216,7 @@ function addToCart() {
         button.addEventListener("click", () => {
             // add loading animation
             addToCartLoading(`${button.id}`);
-            fetch(`https://fakestoreapi.com/products/${button.id}`)
+            fetch(`http://localhost:8000/products/${button.id}`)
                 .then((res) => res.json())
                 .then((json) => {
                     // console.log(json);

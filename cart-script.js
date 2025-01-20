@@ -38,7 +38,8 @@ function addItemInCart(json) {
     // creating img tag
     const itemImg = document.createElement("img");
     itemImg.id = "item-image";
-    itemImg.src = json.image;
+    // itemImg.src = json.image;
+    itemImg.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
 
     //appending img tag to div
     itemImgDiv.append(itemImg);

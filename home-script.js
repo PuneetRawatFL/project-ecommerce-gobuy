@@ -112,15 +112,20 @@ function getRandomNumber() {
 }
 
 (function displayProductCard() {
-    fetch("https://fakestoreapi.com/products")
+    fetch("http://localhost:8000/products")
         .then((res) => res.json())
         .then((data) => {
             let x = 0;
             let randArr = getRandomNumber();
             productCard.forEach((product) => {
-                product.children[0].href = `product-page.html?id=${randArr[x]}`;
+                product.children[0].href = `product-page.html?id=${
+                    data[randArr[x]].id
+                }`;
                 //to display image
-                product.children[0].children[0].src = data[randArr[x]].image;
+                // product.children[0].children[0].src = data[randArr[x]].image;
+                product.children[0].children[0].src = `http://localhost:8000/product-images/product_${
+                    data[randArr[x]].id
+                }.jpg`;
                 //to display price
                 product.children[1].innerText = `$${data[randArr[x]].price}`;
                 x++;
