@@ -33,6 +33,7 @@ const productId = urlParams.get("id");
 fetch(`http://localhost:8000/products/${productId}`)
     .then((res) => res.json())
     .then((json) => {
+        // console.log(json[0]);
         //making body visible
         document.querySelector(".product-container").style.visibility =
             "visible";
@@ -58,15 +59,15 @@ fetch(`http://localhost:8000/products/${productId}`)
         //modifying content
 
         //navigation bar content
-        productNavigation.innerText = json.title;
+        productNavigation.innerText = json[0].title;
 
         //product content
-        productTitle.innerText = json.title;
+        productTitle.innerText = json[0].title;
         //product price
-        productPrice.innerHTML = `$${json.price} <span class="old-mrp">$${(
-            json.price + 10
+        productPrice.innerHTML = `$${json[0].price} <span class="old-mrp">$${(
+            json[0].price + 10
         ).toFixed(2)}</span> <span class="discount-offer">${Math.round(
-            (10 / json.price) * 100
+            (10 / json[0].price) * 100
         )}% off</span>`;
         //styling line-through mrp
         const oldmrp = document.querySelector(".old-mrp");
@@ -80,42 +81,55 @@ fetch(`http://localhost:8000/products/${productId}`)
         discountOffer.style.fontWeight = "400";
 
         productPriceMrp.innerText = "MRP(Inclusive of all taxes)";
-        // productImage.src = json.image;
-        productImage.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+        // productImage.src = json[0].image;
+        productImage.src = `http://localhost:8000/product-images/product_${json[0].id}.jpg`;
 
-        productDescription.innerText = json.description;
-        productRatingCount.innerText = json.rating.count;
-        productRatingStar.innerText = json.rating.rate;
+        productDescription.innerText = json[0].description;
+        productRatingCount.innerText = json[0].rating_count;
+        productRatingStar.innerText = json[0].rating_rate;
         //removing loading bar
         removeLoadingBar();
 
         //event listener for add to cart
         addToCart.addEventListener("click", () => {
+            // console.log("cart");
             //to increase cart item number
             window.updateCartItem("increase");
+
+            //add to mysql database
+            fetch("http://localhost:8000/addToCart", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({ data: json[0] }),
+            })
+                .then((res) => res.json())
+                .then((data) => console.log("Success:", data))
+                .catch((err) => console.log("Error:", err));
 
             //creating flag
             let itemExist = false;
 
             // to check if the item already exists
             for (let x = 0; x < window.globalCartArray.length; x++) {
-                if (json.id === window.globalCartArray[x].id) {
+                if (json[0].id === window.globalCartArray[x].id) {
                     console.log("item exists");
                     // window.globalCartArray[x].quantity += 1;
                     itemExist = true;
                     // window.modifyCartTotal();
-                    window.itemExits(json.id);
+                    window.itemExits(json[0].id);
                 }
             }
             //checking item exist flag
             if (!itemExist) {
-                //adding quantity field to json item
-                json.quantity = 1;
+                //adding quantity field to json[0] item
+                json[0].quantity = 1;
                 //adding item to cart array
-                window.globalCartArray.push(json);
+                window.globalCartArray.push(json[0]);
                 // add to cart
                 // window.addItemInCart(window.globalCartArray);
-                window.addItemInCart(json);
+                window.addItemInCart(json[0]);
             }
         });
     });

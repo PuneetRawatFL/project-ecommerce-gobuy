@@ -87,7 +87,8 @@ function addItemInCart(json) {
     itemCount.id = "itemCount";
     //p tag for count
     const pItemCount = document.createElement("p");
-    pItemCount.innerText = json.quantity;
+    // pItemCount.innerText = json.quantity;  --older
+    pItemCount.innerText = json.product_quantity;
     pItemCount.id = `itemQuantity-${json.id}`;
     //appending
     itemCount.append(pItemCount);
@@ -233,3 +234,17 @@ window.modifyCartTotal = modifyCartTotal;
 //          </div>
 //        </div>
 //      </div>
+
+//display items from mysql database
+function refreshCart() {
+    fetch("http://localhost:8000/cart")
+        .then((res) => res.json())
+        .then((result) => {
+            // console.log(result);
+            result.forEach((item) => {
+                console.log(item);
+                addItemInCart(item);
+            });
+        });
+}
+refreshCart();

@@ -13,6 +13,8 @@ $(function () {
 });
 
 const shoppingList = document.querySelector(".shopping-cart-list");
+const subtotalSpan = document.querySelector("#subtotalSpan");
+let totalCartPrice = 0;
 
 //trial product
 fetch(`http://localhost:8000/products/category/jewelery`)
@@ -57,6 +59,8 @@ fetch(`http://localhost:8000/products/category/jewelery`)
             //price tag
             const priceTag = document.createElement("h4");
             priceTag.innerText = `$${json.price}`;
+            totalCartPrice = totalCartPrice + json.price;
+            console.log(totalCartPrice);
             //appending
             shoppingItemPrice.append(priceTag);
 
@@ -67,5 +71,8 @@ fetch(`http://localhost:8000/products/category/jewelery`)
 
             //appending to main list
             shoppingList.append(shoppingCartItem);
+
+            //total price
+            subtotalSpan.innerText = `$${totalCartPrice}`;
         });
     });

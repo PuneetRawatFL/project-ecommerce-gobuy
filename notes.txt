@@ -1,19 +1,31 @@
 database - gobuy
 
 PRODUCTS schema-
-const productSchema = {
-    id: { type: Number },
-    title: { type: String },
-    price: { type: Number },
-    description: { type: String },
-    category: { type: String },
-    image: { type: String },
-    rating: {
-        rate: { type: Number },
-        count: { type: Number },
-    },
-};
+products
+create table products(
+	id int auto_increment primary key,
+    title varchar(255) not null,
+    price decimal(10,2) not null,
+    category varchar(255) not null,
+    description text,
+    image varchar(255),
+	rating_count int, 
+	rating_rate decimal(3,1)
+)
 
+//temp_table
+create table temp_table(
+	id int auto_increment primary key,
+    title varchar(255) not null,
+    price decimal(10,2) not null,
+    category varchar(255) not null,
+    description text,
+    image varchar(255),
+	rating_count int, 
+	rating_rate decimal(3,1),
+	product_quantity int,
+	product_total decimal(10,2)
+);
 
 CUSTOMERS-
 customer_id
