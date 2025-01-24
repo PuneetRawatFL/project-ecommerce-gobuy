@@ -4,40 +4,45 @@
             <p class="cart-head">Your Cart</p>
             <p class="cart-close">&#10005;</p>
         </div>
-        <div class="cart-items-list">
-            <div
-                class="empty-cart"
+
+        <!-- for empty cart -->
+
+        <div
+            class="empty-cart"
+            style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 50px;
+            "
+        >
+            <img
+                src="./images/shopping.png"
+                alt=""
+                style="height: 200px; width: 200px"
+            />
+            <p style="font-size: 1.1rem">Your cart is feeling lonely</p>
+            <br />
+            <br />
+            <button
+                onclick="location.href='./products.html'"
                 style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
+                    width: 90%;
+                    height: 50px;
+                    margin-left: 5%;
+                    border-radius: 8px;
+                    background-color: #36558f;
+                    color: white;
+                    font-size: 1.1rem;
+                    cursor: pointer;
                 "
             >
-                <img
-                    src="./images/shopping.png"
-                    alt=""
-                    style="height: 200px; width: 200px"
-                />
-                <p style="font-size: 1.1rem">Your cart is feeling lonely</p>
-                <br />
-                <br />
-                <button
-                    onclick="location.href='./products.html'"
-                    style="
-                        width: 90%;
-                        height: 50px;
-                        margin-left: 5%;
-                        border-radius: 8px;
-                        background-color: #36558f;
-                        color: white;
-                        font-size: 1.1rem;
-                        cursor: pointer;
-                    "
-                >
-                    Start Shopping
-                </button>
-            </div>
+                Start Shopping
+            </button>
+        </div>
+
+        <div class="cart-items-list">
             <!-- <div class="cart-items">
         <div class="item-image item">
           <img id="item-image" src="./images/sale_banner1.jpg" alt="" />

@@ -99,21 +99,31 @@ app.post("/addToCart", (req, res) => {
     // res.json({ message: "Data received successfully!", data: itemReceived });
 
     const query =
-        "insert into temp_table(title, price, category, description, image, rating_count, rating_rate) values (?,?,?,?,?,?,?)";
+        "insert into temp_table(product_id, product_price, product_quantity, total_price) values (?,?,?,?)";
     const values = [
-        itemReceived.title,
+        itemReceived.id,
         itemReceived.price,
-        itemReceived.category,
-        itemReceived.description,
-        itemReceived.image,
-        itemReceived.rating_count,
-        itemReceived.rating_rate,
+        "1",
+        itemReceived.price,
     ];
 
     connection.query(query, values, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
+        res.status(200).json(results);
+    });
+});
+
+//end point for sql query
+app.get("/mysql", (req, res) => {
+    const mysqlQuery = req.query.mysqlQuery;
+    // console.log(mysqlQuery);
+    connection.query(mysqlQuery, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err });
+        }
+        // console.log(results);
         res.status(200).json(results);
     });
 });

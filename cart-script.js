@@ -7,11 +7,13 @@ const cartEmptyContent = document.querySelector(".empty-cart");
 let cartEmpty = true;
 function changeContent() {
     if (cartEmpty) {
+        // console.log("change content function");
         cartBottomDiv.style.visibility = "hidden";
-        cartEmptyContent.style.display = "block";
+        cartEmptyContent.style.display = "flex";
         cartListDiv.classList.add("cart-items-list-empty");
         cartListDiv.classList.remove("cart-items-list-filled");
     } else {
+        console.log("else condition");
         cartBottomDiv.style.visibility = "visible";
         cartEmptyContent.style.display = "none";
         cartListDiv.classList.remove("cart-items-list-empty");
@@ -19,6 +21,34 @@ function changeContent() {
     }
 }
 changeContent();
+
+//display items from mysql database
+function refreshCart() {
+    fetch(
+        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+    )
+        .then((res) => res.json())
+        .then((result) => {
+            console.log(result.length);
+            if (result.length == 0) {
+                console.log("Cart empty");
+                cartEmpty = true;
+                changeContent();
+            } else {
+                //empty list
+                cartListDiv.innerHTML = "";
+                result.forEach((item) => {
+                    // console.log(item);
+                    addItemInCart(item);
+
+                    //
+                    window.updateCartItem();
+                });
+            }
+        });
+}
+window.refreshCart = refreshCart;
+refreshCart();
 
 function addItemInCart(json) {
     //change html of cartlist
@@ -82,6 +112,30 @@ function addItemInCart(json) {
     itemIncrease.id = "itemIncrease";
     itemIncrease.innerText = "+";
 
+    //increase counter
+    itemIncrease.addEventListener("click", () => {
+        //increasing quantity
+        console.log(json);
+        // json.product_quantity++;
+        // pItemCount.innerText = json.product_quantity;
+
+        fetch(
+            `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${json.id}`
+        )
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+                //to increase cart item number
+                window.updateCartItem();
+            });
+
+        //refresh cart
+        refreshCart();
+
+        //update cart total
+        window.modifyCartTotal();
+    });
+
     //count div
     const itemCount = document.createElement("div");
     itemCount.id = "itemCount";
@@ -98,6 +152,85 @@ function addItemInCart(json) {
     itemDecrease.classList.add("counter");
     itemDecrease.id = "itemDecrease";
     itemDecrease.innerText = "-";
+
+    //decrease counter
+    itemDecrease.addEventListener("click", () => {
+        //decreasing quantity
+        console.log(json);
+        // json.quantity--;
+        // pItemCount.innerText = json.quantity;
+        console.log(json.product_quantity - 1);
+        if (json.product_quantity - 1 == 0) {
+            fetch(
+                `http://localhost:8000/mysql?mysqlQuery=delete from temp_table where product_id = ${json.id}`
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log("result: ", result);
+                    console.log("Item deleted");
+
+                    // to remove the item
+                    // - from list
+                    let cartList = document.querySelector(".cart-items-list");
+                    let removeItem = document.querySelector(
+                        `#${cartItemDiv.id}`
+                    );
+                    console.log(removeItem);
+                    cartList.removeChild(removeItem);
+                    //to update cart item number
+                    window.updateCartItem();
+
+                    //refresh cart
+                    refreshCart();
+                });
+        } else {
+            fetch(
+                `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2D 1 where product_id = ${json.id}`
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log("result: ", result);
+                    //to update cart item number
+                    window.updateCartItem();
+
+                    //
+
+                    // if((json.product_quantity-1) === 0)
+                });
+
+            // //remove item from list and array
+            // if (json.quantity == 0) {
+            //     let index;
+            //     for (let x = 0; x < window.globalCartArray.length; x++) {
+            //         if (cartItemDiv.id[5] == window.globalCartArray[x].id) {
+            //             console.log("quantity", json.quantity);
+            //             console.log(index);
+            //             index = window.globalCartArray.indexOf(
+            //                 window.globalCartArray[x]
+            //             );
+
+            //             // - from array
+            //             // window.globalCartArray.splice(index, 1); // this will remove the item from global array
+            //         }
+            //     }
+            // }
+        }
+        //refresh cart
+        refreshCart();
+
+        //to decrease cart item number
+        // window.updateCartItem();
+
+        //update cart total
+        window.modifyCartTotal();
+
+        //to change content if no items are left
+        if (window.globalCartArray.length == 0) {
+            console.log("cart is empty");
+            cartEmpty = true;
+            changeContent();
+        }
+    });
 
     //appending buttons and counter to parent container
     itemQuantityContainer.append(itemIncrease);
@@ -120,100 +253,46 @@ function addItemInCart(json) {
 
     //change cart total
     window.modifyCartTotal();
-
-    //increase counter
-    itemIncrease.addEventListener("click", () => {
-        //increasing quantity
-        console.log(json);
-        json.quantity++;
-        pItemCount.innerText = json.quantity;
-
-        //to increase cart item number
-        window.updateCartItem("increase");
-
-        //update cart total
-        window.modifyCartTotal();
-    });
-
-    //decrease counter
-    itemDecrease.addEventListener("click", () => {
-        //decreasing quantity
-        console.log(json);
-        json.quantity--;
-        pItemCount.innerText = json.quantity;
-
-        //to decrease cart item number
-        window.updateCartItem("decrease");
-
-        //remove item from list and array
-        if (json.quantity == 0) {
-            let index;
-            for (let x = 0; x < window.globalCartArray.length; x++) {
-                if (cartItemDiv.id[5] == window.globalCartArray[x].id) {
-                    console.log("quantity", json.quantity);
-                    console.log(index);
-                    index = window.globalCartArray.indexOf(
-                        window.globalCartArray[x]
-                    );
-                    // to remove the item
-                    // - from list
-                    let cartList = document.querySelector(".cart-items-list");
-                    let removeItem = document.querySelector(
-                        `#${cartItemDiv.id}`
-                    );
-                    console.log(removeItem);
-                    cartList.removeChild(removeItem);
-
-                    // - from array
-                    window.globalCartArray.splice(index, 1); // this will remove the item from global array
-                }
-            }
-        }
-
-        //update cart total
-        window.modifyCartTotal();
-
-        //to change content if no items are left
-        if (window.globalCartArray.length == 0) {
-            console.log("cart is empty");
-            cartEmpty = true;
-            changeContent();
-        }
-    });
 }
-// if the item already exists
-function itemExits(jsonId) {
-    for (let x = 0; x < window.globalCartArray.length; x++) {
-        if (jsonId == window.globalCartArray[x].id) {
-            //increase quantity
-            window.globalCartArray[x].quantity += 1;
-
-            //changing item count in cart
-            document.querySelector(`#itemQuantity-${jsonId}`).innerText =
-                window.globalCartArray[x].quantity;
-
-            //update cart total
-            window.modifyCartTotal();
-        }
-    }
-}
-window.itemExits = itemExits;
-
 //making this function global
 window.addItemInCart = addItemInCart;
+
+// if the item already exists
+// function itemExits(jsonId) {
+//     for (let x = 0; x < window.globalCartArray.length; x++) {
+//         if (jsonId == window.globalCartArray[x].id) {
+//             //increase quantity
+//             window.globalCartArray[x].quantity += 1;
+
+//             //changing item count in cart
+//             document.querySelector(`#itemQuantity-${jsonId}`).innerText =
+//                 window.globalCartArray[x].quantity;
+
+//             //update cart total
+//             window.modifyCartTotal();
+//         }
+//     }
+// }
+// window.itemExits = itemExits;
 
 //function to modify total price
 function modifyCartTotal() {
     let totalPrice = 0;
-    for (let index = 0; index < window.globalCartArray.length; index++) {
-        totalPrice +=
-            window.globalCartArray[index].price *
-            window.globalCartArray[index].quantity;
-    }
-    totalPrice = parseFloat(totalPrice.toFixed(2));
 
-    cartTotal.innerText = totalPrice;
+    fetch(
+        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+    )
+        .then((res) => res.json())
+        .then((result) => {
+            // console.log(result);
+            result.forEach((item) => {
+                totalPrice += item.price * item.product_quantity;
+                totalPrice = parseFloat(totalPrice.toFixed(2));
+                cartTotal.innerText = totalPrice;
+            });
+        });
 }
+
 //making this function global
 window.modifyCartTotal = modifyCartTotal;
 
@@ -234,17 +313,3 @@ window.modifyCartTotal = modifyCartTotal;
 //          </div>
 //        </div>
 //      </div>
-
-//display items from mysql database
-function refreshCart() {
-    fetch("http://localhost:8000/cart")
-        .then((res) => res.json())
-        .then((result) => {
-            // console.log(result);
-            result.forEach((item) => {
-                console.log(item);
-                addItemInCart(item);
-            });
-        });
-}
-refreshCart();

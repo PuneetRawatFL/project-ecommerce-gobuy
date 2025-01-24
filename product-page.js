@@ -93,43 +93,87 @@ fetch(`http://localhost:8000/products/${productId}`)
         //event listener for add to cart
         addToCart.addEventListener("click", () => {
             // console.log("cart");
-            //to increase cart item number
-            window.updateCartItem("increase");
-
-            //add to mysql database
-            fetch("http://localhost:8000/addToCart", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({ data: json[0] }),
-            })
-                .then((res) => res.json())
-                .then((data) => console.log("Success:", data))
-                .catch((err) => console.log("Error:", err));
 
             //creating flag
-            let itemExist = false;
+            // let itemExist = false;
 
             // to check if the item already exists
-            for (let x = 0; x < window.globalCartArray.length; x++) {
-                if (json[0].id === window.globalCartArray[x].id) {
-                    console.log("item exists");
-                    // window.globalCartArray[x].quantity += 1;
-                    itemExist = true;
-                    // window.modifyCartTotal();
-                    window.itemExits(json[0].id);
-                }
-            }
+            fetch(
+                `http://localhost:8000/mysql?mysqlQuery=select * from temp_table where product_id = ${json[0].id}`
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    // console.log(result);
+
+                    if (result.length === 0) {
+                        console.log(result.length);
+                        console.log("item dont exists");
+
+                        //to increase cart item number
+                        window.updateCartItem("increase");
+
+                        //add to mysql database
+                        fetch("http://localhost:8000/addToCart", {
+                            method: "POST",
+                            headers: {
+                                "Content-type": "application/json",
+                            },
+                            body: JSON.stringify({ data: json[0] }),
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log("Success:", data);
+                                window.refreshCart();
+                            })
+                            .catch((err) => console.log("Error:", err));
+                    }
+
+                    //if item exist -> increase quantity in mysql table
+                    else {
+                        console.log("item exists");
+                        fetch(
+                            `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${json[0].id}`
+                        )
+                            .then((res) => res.json())
+                            .then((result) => {
+                                console.log(result);
+                                //to increase cart item number
+                                window.updateCartItem();
+                            });
+                    }
+                });
+
+            // for (let x = 0; x < window.globalCartArray.length; x++) {
+            //     if (json[0].id === window.globalCartArray[x].id) {
+            //         console.log("item exists");
+            //         // window.globalCartArray[x].quantity += 1;
+            //         // window.modifyCartTotal();
+            //         window.itemExits(json[0].id);
+            //     }
+            // }
             //checking item exist flag
-            if (!itemExist) {
-                //adding quantity field to json[0] item
-                json[0].quantity = 1;
-                //adding item to cart array
-                window.globalCartArray.push(json[0]);
-                // add to cart
-                // window.addItemInCart(window.globalCartArray);
-                window.addItemInCart(json[0]);
-            }
+            // if (!itemExist) {
+            //adding quantity field to json[0] item
+            // json[0].quantity = 1;
+            //adding item to cart array
+            // window.globalCartArray.push(json[0]);
+            // add to cart
+            // window.addItemInCart(window.globalCartArray);
+            // window.addItemInCart(json[0]);.
+            // //add to mysql database
+            // fetch("http://localhost:8000/addToCart", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-type": "application/json",
+            //     },
+            //     body: JSON.stringify({ data: json[0] }),
+            // })
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         console.log("Success:", data);
+            //         window.refreshCart();
+            //     })
+            //     .catch((err) => console.log("Error:", err));
+            // }
         });
     });

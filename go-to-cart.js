@@ -12,12 +12,21 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+setTimeout(() => {
+    console.log("HEllo");
+    //disable cart modal
+    document.querySelector(".shopping-cart").style.pointerEvents = "none";
+    document.querySelector(".shopping-cart").style.cursor = "default";
+}, 1000);
+
 const shoppingList = document.querySelector(".shopping-cart-list");
 const subtotalSpan = document.querySelector("#subtotalSpan");
 let totalCartPrice = 0;
 
 //trial product
-fetch(`http://localhost:8000/products/category/jewelery`)
+fetch(
+    `http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id`
+)
     .then((res) => res.json())
     // .then((json) => {
     .then((products) => {
@@ -33,7 +42,7 @@ fetch(`http://localhost:8000/products/category/jewelery`)
             shoppingItemImage.classList.add("shoppingItemImage");
             //image tag
             const imagTag = document.createElement("img");
-            imagTag.src = `http://localhost:8000/product-images/product_1.jpg`;
+            imagTag.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
             //appending
             shoppingItemImage.append(imagTag);
 
@@ -49,9 +58,56 @@ fetch(`http://localhost:8000/products/category/jewelery`)
 
             //category
             //quantity
+            //creating quantity counter div
+            const itemQuantityDiv = document.createElement("div");
+            itemQuantityDiv.classList.add("item-quantity");
+            itemQuantityDiv.classList.add("item");
+            itemQuantityDiv.style.backgroundColor = "#ffffff";
+            itemQuantityDiv.style.marginTop = "10px";
+            itemQuantityDiv.style.justifyContent = "start";
+
+            //creating quantity counter container
+            const itemQuantityContainer = document.createElement("div");
+            itemQuantityContainer.classList.add("item-quantity-container");
+            itemQuantityContainer.style.justifyContent = "start";
+
+            //creating buttons and div for item count
+            //increase btn
+            const itemIncrease = document.createElement("button");
+            itemIncrease.classList.add("counter");
+            itemIncrease.id = "itemIncrease";
+            itemIncrease.innerText = "+";
+
+            //count div
+            const itemCount = document.createElement("div");
+            itemCount.id = "itemCount";
+            //p tag for count
+            const pItemCount = document.createElement("p");
+            // pItemCount.innerText = json.quantity;  --older
+            pItemCount.innerText = json.product_quantity;
+            pItemCount.id = `itemQuantity-${json.id}`;
+            //appending
+            itemCount.append(pItemCount);
+
+            //decrease btn
+            const itemDecrease = document.createElement("button");
+            itemDecrease.classList.add("counter");
+            itemDecrease.id = "itemDecrease";
+            itemDecrease.innerText = "-";
+
+            //appending buttons and counter to parent container
+            itemQuantityContainer.append(itemIncrease);
+            itemQuantityContainer.append(itemCount);
+            itemQuantityContainer.append(itemDecrease);
+
             //appending
             shoppingItemDetails.append(titleTag);
             shoppingItemDetails.append(detailsTag);
+
+            //
+            // appending
+            itemQuantityDiv.append(itemQuantityContainer);
+            shoppingItemDetails.append(itemQuantityDiv);
 
             //div for price
             const shoppingItemPrice = document.createElement("div");
@@ -73,6 +129,7 @@ fetch(`http://localhost:8000/products/category/jewelery`)
             shoppingList.append(shoppingCartItem);
 
             //total price
+            totalCartPrice = parseFloat(totalCartPrice.toFixed(2));
             subtotalSpan.innerText = `$${totalCartPrice}`;
         });
     });
