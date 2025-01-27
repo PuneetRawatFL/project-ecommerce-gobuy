@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const path = require("path");
 const app = express();
 
 //cors
@@ -10,7 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 //to use static images for product items
-app.use("/product-images", express.static("product-images"));
+app.use(
+    "/product-images",
+    express.static(path.join(__dirname, "../public/product-images"))
+);
 
 //creating connection
 const connection = mysql.createConnection({

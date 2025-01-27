@@ -1,8 +1,8 @@
 //loading cart-modal
 let visible = "false";
 $(function () {
-    $(".cart-modal").load("cart.html", function () {
-        $.getScript("cart-script.js");
+    $(".cart-modal").load("../html/cart.html", function () {
+        $.getScript("../js/cart-script.js");
         //to close the cart
         document.querySelector(".cart-close").addEventListener("click", () => {
             if (visible === "true") {
@@ -35,11 +35,11 @@ function updateCartItem() {
         .then((result) => {
             // console.log("cart length", result[0].quantity);
             if (result[0].quantity > 0) {
-                cartIcon.src = "./images/shopping-bag-filled.png";
+                cartIcon.src = "../images/shopping-bag-filled.png";
                 cartCount.style.visibility = "visible";
                 cartCount.innerText = result[0].quantity;
             } else {
-                cartIcon.src = "./images/shopping-bag-empty.png";
+                cartIcon.src = "../images/shopping-bag-empty.png";
                 cartCount.style.visibility = "hidden";
                 // cartTotalDiv.style.visibility = "hidden";
             }

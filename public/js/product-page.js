@@ -5,7 +5,7 @@ $(function () {
     $(".announcement-bar").load("announcement-bar.html");
     //header
     $(".navbar").load("header.html", function () {
-        $.getScript("header-script.js");
+        $.getScript("../js/header-script.js");
     });
     //footer
     $("#footer").load("footer.html");
@@ -45,7 +45,7 @@ fetch(`http://localhost:8000/products/${productId}`)
 
         //rating section
         let ratingStar = document.querySelector("#rating-star");
-        ratingStar.src = "./images/rating-star.png";
+        ratingStar.src = "../images/rating-star.png";
 
         //product elements
         let productTitle = document.querySelector("#product-title");
@@ -139,6 +139,9 @@ fetch(`http://localhost:8000/products/${productId}`)
                                 console.log(result);
                                 //to increase cart item number
                                 window.updateCartItem();
+
+                                //window
+                                window.refreshCart();
                             });
                     }
                 });

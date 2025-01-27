@@ -106,7 +106,7 @@ function getProducts(url) {
 
                 //adding eventlistener
                 btn.addEventListener("click", () => {
-                    console.log("button: ", btn);
+                    // console.log("button: ", btn);
                     //add loading animation
                     addToCartLoading(`${btn.id}`);
                     fetch(
@@ -120,7 +120,7 @@ function getProducts(url) {
                             // console.log(result);
 
                             if (result.length === 0) {
-                                console.log(result.length);
+                                // console.log(result.length);
                                 console.log("item dont exists");
 
                                 //to increase cart item number
@@ -244,7 +244,7 @@ $(function () {
     // Declare a global object to store references to elements
 
     $(".navbar").load("header.html", function () {
-        $.getScript("header-script.js");
+        $.getScript("../js/header-script.js");
     });
     $("#footer").load("footer.html");
 });

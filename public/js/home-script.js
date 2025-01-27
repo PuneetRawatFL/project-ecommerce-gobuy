@@ -118,7 +118,7 @@ function getRandomNumber() {
             let x = 0;
             let randArr = getRandomNumber();
             productCard.forEach((product) => {
-                product.children[0].href = `product-page.html?id=${
+                product.children[0].href = `./product-page.html?id=${
                     data[randArr[x]].id
                 }`;
                 //to display image
@@ -136,6 +136,8 @@ function getRandomNumber() {
 //loading header script
 $(function () {
     $(".navbar").load("header.html", function () {
-        $.getScript("header-script.js");
+        $.getScript("../js/header-script.js");
     });
 });
+
+console.log("HEllo");

@@ -13,7 +13,7 @@ function changeContent() {
         cartListDiv.classList.add("cart-items-list-empty");
         cartListDiv.classList.remove("cart-items-list-filled");
     } else {
-        console.log("else condition");
+        // console.log("else condition");
         cartBottomDiv.style.visibility = "visible";
         cartEmptyContent.style.display = "none";
         cartListDiv.classList.remove("cart-items-list-empty");
@@ -29,9 +29,9 @@ function refreshCart() {
     )
         .then((res) => res.json())
         .then((result) => {
-            console.log(result.length);
+            // console.log(result.length);
             if (result.length == 0) {
-                console.log("Cart empty");
+                // console.log("Cart empty");
                 cartEmpty = true;
                 changeContent();
             } else {
@@ -156,10 +156,10 @@ function addItemInCart(json) {
     //decrease counter
     itemDecrease.addEventListener("click", () => {
         //decreasing quantity
-        console.log(json);
+        // console.log(json);
         // json.quantity--;
         // pItemCount.innerText = json.quantity;
-        console.log(json.product_quantity - 1);
+        // console.log(json.product_quantity - 1);
         if (json.product_quantity - 1 == 0) {
             fetch(
                 `http://localhost:8000/mysql?mysqlQuery=delete from temp_table where product_id = ${json.id}`
@@ -175,7 +175,7 @@ function addItemInCart(json) {
                     let removeItem = document.querySelector(
                         `#${cartItemDiv.id}`
                     );
-                    console.log(removeItem);
+                    // console.log(removeItem);
                     cartList.removeChild(removeItem);
                     //to update cart item number
                     window.updateCartItem();
@@ -197,24 +197,24 @@ function addItemInCart(json) {
 
                     // if((json.product_quantity-1) === 0)
                 });
-
-            // //remove item from list and array
-            // if (json.quantity == 0) {
-            //     let index;
-            //     for (let x = 0; x < window.globalCartArray.length; x++) {
-            //         if (cartItemDiv.id[5] == window.globalCartArray[x].id) {
-            //             console.log("quantity", json.quantity);
-            //             console.log(index);
-            //             index = window.globalCartArray.indexOf(
-            //                 window.globalCartArray[x]
-            //             );
-
-            //             // - from array
-            //             // window.globalCartArray.splice(index, 1); // this will remove the item from global array
-            //         }
-            //     }
-            // }
         }
+        // //remove item from list and array
+        // if (json.quantity == 0) {
+        //     let index;
+        //     for (let x = 0; x < window.globalCartArray.length; x++) {
+        //         if (cartItemDiv.id[5] == window.globalCartArray[x].id) {
+        //             console.log("quantity", json.quantity);
+        //             console.log(index);
+        //             index = window.globalCartArray.indexOf(
+        //                 window.globalCartArray[x]
+        //             );
+
+        //             // - from array
+        //             // window.globalCartArray.splice(index, 1); // this will remove the item from global array
+        //         }
+        //     }
+        // }
+
         //refresh cart
         refreshCart();
 
@@ -223,13 +223,6 @@ function addItemInCart(json) {
 
         //update cart total
         window.modifyCartTotal();
-
-        //to change content if no items are left
-        if (window.globalCartArray.length == 0) {
-            console.log("cart is empty");
-            cartEmpty = true;
-            changeContent();
-        }
     });
 
     //appending buttons and counter to parent container

@@ -20,14 +20,14 @@ body {
     margin-top: 110px;
     height: 80vh;
     width: 100%;
-    background-image: url("./images/intro-background.png");
+    background-image: url("../images/intro-background.png");
     background-size: cover;
 }
 .intro-section {
     margin-top: 110px;
     height: 90vh;
     width: 100%;
-    background-image: url("./images/intro-vector.png");
+    background-image: url("../images/intro-vector.png");
     /* background-size: auto auto; */
     background-size: 100vh 50vh;
     background-position: left 20vh center;
@@ -64,7 +64,7 @@ body {
     height: 80vh;
     width: 100%;
     /* background-image: url("./images/our-mission.jpg"); */
-    background-image: url("./images/our-mission.png");
+    background-image: url("../images/our-mission.png");
     background-size: 80vh 50vh;
     background-position: right 20vh center;
     background-repeat: no-repeat;
@@ -100,7 +100,7 @@ body {
 .success {
     height: 90vh;
     width: 100%;
-    background-image: url("./images/our-success.png");
+    background-image: url("../images/our-success.png");
     background-size: 90vh 80vh;
     background-position: left 20vh center;
     background-repeat: no-repeat;
@@ -140,7 +140,7 @@ body {
     height: 90vh;
     width: 100%;
     /* background-image: url("./images/our-mission.jpg"); */
-    background-image: url("./images/our-team.png");
+    background-image: url("../images/our-team.png");
     background-size: 190vh 90vh;
     background-position: right center;
     background-repeat: no-repeat;
