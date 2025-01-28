@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cart</title>
+        <title>Document</title>
 
         <!-- font family -->
         <link
@@ -12,7 +12,7 @@
         />
 
         <!-- style file -->
-        <link rel="stylesheet" href="../css/go-to-cart.css" />
+        <link rel="stylesheet" href="../css/confirm-details.css" />
 
         <!-- including header and footer using jquery -->
         <script
@@ -22,7 +22,7 @@
         ></script>
 
         <!-- script file -->
-        <script src="../js/go-to-cart.js" defer></script>
+        <script src="../js/confirm-details.js" defer></script>
     </head>
     <body>
         <!-- announcement bar -->
@@ -36,17 +36,31 @@
         <!-- cart modal -->
         <div class="cart-modal"></div>
 
-        <!-- cart area -->
-
         <div class="shopping-cart-checkout">
             <div class="cart-heading">
-                <h1>Shopping Cart</h1>
+                <h1>Confirm Details</h1>
+            </div>
+            <div class="address">
+                <h2>Delievery address:</h2>
+                <div class="address-content">
+                    <p id="address-tag">Name: <span id="fullName"></span></p>
+                    <p id="address-tag">
+                        Phone number: <span id="mobileno"></span>
+                    </p>
+                    <p id="address-tag">
+                        Address: <span id="fullAddress"></span>
+                    </p>
+                    <p id="address-tag">City: <span id="cityName"></span></p>
+                    <p id="address-tag">State: <span id="stateName"></span></p>
+                    <p id="address-tag">
+                        Postal code: <span id="zipCode"></span>
+                    </p>
+                </div>
+                <br />
+                <h2>Cart Items:</h2>
             </div>
             <div class="shopping-cart-list">
-                <!-- for one item -->
-                <!-- <div class="shopping-item-image"></div> -->
-                <!-- <div class="shopping-item-details"></div> -->
-                <!-- <div class="shopping-item-price"></div> -->
+                <!-- for item -->
             </div>
             <div class="shopping-cart-subtotal">
                 <h3 class="subtotal">Subtotal:</h3>
@@ -54,12 +68,17 @@
                     <span id="subtotalSpan"></span>
                 </h3>
             </div>
+            <!-- delievery estimation -->
+            <div class="estimated-delievry">
+                <img src="../images/delivery-truck.png" alt="" />
+                <p>Estimated delievry: 7 Working days</p>
+            </div>
         </div>
+
         <div class="button-container">
-            <button onclick="location.href='./shipping-details.html'">
-                Proceed to checkout
-            </button>
+            <button>Confirm & Pay</button>
         </div>
+
         <!-- footer -->
         <footer>
             <div id="footer"></div>
