@@ -29,6 +29,7 @@ An engaging, user-friendly eCommerce shopping platform that allows users to brow
 -   Git
 -   Node.js
 -   npm
+-   MySql (make sure MySQL is installed and running on your machine)
 
 ### Cloning the Repository
 
@@ -47,6 +48,19 @@ cd project-ecommerce-gobuy
 npm install
 ```
 
+### Setting Up MySQL
+
+1. **Create a new database:**
+    ```sh
+    mysql -u root -p -e "CREATE DATABASE ecommerce_db;"
+    ```
+2. **Execute the provided `.sql` file to set up the tables and initial data:**
+    ```sh
+    mysql -u root -p ecommerce_db < setup.sql
+    ```
+
+## Usage
+
 ### Running the Project
 
 Open terminal and run the following command:
@@ -54,3 +68,13 @@ Open terminal and run the following command:
 ```sh
 npm start
 ```
+
+This will start the server, and you can access the project by navigating to `http://localhost:3000` in your web browser.
+
+## Contact
+
+For any inquiries, feel free to reach out:
+
+-   Email: puneet.rawat@fexle.com
+-   LinkedIn: [your-linkedin-url](https://www.linkedin.com/in/your-profile)
+-   GitHub: [PuneetRawatFL](https://github.com/PuneetRawatFL)
