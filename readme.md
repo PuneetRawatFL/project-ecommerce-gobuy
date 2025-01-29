@@ -48,13 +48,18 @@ cd project-ecommerce-gobuy
 npm install
 ```
 
+This command reads the `package.json` file and installs all listed dependencies.
+
 ### Setting Up MySQL
 
 1. **Create a new database:**
+
     ```sh
     mysql -u root -p -e "CREATE DATABASE ecommerce_db;"
     ```
-2. **Execute the provided `.sql` file to set up the tables and initial data:**
+
+2. **Execute the provided `.sql` file to set up the tables and initial data:**\
+
     ```sh
     mysql -u root -p ecommerce_db < setup.sql
     ```
