@@ -29,7 +29,7 @@ function savedAddress() {
             const stateName = document.querySelector("#stateName");
             const zipCode = document.querySelector("#zipCode");
 
-            fullName.innerText = `${results[0].fname}+${results[0].lname}`;
+            fullName.innerText = `${results[0].fname} ${results[0].lname}`;
             mobileno.innerText = results[0].mobileno;
             fullAddress.innerText = results[0].address;
             cityName.innerText = results[0].city;
