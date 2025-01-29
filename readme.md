@@ -15,3 +15,42 @@ An engaging, user-friendly eCommerce shopping platform that allows users to brow
 -   Backend: Node.js, Express.js
 -   Database: MySql
 -   Payment Gateway:
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Contact](#contact)
+
+## Installation
+
+### Prerequisites
+
+-   Git
+-   Node.js
+-   npm
+
+### Cloning the Repository
+
+To clone the repository, run the following command:
+
+```sh
+git clone https://github.com/PuneetRawatFL/project-ecommerce-gobuy.git
+```
+
+### Installing Dependencies
+
+Navigate to the project directory and install the required dependencies:
+
+```sh
+cd project-ecommerce-gobuy
+npm install
+```
+
+### Running the Project
+
+Open terminal and run the following command:
+
+```sh
+npm start
+```
