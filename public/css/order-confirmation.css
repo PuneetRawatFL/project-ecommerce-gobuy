@@ -1,0 +1,53 @@
+* {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body {
+    background-color: #f6f2ff;
+}
+
+.confirmation-container {
+    margin-top: 120px;
+    /* background-color: blue; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+}
+
+.confirmation-heading {
+    width: 70%;
+    text-align: left;
+    border-left: 5px solid #36558f;
+    padding-left: 10px;
+}
+
+.confirmation-content {
+    margin-top: 20px;
+    width: 70%;
+    padding: 10px;
+    padding-bottom: 0;
+    background-color: #ffffff;
+}
+
+.thank-you-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.order-summary {
+    margin-top: 20px;
+}
+.order-summary h2,
+p {
+    text-align: center;
+}

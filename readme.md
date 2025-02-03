@@ -55,13 +55,13 @@ This command reads the `package.json` file and installs all listed dependencies.
 1. **Create a new database:**
 
     ```sh
-    mysql -u root -p -e "CREATE DATABASE ecommerce_db;"
+    mysql -u root -p -e "CREATE DATABASE gobuy_db;"
     ```
 
-2. **Execute the provided `.sql` file to set up the tables and initial data:**\
+2. **Execute the provided `.sql` file to set up the tables and initial data:**
 
     ```sh
-    mysql -u root -p ecommerce_db < setup.sql
+    mysql -u root -p gobuy_db < setup.sql
     ```
 
 ## Usage

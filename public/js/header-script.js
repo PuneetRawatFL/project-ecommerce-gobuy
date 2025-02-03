@@ -48,3 +48,18 @@ function updateCartItem() {
 
 //to make function available globally
 window.updateCartItem = updateCartItem;
+
+//drop down user details
+let userIcon = document.querySelector(".user-icon");
+console.log(userIcon);
+let show = "false";
+userIcon.addEventListener("click", () => {
+    // console.log("hover");
+    if (show === "false") {
+        document.querySelector(".user-info").classList.add("show");
+        show = "true";
+    } else {
+        document.querySelector(".user-info").classList.remove("show");
+        show = "false";
+    }
+});

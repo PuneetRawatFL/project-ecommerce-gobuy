@@ -143,12 +143,13 @@ body {
     padding: 5px;
     margin-top: 50px;
     /* margin-left: 50%; */
-    background-color: #40376e;
+    background-color: #36558f;
     color: #eeeeee;
     cursor: pointer;
     transition: 0.2s;
 }
 #btn1:hover {
+    background-color: #e5533d;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

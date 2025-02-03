@@ -73,9 +73,6 @@ body {
     text-decoration: underline;
     color: #36558f;
 }
-.navbar .items a:hover {
-    text-shadow: 0 5px 8px rgba(173, 216, 230, 1);
-}
 
 /* navigation panel */
 .page-name {

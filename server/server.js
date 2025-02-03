@@ -5,6 +5,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 
+//controller for sending mail
+const sendMail = require("./controllers/sendMail.js");
+
 //cors
 app.use(cors());
 
@@ -160,9 +163,11 @@ app.post("/submit-shipping-details", (req, res) => {
     });
 
     // console.log(formData);
-
     // res.status(200).send("details submitted");
 });
+
+//api endpoint to send customer support email
+app.post("/sendemail", sendMail);
 
 //starting server
 app.listen(8000, () => {
