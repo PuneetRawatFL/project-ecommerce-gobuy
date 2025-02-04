@@ -3,18 +3,23 @@ const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const authenticateToken = require("./middleware/authToken.js");
 const app = express();
 
 //controller for sending mail
 const sendMail = require("./controllers/sendMail.js");
+//controller for user
+const userController = require("./controllers/userController.js");
 
 //cors
 app.use(cors());
-
 //middleware to parse json
 app.use(express.json());
-
+//
 app.use(bodyParser.urlencoded({ extended: true }));
+//
+app.use(cookieParser());
 
 //to use static images for product items
 app.use(
@@ -161,13 +166,18 @@ app.post("/submit-shipping-details", (req, res) => {
         }
         res.status(200).json(results);
     });
-
-    // console.log(formData);
-    // res.status(200).send("details submitted");
 });
 
 //api endpoint to send customer support email
 app.post("/sendemail", sendMail);
+
+//endpoint for user
+app.post("/register", userController);
+
+//
+app.get("/protected", authenticateToken, (req, res) => {
+    res.status(200).send(`Welcome, ${req.user.email}`);
+});
 
 //starting server
 app.listen(8000, () => {

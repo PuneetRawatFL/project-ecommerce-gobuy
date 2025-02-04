@@ -21,18 +21,25 @@
     <div class="user-icon">
         <img id="user-btn" src="../images/user_logged_out.png" alt="" />
         <div class="user-info">
-            <h4>Hello, Puneet</h4>
-            <a href="../html/my-orders.html">Orders</a>
-            <a href="../html/my-account.html">Account</a>
-            <a href=""
-                >Logout
-                <span
-                    ><img
-                        src="../images/logout.png"
-                        alt=""
-                        style="height: 10px; width: 10px"
-                /></span>
-            </a>
+            <h4 class="user-name">Not a user? Login</h4>
+
+            <div class="user-login-options">
+                <a href="../html/login.html">Login</a>
+            </div>
+
+            <div class="user-logout-options">
+                <a href="../html/my-orders.html">Orders</a>
+                <a href="../html/my-account.html">Account</a>
+                <a href="" id="logout-btn"
+                    >Logout
+                    <span
+                        ><img
+                            src="../images/logout.png"
+                            alt=""
+                            style="height: 10px; width: 10px"
+                    /></span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -148,5 +155,13 @@
     .user-info.show {
         opacity: 1;
         max-height: 200px;
+    }
+
+    .user-logout-options {
+        display: none;
+    }
+    .user-logout-options a {
+        display: block;
+        width: 100%;
     }
 </style>

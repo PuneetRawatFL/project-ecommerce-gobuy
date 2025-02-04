@@ -1,0 +1,94 @@
+* {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body {
+    background-color: #f6f2ff;
+}
+.login-container {
+    margin-top: 120px;
+    /* background-color: blue; */
+    width: 100%;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    width: 100%;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-heading {
+    width: 70%;
+    text-align: left;
+    border-left: 5px solid #36558f;
+    padding-left: 10px;
+}
+
+.form-container {
+    margin-top: 10px;
+    width: 70%;
+    padding: 10px;
+    padding-bottom: 20px;
+    background-color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+input,
+select {
+    border: 1.5px solid black;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px;
+}
+label {
+    margin: 10px 0 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-container button {
+    margin-top: 25px;
+    background-color: #36558f;
+    color: white;
+    height: 40px;
+    /* width: 150px; */
+    width: 40%;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.button-container button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: black;
+    background-color: #ffa500;
+    /* background-color: #ffffe0; */
+}
+
+.result-container {
+    display: none;
+    width: 70%;
+    padding: 10px;
+    padding-bottom: 20px;
+    background-color: #ffffff;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+}

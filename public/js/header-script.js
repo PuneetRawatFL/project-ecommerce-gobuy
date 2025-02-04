@@ -51,7 +51,7 @@ window.updateCartItem = updateCartItem;
 
 //drop down user details
 let userIcon = document.querySelector(".user-icon");
-console.log(userIcon);
+// console.log(userIcon);
 let show = "false";
 userIcon.addEventListener("click", () => {
     // console.log("hover");
@@ -62,4 +62,28 @@ userIcon.addEventListener("click", () => {
         document.querySelector(".user-info").classList.remove("show");
         show = "false";
     }
+});
+
+//login
+const userTag = document.querySelector(".user-name");
+const userBtn = document.querySelector("#user-btn");
+const userLogoutOptions = document.querySelector(".user-logout-options");
+const userLoginOptions = document.querySelector(".user-login-options");
+// console.log(userBtn);
+
+function userLoggedIn(userName) {
+    userTag.innerText = `Hello, ${userName}`;
+    userLoginOptions.style.display = "none";
+    userLogoutOptions.style.display = "block";
+    userBtn.src = "../images/user_logged_in.png";
+}
+window.userLoggedIn = userLoggedIn;
+
+//logout
+const logoutBtn = document.querySelector("#logout-btn");
+logoutBtn.addEventListener("click", () => {
+    userTag.innerText = `Not a user? Login`;
+    userLoginOptions.style.display = "block";
+    userLogoutOptions.style.display = "none";
+    userBtn.src = "../images/user_logged_out.png";
 });
