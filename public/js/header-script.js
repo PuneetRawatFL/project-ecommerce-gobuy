@@ -76,6 +76,8 @@ function userLoggedIn(userName) {
     userLoginOptions.style.display = "none";
     userLogoutOptions.style.display = "block";
     userBtn.src = "../images/user_logged_in.png";
+
+    // console.log((document.cookie = "token"));
 }
 window.userLoggedIn = userLoggedIn;
 
@@ -86,4 +88,50 @@ logoutBtn.addEventListener("click", () => {
     userLoginOptions.style.display = "block";
     userLogoutOptions.style.display = "none";
     userBtn.src = "../images/user_logged_out.png";
+
+    //delete cookie
+    document.cookie =
+        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/public/html";
 });
+
+//function to check if the user is logged in
+async function checkUser() {
+    const hasToken = document.cookie.includes("token=");
+    console.log(hasToken);
+
+    if (hasToken) {
+        const details = await getDetailFromToken();
+        console.log("details", details);
+        //calling function
+        userLoggedIn(details.name);
+
+        document.cookie = `userId = ${details.id}`;
+    }
+    return hasToken;
+}
+window.checkUser = checkUser;
+checkUser();
+
+async function getDetailFromToken() {
+    //extracting token value using regex
+    const match = document.cookie.match(/(^| )token=([^;]+)/);
+    console.log(match[2]);
+
+    // Decode the JWT using jwt-decode script
+    const decoded = jwt_decode(match[2]);
+
+    // Log the decoded payload
+    console.log("Decoded Payload:", decoded);
+
+    //trying fetch
+    const response = await fetch(
+        `http://localhost:8000/mysql?mysqlQuery=select * from users where email='${decoded.email}'`
+    );
+    const result = await response.json();
+    console.log("result: ", result[0]);
+    console.log(result[0].name);
+
+    //return user details
+    return result[0];
+}
+window.getDetailFromToken = getDetailFromToken;

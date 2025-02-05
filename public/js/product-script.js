@@ -1,3 +1,11 @@
+try {
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
+    console.log("userid", userId);
+} catch {
+    console.error("user not logged in");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     //fetch announcement bar
     fetch("announcement-bar.html")
@@ -5,6 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((data) => {
             document.querySelector(".announcement-bar").innerHTML = data;
         });
+});
+
+//loading header script
+
+$(function () {
+    $(".navbar").load("header.html", function () {
+        $.getScript("../js/header-script.js");
+    });
+    $("#footer").load("footer.html");
 });
 
 // access accordian
@@ -126,13 +143,23 @@ function getProducts(url) {
                                 //to increase cart item number
                                 window.updateCartItem();
 
+                                const user =
+                                    document.cookie.match(
+                                        /(^| )userId=([^;]+)/
+                                    );
+                                const userId = parseInt(user[2], 10);
+                                // product.userId = userId;
+
                                 //add to mysql database
                                 fetch("http://localhost:8000/addToCart", {
                                     method: "POST",
                                     headers: {
                                         "Content-type": "application/json",
                                     },
-                                    body: JSON.stringify({ data: product }),
+                                    body: JSON.stringify({
+                                        data: product,
+                                        userId: userId,
+                                    }),
                                 })
                                     .then((res) => res.json())
                                     .then((data) => {
@@ -238,17 +265,6 @@ resetBtn.addEventListener("click", () => {
     getProducts("http://localhost:8000/products");
 });
 
-//loading header script
-
-$(function () {
-    // Declare a global object to store references to elements
-
-    $(".navbar").load("header.html", function () {
-        $.getScript("../js/header-script.js");
-    });
-    $("#footer").load("footer.html");
-});
-
 // function to add loading animaton to add to cart button
 function addToCartLoading(btnId) {
     const btn = document.getElementById(`${btnId}`);
@@ -274,75 +290,18 @@ function removeAddButtonLoading(btnId) {
 // //creating global array
 // window.globalCartArray = [];
 
+// no use ----------------------------------
+
 //opening cart modal on add to cart button
 function addToCart() {
     let addToCartBtns = document.querySelectorAll(".addButton");
+    console.log("fuction call");
     addToCartBtns.forEach((button) => {
         button.addEventListener("click", () => {
             // add loading animation
             addToCartLoading(`${button.id}`);
-            // fetch(`http://localhost:8000/products/${button.id}`)
-            //     .then((res) => res.json())
-            //     .then((json) => {
-            //         console.log(json[0]);
+            console.log("click");
 
-            //         //add to mysql database
-            //         fetch("http://localhost:8000/addToCart", {
-            //             method: "POST",
-            //             headers: {
-            //                 "Content-type": "application/json",
-            //             },
-            //             body: JSON.stringify({ data: json[0] }),
-            //         })
-            //             .then((res) => res.json())
-            //             .then((data) => console.log("Success:", data))
-            //             .catch((err) => console.log("Error:", err));
-
-            //         //to increase cart item number
-            //         window.updateCartItem("increase");
-
-            //         //remove loading animation
-            //         removeAddButtonLoading(`${button.id}`);
-
-            //         //creating flag
-            //         let itemExist = false;
-
-            //         // to check if the item already exists
-            //         // for (let x = 0; x < window.globalCartArray.length; x++) {
-            //         //     if (json[0].id === window.globalCartArray[x].id) {
-            //         //         console.log("item exists");
-            //         //         // window.globalCartArray[x].quantity += 1;
-            //         //         itemExist = true;
-            //         //         // window.modifyCartTotal();
-            //         //         window.itemExits(json[0].id);
-            //         //     }
-            //         // }
-            //         fetch(
-            //             `http://localhost:8000/mysql?mysqlQuery=select * from temp_table where product_id = ${json[0].id}`
-            //         )
-            //             .then((res) => res.json())
-            //             .then((result) => {
-            //                 if (result) {
-            //                     console.log("item exists");
-
-            //                     //to increase cart item number
-            //                     window.updateCartItem("increase");
-            //                 }
-            //             });
-
-            //         //checking item exist flag
-            //         if (!itemExist) {
-            //             //adding quantity field to json item
-            //             json[0].quantity = 1;
-            //             //adding item to cart array
-            //             window.globalCartArray.push(json[0]);
-            //             // add to cart
-            //             // window.addItemInCart(window.globalCartArray);
-            //             window.addItemInCart(json[0]);
-            //         }
-            //     });
-
-            // to check if the item already exists
             fetch(
                 `http://localhost:8000/mysql?mysqlQuery=select * from temp_table where product_id = ${button.id}`
             )
@@ -350,15 +309,19 @@ function addToCart() {
                 .then((result) => {
                     //remove loading animation
                     removeAddButtonLoading(`${button.id}`);
+                    console.log("HELLOOOOOOOOO");
 
                     // console.log(result);
 
                     if (result.length === 0) {
                         console.log(result.length);
-                        console.log("item dont exists");
+                        console.log("item dont exists hello");
 
                         //to increase cart item number
                         window.updateCartItem();
+
+                        json[0].userId = "hello";
+                        console.log(json[0]);
 
                         //add to mysql database
                         fetch("http://localhost:8000/addToCart", {
@@ -366,7 +329,9 @@ function addToCart() {
                             headers: {
                                 "Content-type": "application/json",
                             },
-                            body: JSON.stringify({ data: json[0] }),
+                            body: JSON.stringify({
+                                data: json[0],
+                            }),
                         })
                             .then((res) => res.json())
                             .then((data) => {

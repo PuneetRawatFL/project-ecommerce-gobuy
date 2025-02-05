@@ -110,16 +110,19 @@ app.get("/cart", (req, res) => {
 
 //post route to add item to cart
 app.post("/addToCart", (req, res) => {
+    console.log(req.body);
     const itemReceived = req.body.data;
+    const userId = req.body.userId;
     // res.json({ message: "Data received successfully!", data: itemReceived });
 
     const query =
-        "insert into temp_table(product_id, product_price, product_quantity, total_price) values (?,?,?,?)";
+        "insert into temp_table(product_id, product_price, product_quantity, total_price, user_id) values (?,?,?,?,?)";
     const values = [
         itemReceived.id,
         itemReceived.price,
         "1",
         itemReceived.price,
+        userId,
     ];
 
     connection.query(query, values, (error, results) => {

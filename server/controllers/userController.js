@@ -61,6 +61,7 @@ const userController = async (req, res) => {
                 );
 
                 //send as cookie
+                // document.cookie = `token =${token}`;
                 // res.cookie("token", token, { httpOnly: false });
                 res.cookie("token", token, {
                     httpOnly: false,
@@ -68,11 +69,12 @@ const userController = async (req, res) => {
                     path: "/",
                 });
 
-                console.log(token);
+                // console.log(token);
 
                 return res.status(200).json({
                     message: "User logged in successfully",
                     result: user,
+                    token: token,
                 });
             }
         );

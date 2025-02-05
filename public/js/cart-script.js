@@ -50,6 +50,15 @@ function refreshCart() {
 window.refreshCart = refreshCart;
 refreshCart();
 
+// const isUser = await window.checkUser();
+// console.log(isUser);
+
+async function userDetails() {
+    const userDetails = await window.getDetailFromToken();
+    console.log("cart script", userDetails.id);
+}
+userDetails();
+
 function addItemInCart(json) {
     //change html of cartlist
     cartEmpty = false;

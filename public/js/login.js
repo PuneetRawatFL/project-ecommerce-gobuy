@@ -52,16 +52,20 @@ forms.forEach((form) => {
             body: JSON.stringify(data),
         })
             .then(async (res) => {
-                console.log(res.status);
+                console.log(res);
                 if (res.ok) {
                     const result = await res.json();
-                    // alert(result);
+                    console.log(result);
 
                     resultDiv.style.display = "block";
                     resultDiv.style.backgroundColor = "green";
                     resultDiv.innerText = result.message;
                     console.log(result.result.name);
                     window.userLoggedIn(result.result.name);
+
+                    //acess token
+                    document.cookie = `token = ${result.token}`;
+                    // console.log(document.cookie);
                 } else {
                     // alert("Form submission failed.");
                     const result = await res.json();
@@ -73,3 +77,5 @@ forms.forEach((form) => {
             .catch((err) => console.log("Error:", err));
     });
 });
+
+//logout function

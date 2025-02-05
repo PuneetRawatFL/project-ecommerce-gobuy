@@ -75,3 +75,18 @@ create table orders (
 	
 )
 
+SELECT 
+    u.user_id,
+    u.name AS user_name,
+    c.cart_id,
+    p.product_id,
+    p.product_name,
+    p.product_price
+FROM 
+    user u
+JOIN 
+    cart c ON u.user_id = c.user_id
+JOIN 
+    products p ON c.product_id = p.product_id
+WHERE 
+    u.user_id = ?;  -- Replace with the specific user ID
