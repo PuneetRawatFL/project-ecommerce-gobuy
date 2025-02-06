@@ -90,3 +90,48 @@ JOIN
     products p ON c.product_id = p.product_id
 WHERE 
     u.user_id = ?;  -- Replace with the specific user ID
+
+
+cart-modal
+create table cart(
+	cart_id int primary key auto_increment,
+    product_id int, 
+    product_quantity int, 
+    product_price decimal(10, 2),
+    total_price decimal(10, 2) generated always as (product_quantity * product_price) stored,
+    user_id int
+);
+
+cart -> orders -> order_items
+
+cart
+
+create table cart(
+	cart_id int primary key auto_increment,
+    product_id int, 
+    product_quantity int, 
+    product_price decimal(10, 2),
+    total_price decimal(10, 2) generated always as (product_quantity * product_price) stored,
+    user_id int
+);
+
+orders
+
+insert into orders(user_id, order_date, total_amount)
+select user_id, now(), sum(product_quantity * product_price) as total_amount
+from cart
+where user_id = 2;
+
+---delete from cart;
+
+delete from cart where user_id = 2;
+
+
+
+order_items
+
+insert into order_items(order_id, product_id, quantity, price)
+select o.order_id, c.product_id, c.product_quantity, c.product_price
+from cart c
+join orders o on o.user_id = c.user_id
+where c.user_id = 1

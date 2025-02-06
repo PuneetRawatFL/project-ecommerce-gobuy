@@ -121,20 +121,28 @@ function getProducts(url) {
                 btn.id = `${btnId}`;
                 btnId++;
 
+                //user id
+                try {
+                    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+                    const userId = parseInt(user[2], 10);
+                } catch {
+                    console.log("User not logged in");
+                }
+
                 //adding eventlistener
                 btn.addEventListener("click", () => {
                     // console.log("button: ", btn);
                     //add loading animation
                     addToCartLoading(`${btn.id}`);
                     fetch(
-                        `http://localhost:8000/mysql?mysqlQuery=select * from temp_table where product_id = ${btn.id}`
+                        `http://localhost:8000/mysql?mysqlQuery=select * from cart c join users u on c.user_id = u.userId where u.userId =${userId} and product_id = ${btn.id}`
                     )
                         .then((res) => res.json())
                         .then((result) => {
                             //remove loading animation
                             removeAddButtonLoading(`${btn.id}`);
 
-                            // console.log(result);
+                            console.log(result);
 
                             if (result.length === 0) {
                                 // console.log(result.length);
@@ -173,7 +181,7 @@ function getProducts(url) {
                             else {
                                 console.log("item exists");
                                 fetch(
-                                    `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${btn.id}`
+                                    `http://localhost:8000/mysql?mysqlQuery=update cart c join users u on c.user_id = u.userId set product_quantity = product_quantity %2B 1 where product_id = ${btn.id}`
                                 )
                                     .then((res) => res.json())
                                     .then((result) => {

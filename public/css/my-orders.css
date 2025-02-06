@@ -31,3 +31,15 @@ body {
     margin-bottom: 10px;
     color: #36558f;
 }
+
+.order-items-area {
+    margin-top: 10px;
+    height: 100px;
+    background-color: blue;
+    padding: 10px;
+}
+
+.order-container {
+    height: 10vh;
+    background-color: aqua;
+}

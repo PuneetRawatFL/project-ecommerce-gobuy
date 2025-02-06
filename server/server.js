@@ -33,6 +33,7 @@ const connection = mysql.createConnection({
     user: "root",
     password: "123456",
     database: "gobuy",
+    multipleStatements: true,
 });
 
 //connecting
@@ -116,14 +117,8 @@ app.post("/addToCart", (req, res) => {
     // res.json({ message: "Data received successfully!", data: itemReceived });
 
     const query =
-        "insert into temp_table(product_id, product_price, product_quantity, total_price, user_id) values (?,?,?,?,?)";
-    const values = [
-        itemReceived.id,
-        itemReceived.price,
-        "1",
-        itemReceived.price,
-        userId,
-    ];
+        "insert into cart(product_id, product_price, product_quantity, user_id) values (?,?,?,?)";
+    const values = [itemReceived.id, itemReceived.price, "1", userId];
 
     connection.query(query, values, (error, results) => {
         if (error) {
@@ -177,9 +172,26 @@ app.post("/sendemail", sendMail);
 //endpoint for user
 app.post("/register", userController);
 
-//
-app.get("/protected", authenticateToken, (req, res) => {
-    res.status(200).send(`Welcome, ${req.user.email}`);
+//endpoint to place order
+app.post("/place-order", (req, res) => {
+    console.log(req.body.userId);
+
+    const query = `
+    insert into orders(user_id, order_date, total_amount) select user_id, now(), sum(product_quantity * product_price) as total_amount from cart where user_id = ${req.body.userId};
+    insert into order_items(order_id, product_id, quantity, price) select o.order_id, c.product_id, c.product_quantity, c.product_price from cart c join orders o on o.user_id = c.user_id where c.user_id = ${req.body.userId};
+    delete from cart where user_id = ${req.body.userId};
+    `;
+    // console.log(query);
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error });
+        }
+        console.log("response okay");
+        res.status(200).json(results);
+    });
+
+    // res.status(200).send("accept");
 });
 
 //starting server

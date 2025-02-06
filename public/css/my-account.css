@@ -16,14 +16,14 @@ body {
     max-width: 900px;
     margin: auto;
     margin-top: 150px;
-    padding: 40px 20px;
+    padding: 20px 40px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 .header {
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
     border-bottom: 2px solid #36558f;
 }
 .header h1 {

@@ -29,7 +29,7 @@ const cartCount = document.querySelector(".cart-item-count");
 const cartIcon = document.querySelector("#cart-btn");
 function updateCartItem() {
     fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select sum(product_quantity) as quantity from temp_table`
+        `http://localhost:8000/mysql?mysqlQuery=select sum(product_quantity) as quantity from cart t join users u on t.user_id = u.userId where u.userId = ${userId}`
     )
         .then((res) => res.json())
         .then((result) => {
@@ -92,6 +92,14 @@ logoutBtn.addEventListener("click", () => {
     //delete cookie
     document.cookie =
         "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/public/html";
+    document.cookie =
+        "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/public/html";
+
+    setTimeout(() => {
+        window.location.href = "../html/index.html";
+    }, 1000);
+
+    // window.refreshCart();
 });
 
 //function to check if the user is logged in
@@ -101,11 +109,11 @@ async function checkUser() {
 
     if (hasToken) {
         const details = await getDetailFromToken();
-        console.log("details", details);
+        // console.log("details", details);
         //calling function
         userLoggedIn(details.name);
 
-        document.cookie = `userId = ${details.id}`;
+        document.cookie = `userId = ${details.userId}`;
     }
     return hasToken;
 }
@@ -115,21 +123,21 @@ checkUser();
 async function getDetailFromToken() {
     //extracting token value using regex
     const match = document.cookie.match(/(^| )token=([^;]+)/);
-    console.log(match[2]);
+    // console.log(match[2]);
 
     // Decode the JWT using jwt-decode script
     const decoded = jwt_decode(match[2]);
 
     // Log the decoded payload
-    console.log("Decoded Payload:", decoded);
+    // console.log("Decoded Payload:", decoded);
 
     //trying fetch
     const response = await fetch(
         `http://localhost:8000/mysql?mysqlQuery=select * from users where email='${decoded.email}'`
     );
     const result = await response.json();
-    console.log("result: ", result[0]);
-    console.log(result[0].name);
+    // console.log("result: ", result[0]);
+    // console.log(result[0].name);
 
     //return user details
     return result[0];

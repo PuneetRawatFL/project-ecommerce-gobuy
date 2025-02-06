@@ -22,10 +22,13 @@ function changeContent() {
 }
 changeContent();
 
+const user = document.cookie.match(/(^| )userId=([^;]+)/);
+const userId = parseInt(user[2], 10);
+
 //display items from mysql database
 function refreshCart() {
     fetch(
-        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+        `http://localhost:8000/mysql?mysqlQuery=select * from products p join cart c on p.id = c.product_id join users u on u.userId = c.user_id where u.userId=${userId}`
     )
         .then((res) => res.json())
         .then((result) => {
@@ -50,17 +53,9 @@ function refreshCart() {
 window.refreshCart = refreshCart;
 refreshCart();
 
-// const isUser = await window.checkUser();
-// console.log(isUser);
-
-async function userDetails() {
-    const userDetails = await window.getDetailFromToken();
-    console.log("cart script", userDetails.id);
-}
-userDetails();
-
 function addItemInCart(json) {
     //change html of cartlist
+    // console.log(json);
     cartEmpty = false;
     changeContent();
 
@@ -79,6 +74,7 @@ function addItemInCart(json) {
     itemImg.id = "item-image";
     // itemImg.src = json.image;
     itemImg.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+    // console.log(json.id);
 
     //appending img tag to div
     itemImgDiv.append(itemImg);
@@ -95,6 +91,7 @@ function addItemInCart(json) {
     //p tags for detail and price
     const cartItemName = document.createElement("p");
     cartItemName.id = "item-details";
+    cartItemName.classList.add("cartItemName");
     cartItemName.textContent = json.title;
 
     const cartItemPrice = document.createElement("p");
@@ -129,7 +126,7 @@ function addItemInCart(json) {
         // pItemCount.innerText = json.product_quantity;
 
         fetch(
-            `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${json.id}`
+            `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId}`
         )
             .then((res) => res.json())
             .then((result) => {
@@ -171,12 +168,12 @@ function addItemInCart(json) {
         // console.log(json.product_quantity - 1);
         if (json.product_quantity - 1 == 0) {
             fetch(
-                `http://localhost:8000/mysql?mysqlQuery=delete from temp_table where product_id = ${json.id}`
+                `http://localhost:8000/mysql?mysqlQuery=delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId}`
             )
                 .then((res) => res.json())
                 .then((result) => {
                     console.log("result: ", result);
-                    console.log("Item deleted");
+                    // console.log("Item deleted");
 
                     // to remove the item
                     // - from list
@@ -194,7 +191,7 @@ function addItemInCart(json) {
                 });
         } else {
             fetch(
-                `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2D 1 where product_id = ${json.id}`
+                `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId}`
             )
                 .then((res) => res.json())
                 .then((result) => {
@@ -207,28 +204,9 @@ function addItemInCart(json) {
                     // if((json.product_quantity-1) === 0)
                 });
         }
-        // //remove item from list and array
-        // if (json.quantity == 0) {
-        //     let index;
-        //     for (let x = 0; x < window.globalCartArray.length; x++) {
-        //         if (cartItemDiv.id[5] == window.globalCartArray[x].id) {
-        //             console.log("quantity", json.quantity);
-        //             console.log(index);
-        //             index = window.globalCartArray.indexOf(
-        //                 window.globalCartArray[x]
-        //             );
-
-        //             // - from array
-        //             // window.globalCartArray.splice(index, 1); // this will remove the item from global array
-        //         }
-        //     }
-        // }
 
         //refresh cart
         refreshCart();
-
-        //to decrease cart item number
-        // window.updateCartItem();
 
         //update cart total
         window.modifyCartTotal();
@@ -259,39 +237,21 @@ function addItemInCart(json) {
 //making this function global
 window.addItemInCart = addItemInCart;
 
-// if the item already exists
-// function itemExits(jsonId) {
-//     for (let x = 0; x < window.globalCartArray.length; x++) {
-//         if (jsonId == window.globalCartArray[x].id) {
-//             //increase quantity
-//             window.globalCartArray[x].quantity += 1;
-
-//             //changing item count in cart
-//             document.querySelector(`#itemQuantity-${jsonId}`).innerText =
-//                 window.globalCartArray[x].quantity;
-
-//             //update cart total
-//             window.modifyCartTotal();
-//         }
-//     }
-// }
-// window.itemExits = itemExits;
-
 //function to modify total price
 function modifyCartTotal() {
-    let totalPrice = 0;
+    // let totalPrice = 0;
 
     fetch(
-        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+        `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
     )
         .then((res) => res.json())
         .then((result) => {
-            // console.log(result);
-            result.forEach((item) => {
-                totalPrice += item.price * item.product_quantity;
-                totalPrice = parseFloat(totalPrice.toFixed(2));
-                cartTotal.innerText = totalPrice;
-            });
+            cartTotal.innerText = result[0].cart_total;
+            // console.log("cart total", result[0].cart_total);
+            // result.forEach((item) => {
+            //     totalPrice += item.price * item.product_quantity;
+            //     totalPrice = parseFloat(totalPrice.toFixed(2));
+            // });
         });
 }
 

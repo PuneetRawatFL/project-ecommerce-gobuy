@@ -26,8 +26,10 @@ let totalCartPrice = 0;
 //trial product
 
 function refreshShoppingCart() {
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
     fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id`
+        `http://localhost:8000/mysql?mysqlQuery=select * from products p join cart c on p.id = c.product_id join users u on u.userId = c.user_id where u.userId=${userId}`
     )
         .then((res) => res.json())
         // .then((json) => {
@@ -83,7 +85,7 @@ function refreshShoppingCart() {
 
                 itemIncrease.addEventListener("click", () => {
                     fetch(
-                        `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${json.id}`
+                        `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId}`
                     )
                         .then((res) => res.json())
                         .then((result) => {
@@ -120,7 +122,7 @@ function refreshShoppingCart() {
                     // console.log(json.product_quantity - 1);
                     if (json.product_quantity - 1 == 0) {
                         fetch(
-                            `http://localhost:8000/mysql?mysqlQuery=delete from temp_table where product_id = ${json.id}`
+                            `http://localhost:8000/mysql?mysqlQuery=delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId}`
                         )
                             .then((res) => res.json())
                             .then((result) => {
@@ -137,7 +139,7 @@ function refreshShoppingCart() {
                             });
                     } else {
                         fetch(
-                            `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2D 1 where product_id = ${json.id}`
+                            `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId}`
                         )
                             .then((res) => res.json())
                             .then((result) => {
@@ -194,19 +196,14 @@ function refreshShoppingCart() {
 refreshShoppingCart();
 
 function refreshShoppingCartValue() {
-    let totalPrice = 0;
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
 
     fetch(
-        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+        `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
     )
         .then((res) => res.json())
         .then((result) => {
-            // console.log(result);
-            result.forEach((item) => {
-                totalPrice += item.price * item.product_quantity;
-                totalPrice = parseFloat(totalPrice.toFixed(2));
-                // cartTotal.innerText = totalPrice;
-                subtotalSpan.innerText = `$${totalPrice}`;
-            });
+            subtotalSpan.innerText = `$${result[0].cart_total}`;
         });
 }

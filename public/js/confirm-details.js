@@ -20,7 +20,7 @@ function savedAddress() {
     )
         .then((res) => res.json())
         .then((results) => {
-            console.log(results[0]);
+            // console.log(results[0]);
 
             const fullName = document.querySelector("#fullName");
             const mobileno = document.querySelector("#mobileno");
@@ -40,8 +40,10 @@ function savedAddress() {
 savedAddress();
 
 function refreshShoppingCart() {
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
     fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id`
+        `http://localhost:8000/mysql?mysqlQuery=select * from products p join cart c on p.id = c.product_id join users u on u.userId = c.user_id where u.userId=${userId}`
     )
         .then((res) => res.json())
         // .then((json) => {
@@ -111,19 +113,42 @@ function refreshShoppingCart() {
 refreshShoppingCart();
 
 function refreshShoppingCartValue() {
-    let totalPrice = 0;
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
 
     fetch(
-        "http://localhost:8000/mysql?mysqlQuery=select * from products p join temp_table t where p.id = t.product_id"
+        `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
     )
         .then((res) => res.json())
         .then((result) => {
-            // console.log(result);
-            result.forEach((item) => {
-                totalPrice += item.price * item.product_quantity;
-                totalPrice = parseFloat(totalPrice.toFixed(2));
-                // cartTotal.innerText = totalPrice;
-                subtotalSpan.innerText = `$${totalPrice}`;
-            });
+            subtotalSpan.innerText = `$${result[0].cart_total}`;
         });
 }
+
+let confirmPay = document.querySelector("#confirmPay");
+confirmPay.addEventListener("click", () => {
+    // console.log("click");
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    const userId = parseInt(user[2], 10);
+
+    fetch("http://localhost:8000/place-order", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({ userId: userId }),
+    })
+        .then((res) => {
+            if (res.ok) {
+                // If form submission is successful, redirect to the new page
+                console.log("Value accecpted");
+                setTimeout(() => {
+                    window.location.href = "../html/my-orders.html";
+                }, 1000);
+            } else {
+                console.log(res);
+                console.log("Form submission failed.");
+            }
+        })
+        .catch((err) => console.log("Error:", err));
+});

@@ -55,7 +55,7 @@ forms.forEach((form) => {
                 console.log(res);
                 if (res.ok) {
                     const result = await res.json();
-                    console.log(result);
+                    // console.log(result);
 
                     resultDiv.style.display = "block";
                     resultDiv.style.backgroundColor = "green";
@@ -66,6 +66,10 @@ forms.forEach((form) => {
                     //acess token
                     document.cookie = `token = ${result.token}`;
                     // console.log(document.cookie);
+
+                    setTimeout(() => {
+                        window.location.href = "../html/my-orders.html";
+                    }, 2000);
                 } else {
                     // alert("Form submission failed.");
                     const result = await res.json();
