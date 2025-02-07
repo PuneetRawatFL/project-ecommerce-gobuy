@@ -4,7 +4,6 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const authenticateToken = require("./middleware/authToken.js");
 const app = express();
 
 //controller for sending mail

@@ -17,6 +17,7 @@ const orderItemArea = document.querySelector(".order-items-area");
 
 async function getMyOrders() {
     const user = document.cookie.match(/(^| )userId=([^;]+)/);
+    // console.log(user[2]);
     const userId = parseInt(user[2], 10);
 
     const response =
@@ -34,6 +35,7 @@ async function getMyOrders() {
 
         //heading tag
         const orderHeading = document.createElement("div");
+        orderHeading.classList.add("order-heading");
 
         const orderIdTag = document.createElement("h3");
         orderIdTag.innerText = `Order id: ${order.order_id}`;
@@ -45,21 +47,49 @@ async function getMyOrders() {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
+            // hour: "2-digit",
+            // minute: "2-digit",
+            // second: "2-digit",
         };
         const formattedDate = orderDateObj.toLocaleString("en-US", options);
         console.log(formattedDate);
 
         const orderDateTag = document.createElement("p");
         orderDateTag.innerText = `Placed on: ${formattedDate}`;
+        orderDateTag.style.fontSize = "0.8rem";
 
         orderHeading.append(orderIdTag);
         orderHeading.append(orderDateTag);
         //appeding
         orderContainer.append(orderHeading);
 
+        //detail container
+        const displayArea = document.createElement("div");
+        displayArea.style.display = "flex";
+        displayArea.style.gap = "10px";
+        //img div
+        const orderItemImage = document.createElement("div");
+        orderItemImage.classList.add("order-item-image");
+        //image tag
+        const imagTag = document.createElement("img");
+        imagTag.src = `http://localhost:8000/product-images/product_${order.id}.jpg`;
+        //appending
+        orderItemImage.append(imagTag);
+
+        //title, price div
+        const orderTitleDiv = document.createElement("div");
+        const orderTitle = document.createElement("p");
+        orderTitle.innerText = `${order.title}`;
+
+        orderTitleDiv.append(orderTitle);
+
+        //append image
+        displayArea.append(orderItemImage);
+        //append title
+        displayArea.append(orderTitleDiv);
+
+        //
+        orderContainer.append(displayArea);
         //appending
         orderItemArea.append(orderContainer);
     });

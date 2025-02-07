@@ -64,7 +64,7 @@ forms.forEach((form) => {
                     window.userLoggedIn(result.result.name);
 
                     //acess token
-                    document.cookie = `token = ${result.token}`;
+                    document.cookie = `token = ${result.token}; path=/`;
                     // console.log(document.cookie);
 
                     setTimeout(() => {

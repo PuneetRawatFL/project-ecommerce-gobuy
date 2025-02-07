@@ -89,15 +89,17 @@ logoutBtn.addEventListener("click", () => {
     userLogoutOptions.style.display = "none";
     userBtn.src = "../images/user_logged_out.png";
 
-    //delete cookie
-    document.cookie =
-        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/public/html";
-    document.cookie =
-        "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/public/html";
+    console.log("logout");
 
-    setTimeout(() => {
-        window.location.href = "../html/index.html";
-    }, 1000);
+    //delete cookie
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
+    console.log(document.cookie);
+
+    // setTimeout(() => {
+    //     window.location.href = "../html/index.html";
+    // }, 1000);
 
     // window.refreshCart();
 });
@@ -113,7 +115,7 @@ async function checkUser() {
         //calling function
         userLoggedIn(details.name);
 
-        document.cookie = `userId = ${details.userId}`;
+        document.cookie = `userId = ${details.userId}; path=/`;
     }
     return hasToken;
 }

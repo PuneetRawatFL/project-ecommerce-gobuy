@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin</title>
+
+        <!-- css -->
+        <link rel="stylesheet" href="../css/admin-homepage.css" />
+
+        <!-- font family -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            $(function () {
+                $(".navbar").load("header.html", function () {
+                    $.getScript("../js/header.js");
+                });
+                $("#footer").load("footer.html");
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+        <!-- script -->
+        <script src="../js/admin-homepage.js" defer></script>
+    </head>
+    <body>
+        <!-- navbar -->
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
+
+        <div class="description">
+            <!-- text area -->
+            <p id="line1">Welcome <span id="adminName"></span></p>
+        </div>
+        <!-- button - go to shop - direct to product page -->
+        <div class="manage-button-container">
+            <button id="btn1" onclick="location.href='./manage-users.html'">
+                Manage Users
+            </button>
+            <button id="btn1" onclick="location.href='./manage-orders.html'">
+                Manage Orders
+            </button>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>
