@@ -55,21 +55,25 @@ forms.forEach((form) => {
                 console.log(res);
                 if (res.ok) {
                     const result = await res.json();
-                    // console.log(result);
-
+                    console.log(result);
                     resultDiv.style.display = "block";
                     resultDiv.style.backgroundColor = "green";
                     resultDiv.innerText = result.message;
-                    console.log(result.result.name);
-                    window.userLoggedIn(result.result.name);
+                    if (result.action === "register") {
+                        setTimeout(() => {
+                            window.location.href = "../html/login.html";
+                        }, 2000);
+                    } else {
+                        console.log(result.result.name);
+                        window.userLoggedIn(result.result.name);
+                        //acess token
+                        document.cookie = `token = ${result.token}; path=/`;
+                        // console.log(document.cookie);
 
-                    //acess token
-                    document.cookie = `token = ${result.token}; path=/`;
-                    // console.log(document.cookie);
-
-                    setTimeout(() => {
-                        window.location.href = "../html/my-orders.html";
-                    }, 2000);
+                        setTimeout(() => {
+                            window.location.href = "../html/products.html";
+                        }, 2000);
+                    }
                 } else {
                     // alert("Form submission failed.");
                     const result = await res.json();

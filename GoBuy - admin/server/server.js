@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const mysql = require("mysql");
 
 app.use(cors());
 //middleware to parse json
@@ -13,25 +12,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //
 app.use(cookieParser());
 
+//db connect
+const connection = require("./config/dbConnection.js");
+
 //admin controller
 const adminController = require("./controllers/adminController.js");
 
 //user controller
 const userController = require("./controllers/userController.js");
-
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "gobuy",
-});
-
-connection.connect((err) => {
-    if (err) {
-        return console.error("Error connecting to db: ", err);
-    }
-    console.log("Database connected");
-});
 
 //endpoint for sql queries
 app.get("/mysql", (req, res) => {

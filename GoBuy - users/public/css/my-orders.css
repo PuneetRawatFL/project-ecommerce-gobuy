@@ -34,15 +34,15 @@ body {
 
 .order-items-area {
     margin-top: 10px;
-    height: 100px;
-    background-color: blue;
+    height: auto;
+    /* background-color: blue; */
     padding: 10px;
 }
 
 .order-container {
     /* height: 20vh; */
     height: auto;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .order-heading {
@@ -63,4 +63,13 @@ body {
     max-height: 100%;
     width: 300px;
     height: 200px;
+}
+p {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.highlight {
+    font-size: 1rem;
+    font-weight: 400;
 }

@@ -62,6 +62,7 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 .button-container button {
     margin-top: 25px;
@@ -76,6 +77,30 @@ label {
     transition: 0.3s;
 }
 .button-container button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: black;
+    background-color: #ffa500;
+    /* background-color: #ffffe0; */
+}
+.button-container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.button-container-form button {
+    margin-top: 25px;
+    background-color: #36558f;
+    color: white;
+    height: 40px;
+    /* width: 150px; */
+    width: 40%;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.button-container-form button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: black;
     background-color: #ffa500;

@@ -80,7 +80,8 @@ body {
 
 .detailsTag {
     font-size: 0.8rem;
-    height: 50px;
+    height: 40px;
+    overflow: hidden;
 }
 
 .shoppingItemPrice {

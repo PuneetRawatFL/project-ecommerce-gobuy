@@ -28,22 +28,27 @@ let cartCountStorage = 0;
 const cartCount = document.querySelector(".cart-item-count");
 const cartIcon = document.querySelector("#cart-btn");
 function updateCartItem() {
-    fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select sum(product_quantity) as quantity from cart t join users u on t.user_id = u.userId where u.userId = ${userId}`
-    )
-        .then((res) => res.json())
-        .then((result) => {
-            // console.log("cart length", result[0].quantity);
-            if (result[0].quantity > 0) {
-                cartIcon.src = "../images/shopping-bag-filled.png";
-                cartCount.style.visibility = "visible";
-                cartCount.innerText = result[0].quantity;
-            } else {
-                cartIcon.src = "../images/shopping-bag-empty.png";
-                cartCount.style.visibility = "hidden";
-                // cartTotalDiv.style.visibility = "hidden";
-            }
-        });
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+
+    if (user) {
+        const userId = parseInt(user[2], 10);
+        fetch(
+            `http://localhost:8000/mysql?mysqlQuery=select sum(product_quantity) as quantity from cart t join users u on t.user_id = u.userId where u.userId = ${userId}`
+        )
+            .then((res) => res.json())
+            .then((result) => {
+                // console.log("cart length", result[0].quantity);
+                if (result[0].quantity > 0) {
+                    cartIcon.src = "../images/shopping-bag-filled.png";
+                    cartCount.style.visibility = "visible";
+                    cartCount.innerText = result[0].quantity;
+                } else {
+                    cartIcon.src = "../images/shopping-bag-empty.png";
+                    cartCount.style.visibility = "hidden";
+                    // cartTotalDiv.style.visibility = "hidden";
+                }
+            });
+    }
 }
 
 //to make function available globally
@@ -96,6 +101,8 @@ logoutBtn.addEventListener("click", () => {
     document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
     console.log(document.cookie);
+
+    window.location.href = "../html/index.html";
 
     // setTimeout(() => {
     //     window.location.href = "../html/index.html";

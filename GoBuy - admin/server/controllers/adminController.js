@@ -6,21 +6,7 @@ const bcrypt = require("bcryptjs");
 const SECRET_KEY = "puneetAdmin@123";
 
 //creating connection
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "gobuy",
-});
-
-//connecting
-connection.connect((err) => {
-    if (err) {
-        return console.error("Error connecting to database: ", err);
-    }
-
-    console.log("database connected");
-});
+const connection = require("../config/dbConnection.js");
 
 const adminController = async (req, res) => {
     console.log(req.body);

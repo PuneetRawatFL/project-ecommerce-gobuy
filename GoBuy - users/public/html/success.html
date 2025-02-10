@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Thanks for your order!</title>
+        <style>
+            body,
+            html {
+                height: 100%;
+                /* width: 100%; */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                /* align-content: center; */
+            }
+            .loading-container {
+                height: 50px;
+                width: 50px;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px solid transparent;
+                border-top: 5px solid #898d94;
+                border-radius: 50%;
+                animation: spin 1.5s linear infinite;
+            }
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+        <script>
+            // Delay in milliseconds (e.g., 5000 milliseconds = 5 seconds)
+            const delay = 5000;
+
+            // URL of the orders page
+            const ordersPageUrl =
+                "http://127.0.0.1:5500/GoBuy%20-%20users/public/html/my-orders.html";
+
+            // Redirect to the orders page after the delay
+            setTimeout(() => {
+                window.location.href = ordersPageUrl;
+            }, delay);
+        </script>
+    </head>
+    <body>
+        <section>
+            <p>Order Confirmed! Please wait while we redirect you.</p>
+        </section>
+
+        <div class="loading-container"></div>
+    </body>
+</html>

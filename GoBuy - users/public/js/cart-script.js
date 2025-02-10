@@ -22,33 +22,36 @@ function changeContent() {
 }
 changeContent();
 
-const user = document.cookie.match(/(^| )userId=([^;]+)/);
-const userId = parseInt(user[2], 10);
-
 //display items from mysql database
 function refreshCart() {
-    fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select * from products p join cart c on p.id = c.product_id join users u on u.userId = c.user_id where u.userId=${userId}`
-    )
-        .then((res) => res.json())
-        .then((result) => {
-            // console.log(result.length);
-            if (result.length == 0) {
-                // console.log("Cart empty");
-                cartEmpty = true;
-                changeContent();
-            } else {
-                //empty list
-                cartListDiv.innerHTML = "";
-                result.forEach((item) => {
-                    // console.log(item);
-                    addItemInCart(item);
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
 
-                    //
-                    window.updateCartItem();
-                });
-            }
-        });
+    if (user) {
+        const userId = parseInt(user[2], 10);
+
+        fetch(
+            `http://localhost:8000/mysql?mysqlQuery=select * from products p join cart c on p.id = c.product_id join users u on u.userId = c.user_id where u.userId=${userId}`
+        )
+            .then((res) => res.json())
+            .then((result) => {
+                // console.log(result.length);
+                if (result.length == 0) {
+                    console.log("Cart empty");
+                    cartEmpty = true;
+                    changeContent();
+                } else {
+                    //empty list
+                    cartListDiv.innerHTML = "";
+                    result.forEach((item) => {
+                        // console.log(item);
+                        addItemInCart(item);
+
+                        //
+                        window.updateCartItem();
+                    });
+                }
+            });
+    }
 }
 window.refreshCart = refreshCart;
 refreshCart();
@@ -240,19 +243,24 @@ window.addItemInCart = addItemInCart;
 //function to modify total price
 function modifyCartTotal() {
     // let totalPrice = 0;
+    const user = document.cookie.match(/(^| )userId=([^;]+)/);
 
-    fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
-    )
-        .then((res) => res.json())
-        .then((result) => {
-            cartTotal.innerText = result[0].cart_total;
-            // console.log("cart total", result[0].cart_total);
-            // result.forEach((item) => {
-            //     totalPrice += item.price * item.product_quantity;
-            //     totalPrice = parseFloat(totalPrice.toFixed(2));
-            // });
-        });
+    if (user) {
+        const userId = parseInt(user[2], 10);
+
+        fetch(
+            `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
+        )
+            .then((res) => res.json())
+            .then((result) => {
+                cartTotal.innerText = result[0].cart_total;
+                // console.log("cart total", result[0].cart_total);
+                // result.forEach((item) => {
+                //     totalPrice += item.price * item.product_quantity;
+                //     totalPrice = parseFloat(totalPrice.toFixed(2));
+                // });
+            });
+    }
 }
 
 //making this function global

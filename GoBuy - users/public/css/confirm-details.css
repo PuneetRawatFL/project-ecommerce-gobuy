@@ -158,3 +158,27 @@ body {
     background-color: #ffa500;
     /* background-color: #ffffe0; */
 }
+
+.addButtonLoadingExtra {
+    background-color: #36558f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addButtonLoading {
+    width: 18px;
+    height: 18px;
+    border: 3px solid transparent;
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite; /* Animation for the spinning effect */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

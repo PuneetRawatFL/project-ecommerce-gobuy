@@ -122,15 +122,11 @@ function getProducts(url) {
                 btnId++;
 
                 //user id
-                try {
-                    const user = document.cookie.match(/(^| )userId=([^;]+)/);
-                    const userId = parseInt(user[2], 10);
-                } catch {
-                    console.log("User not logged in");
-                }
 
                 //adding eventlistener
                 btn.addEventListener("click", () => {
+                    const user = document.cookie.match(/(^| )userId=([^;]+)/);
+                    const userId = parseInt(user[2], 10);
                     // console.log("button: ", btn);
                     //add loading animation
                     addToCartLoading(`${btn.id}`);

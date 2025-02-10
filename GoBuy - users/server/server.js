@@ -6,10 +6,14 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
 
+//connect to db
+const connection = require("./config/dbConnection.js");
 //controller for sending mail
 const sendMail = require("./controllers/sendMail.js");
 //controller for user
 const userController = require("./controllers/userController.js");
+//controller for payment
+const paymentController = require("./controllers/paymentController.js");
 
 //cors
 app.use(cors());
@@ -27,22 +31,22 @@ app.use(
 );
 
 //creating connection
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "gobuy",
-    multipleStatements: true,
-});
+// const connection = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "123456",
+//     database: "gobuy",
+//     multipleStatements: true,
+// });
 
-//connecting
-connection.connect((err) => {
-    if (err) {
-        return console.error("Error connecting to database: ", err);
-    }
+// //connecting
+// connection.connect((err) => {
+//     if (err) {
+//         return console.error("Error connecting to database: ", err);
+//     }
 
-    console.log("database connected");
-});
+//     console.log("database connected");
+// });
 
 //query to fetch all produccts
 app.get("/products", (req, res) => {
@@ -192,6 +196,8 @@ app.post("/place-order", (req, res) => {
 
     // res.status(200).send("accept");
 });
+
+app.post("/create-checkout-session", paymentController);
 
 //starting server
 app.listen(8000, () => {

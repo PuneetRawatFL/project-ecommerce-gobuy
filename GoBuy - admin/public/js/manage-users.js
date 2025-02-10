@@ -41,6 +41,13 @@ async function getUserList() {
         //stauts
         const statustd = document.createElement("td");
         statustd.innerText = `${user.status}`;
+        if (user.status === "active") {
+            statustd.style.backgroundColor = "green";
+            statustd.style.color = "white";
+        }
+        if (user.status === "inactive") {
+            statustd.style.backgroundColor = "red";
+        }
         //button td
         const buttontd = document.createElement("td");
         buttontd.classList.add("button-container");
@@ -54,8 +61,26 @@ async function getUserList() {
 
         const actBtn = document.createElement("button");
         actBtn.innerText = "Activate";
+        actBtn.addEventListener("click", async () => {
+            console.log("activate: ", user.userId);
+            const response = await fetch(
+                `http://localhost:8001/mysql?mysqlQuery=update users set status = 'active' where userId = ${user.userId}`
+            );
+            const result = await response.json();
+            console.log(result);
+            getUserList();
+        });
         const deactBtn = document.createElement("button");
         deactBtn.innerText = "Deactivate";
+        deactBtn.addEventListener("click", async () => {
+            console.log("activate: ", user.userId);
+            const response = await fetch(
+                `http://localhost:8001/mysql?mysqlQuery=update users set status = 'inactive' where userId = ${user.userId}`
+            );
+            const result = await response.json();
+            console.log(result);
+            getUserList();
+        });
         const delBtn = document.createElement("button");
         delBtn.innerText = "Delete";
         //delete user

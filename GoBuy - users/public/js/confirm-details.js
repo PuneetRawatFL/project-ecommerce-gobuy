@@ -122,32 +122,52 @@ function refreshShoppingCartValue() {
         .then((res) => res.json())
         .then((result) => {
             subtotalSpan.innerText = `$${result[0].cart_total}`;
+            totalCartPrice = `${result[0].cart_total}`;
         });
 }
 
 let confirmPay = document.querySelector("#confirmPay");
+
 confirmPay.addEventListener("click", () => {
+    //adding loading button
+    confirmPay.classList.add("addButtonLoadingExtra");
+    confirmPay.style.backgroundColor = "#36558f";
+
+    confirmPay.innerText = "";
+
+    const loadingdiv = document.createElement("div");
+    loadingdiv.classList.add("addButtonLoading");
+    //
+    confirmPay.appendChild(loadingdiv);
+
     // console.log("click");
     const user = document.cookie.match(/(^| )userId=([^;]+)/);
     const userId = parseInt(user[2], 10);
 
-    fetch("http://localhost:8000/place-order", {
+    fetch("http://localhost:8000/create-checkout-session", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
-        body: JSON.stringify({ userId: userId }),
+        body: JSON.stringify({ userId: userId, total_amount: totalCartPrice }),
     })
-        .then((res) => {
-            if (res.ok) {
-                // If form submission is successful, redirect to the new page
-                console.log("Value accecpted");
-                setTimeout(() => {
-                    window.location.href = "../html/my-orders.html";
-                }, 1000);
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.url) {
+                // console.log(data.shipping_details);
+                // console.log(data.url);
+
+                // fetch(
+                //     `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
+                // )
+                //     .then((res) => res.json())
+                //     .then((result) => {
+                //         subtotalSpan.innerText = `$${result[0].cart_total}`;
+                //         totalCartPrice = `${result[0].cart_total}`;
+                //     });
+                window.location.href = data.url; // Redirect to Stripe Checkout
             } else {
-                console.log(res);
-                console.log("Form submission failed.");
+                console.error("Checkout session creation failed:", data);
             }
         })
         .catch((err) => console.log("Error:", err));

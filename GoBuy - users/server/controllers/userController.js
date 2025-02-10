@@ -7,21 +7,7 @@ const SECRET_KEY = "puneet@123";
 // const tokenBlacklist =
 
 //creating connection
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "gobuy",
-});
-
-//connecting
-connection.connect((err) => {
-    if (err) {
-        return console.error("Error connecting to database: ", err);
-    }
-
-    console.log("database connected");
-});
+const connection = require("../config/dbConnection.js");
 
 const userController = async (req, res) => {
     console.log(req.body);
@@ -82,6 +68,7 @@ const userController = async (req, res) => {
 
     //for register
     if (action === "register") {
+        const now = new Date();
         connection.query(
             "select email from users where email = ?",
             [email],
@@ -101,15 +88,24 @@ const userController = async (req, res) => {
 
                     connection.query(
                         "Insert into users set ?",
-                        { name: fname, email: email, password: hashPassword },
+                        {
+                            name: fname,
+                            email: email,
+                            password: hashPassword,
+                            created_on: now,
+                            user_status: "active",
+                        },
                         (error, results) => {
                             if (error) {
                                 console.error(error);
                             } else {
-                                console.log(results);
-                                return res
-                                    .status(200)
-                                    .json("user registered successfully");
+                                // console.log(results);
+                                return res.status(200).json({
+                                    message: "User Registered in successfully",
+                                    action: "register",
+                                    result: results,
+                                    // token: token,
+                                });
                             }
                         }
                     );

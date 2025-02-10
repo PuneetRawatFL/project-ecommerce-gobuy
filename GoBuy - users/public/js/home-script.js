@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
             response.text();
         })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
         });
 
     //fetch footer
@@ -139,5 +139,3 @@ $(function () {
         $.getScript("../js/header-script.js");
     });
 });
-
-console.log("HEllo");

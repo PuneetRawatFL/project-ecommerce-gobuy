@@ -7,21 +7,7 @@ const SECRET_KEY = "puneet@123";
 // const tokenBlacklist =
 
 //creating connection
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "gobuy",
-});
-
-//connecting
-connection.connect((err) => {
-    if (err) {
-        return console.error("Error connecting to database: ", err);
-    }
-
-    console.log("database connected");
-});
+const connection = require("../config/dbConnection.js");
 
 const userController = async (req, res) => {
     console.log(req.body);
