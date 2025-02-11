@@ -1,6 +1,4 @@
-const stripe = require("stripe")(
-    "sk_test_51QmUdmD8RxU8tzk9yCaG6hZgEao5PWF0QSgcXyEYfHdF9T1a0WSpRFmVjPBItdKQkGKnE1KRUEhZb9UmhxQUMbUG00lpluIJy2"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = "http://127.0.0.1:5500/GoBuy%20-%20users/public/html/";
 

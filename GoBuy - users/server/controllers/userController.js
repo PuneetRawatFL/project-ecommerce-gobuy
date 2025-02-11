@@ -1,9 +1,8 @@
-const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 //creating secret key
-const SECRET_KEY = "puneet@123";
+const SECRET_KEY = process.env.JWT_SECRET_KEY;
 // const tokenBlacklist =
 
 //creating connection
@@ -30,6 +29,12 @@ const userController = async (req, res) => {
                 }
                 if (results.length == 0) {
                     return res.json("No such user found!");
+                }
+
+                if (results.user_status === "inactive") {
+                    return res.json(
+                        "User is inactive. Please contact customer care!"
+                    );
                 }
 
                 const user = results[0];

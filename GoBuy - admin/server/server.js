@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+const PORT = process.env.PORT;
 
 app.use(cors());
 //middleware to parse json
@@ -44,6 +48,6 @@ app.post("/admin-login", adminController);
 //endpoint for user
 app.post("/register", userController);
 
-app.listen(8001, () => {
-    console.log("admin server started......");
+app.listen(PORT, () => {
+    console.log(`admin server started on ${PORT} ......`);
 });

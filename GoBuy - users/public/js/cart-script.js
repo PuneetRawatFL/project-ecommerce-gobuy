@@ -128,21 +128,27 @@ function addItemInCart(json) {
         // json.product_quantity++;
         // pItemCount.innerText = json.product_quantity;
 
-        fetch(
-            `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId}`
-        )
-            .then((res) => res.json())
-            .then((result) => {
-                console.log(result);
-                //to increase cart item number
-                window.updateCartItem();
-            });
+        const user = document.cookie.match(/(^| )userId=([^;]+)/);
 
-        //refresh cart
-        refreshCart();
+        if (user) {
+            const userId = parseInt(user[2], 10);
 
-        //update cart total
-        window.modifyCartTotal();
+            fetch(
+                `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId}`
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    //to increase cart item number
+                    window.updateCartItem();
+                });
+
+            //refresh cart
+            refreshCart();
+
+            //update cart total
+            window.modifyCartTotal();
+        }
     });
 
     //count div
@@ -169,50 +175,57 @@ function addItemInCart(json) {
         // json.quantity--;
         // pItemCount.innerText = json.quantity;
         // console.log(json.product_quantity - 1);
-        if (json.product_quantity - 1 == 0) {
-            fetch(
-                `http://localhost:8000/mysql?mysqlQuery=delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId}`
-            )
-                .then((res) => res.json())
-                .then((result) => {
-                    console.log("result: ", result);
-                    // console.log("Item deleted");
+        const user = document.cookie.match(/(^| )userId=([^;]+)/);
 
-                    // to remove the item
-                    // - from list
-                    let cartList = document.querySelector(".cart-items-list");
-                    let removeItem = document.querySelector(
-                        `#${cartItemDiv.id}`
-                    );
-                    // console.log(removeItem);
-                    cartList.removeChild(removeItem);
-                    //to update cart item number
-                    window.updateCartItem();
+        if (user) {
+            const userId = parseInt(user[2], 10);
 
-                    //refresh cart
-                    refreshCart();
-                });
-        } else {
-            fetch(
-                `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId}`
-            )
-                .then((res) => res.json())
-                .then((result) => {
-                    console.log("result: ", result);
-                    //to update cart item number
-                    window.updateCartItem();
+            if (json.product_quantity - 1 == 0) {
+                fetch(
+                    `http://localhost:8000/mysql?mysqlQuery=delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId}`
+                )
+                    .then((res) => res.json())
+                    .then((result) => {
+                        console.log("result: ", result);
+                        // console.log("Item deleted");
 
-                    //
+                        // to remove the item
+                        // - from list
+                        let cartList =
+                            document.querySelector(".cart-items-list");
+                        let removeItem = document.querySelector(
+                            `#${cartItemDiv.id}`
+                        );
+                        // console.log(removeItem);
+                        cartList.removeChild(removeItem);
+                        //to update cart item number
+                        window.updateCartItem();
 
-                    // if((json.product_quantity-1) === 0)
-                });
+                        //refresh cart
+                        refreshCart();
+                    });
+            } else {
+                fetch(
+                    `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId}`
+                )
+                    .then((res) => res.json())
+                    .then((result) => {
+                        console.log("result: ", result);
+                        //to update cart item number
+                        window.updateCartItem();
+
+                        //
+
+                        // if((json.product_quantity-1) === 0)
+                    });
+            }
+
+            //refresh cart
+            refreshCart();
+
+            //update cart total
+            window.modifyCartTotal();
         }
-
-        //refresh cart
-        refreshCart();
-
-        //update cart total
-        window.modifyCartTotal();
     });
 
     //appending buttons and counter to parent container

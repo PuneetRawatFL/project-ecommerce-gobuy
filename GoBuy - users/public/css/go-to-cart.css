@@ -77,6 +77,11 @@ body {
     /* height: 500px; */
     /* background-color: #ffa500; */
 }
+.shoppingItemDetails h3 {
+    /* font-size: large; */
+    height: 30px;
+    overflow: hidden;
+}
 
 .detailsTag {
     font-size: 0.8rem;
