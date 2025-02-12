@@ -13,6 +13,16 @@ body {
     scroll-behavior: smooth;
 }
 
+/* Add this CSS to your stylesheet */
+.fade-transition {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
 /* navbar */
 .navbar {
     margin-top: 30px;

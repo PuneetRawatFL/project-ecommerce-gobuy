@@ -46,15 +46,14 @@ async function getOrderList() {
         //stauts
         const statustd = document.createElement("td");
         statustd.innerText = `${order.order_status}`;
-        if (order.order_status === "complete") {
-            statustd.style.backgroundColor = "green";
-            statustd.style.color = "white";
-        }
         if (order.order_status === "pending") {
-            statustd.style.backgroundColor = "red";
+            statustd.style.color = "red";
         }
         if (order.order_status === "shipped") {
-            statustd.style.backgroundColor = "orange";
+            statustd.style.color = "#1E90FF";
+        }
+        if (order.order_status === "delivered") {
+            statustd.style.color = "green";
         }
 
         //button td
@@ -64,35 +63,62 @@ async function getOrderList() {
         const pendingBtn = document.createElement("button");
         pendingBtn.innerText = "Pending";
         pendingBtn.addEventListener("click", async () => {
-            console.log("activate: ", order.orderId);
+            // console.log("activate: ", order.orderId);
             const response = await fetch(
                 `http://localhost:8001/mysql?mysqlQuery=update orders set order_status = 'pending' where order_id = ${order.order_id}`
             );
             const result = await response.json();
-            console.log(result);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `Order ${order.order_id} set to Pending.`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getOrderList();
         });
 
         const shippedBtn = document.createElement("button");
         shippedBtn.innerText = "Shipped";
         shippedBtn.addEventListener("click", async () => {
-            console.log("activate: ", order.orderId);
+            // console.log("activate: ", order.orderId);
             const response = await fetch(
                 `http://localhost:8001/mysql?mysqlQuery=update orders set order_status = 'shipped' where order_id = ${order.order_id}`
             );
             const result = await response.json();
-            console.log(result);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `Order ${order.order_id} set to Shipped.`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getOrderList();
         });
         const completeBtn = document.createElement("button");
-        completeBtn.innerText = "Complete";
+        completeBtn.innerText = "Delivered";
         completeBtn.addEventListener("click", async () => {
-            console.log("activate: ", order.orderId);
+            // console.log("activate: ", order.orderId);
             const response = await fetch(
-                `http://localhost:8001/mysql?mysqlQuery=update orders set order_status = 'complete' where order_id = ${order.order_id}`
+                `http://localhost:8001/mysql?mysqlQuery=update orders set order_status = 'delivered' where order_id = ${order.order_id}`
             );
             const result = await response.json();
-            console.log(result);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `Order ${order.order_id} set to Complete.`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getOrderList();
         });
         //appending buttons to container
@@ -119,6 +145,16 @@ async function getOrderList() {
             );
             const result = await response.json();
             console.log(result);
+            if (result[0].affectedRows === 1) {
+                toastr.success(
+                    `Order ${order.order_id} deleted successfully.`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getOrderList();
         });
 

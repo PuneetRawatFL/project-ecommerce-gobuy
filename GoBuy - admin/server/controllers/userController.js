@@ -1,10 +1,4 @@
-const mysql = require("mysql");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
-//creating secret key
-const SECRET_KEY = "puneet@123";
-// const tokenBlacklist =
 
 //creating connection
 const connection = require("../config/dbConnection.js");
@@ -13,7 +7,17 @@ const userController = async (req, res) => {
     console.log(req.body);
 
     //destructuring
-    const { action, fname, lname, email, password, passwordConfirm } = req.body;
+    const {
+        action,
+        fname,
+        lname,
+        email,
+        password,
+        passwordConfirm,
+        userId,
+        newPassword,
+        newPasswordConfirm,
+    } = req.body;
 
     console.log(action);
 
@@ -27,14 +31,13 @@ const userController = async (req, res) => {
                 }
 
                 if (results.length > 0) {
-                    return res.json("Email already in use");
+                    return res.status(400).json("Email already in use");
                 }
                 if (password !== passwordConfirm) {
-                    return res.json("Password do not match");
+                    return res.status(400).json("Passwords do not match");
                 } else {
                     let hashPassword = await bcrypt.hash(password, 8);
-                    console.log(hashPassword);
-
+                    // console.log(hashPassword);
                     connection.query(
                         "Insert into users set ?",
                         {
@@ -42,16 +45,16 @@ const userController = async (req, res) => {
                             email: email,
                             password: hashPassword,
                             created_on: new Date(),
-                            status: "active",
+                            user_status: "active",
                         },
                         (error, results) => {
                             if (error) {
                                 console.error(error);
                             } else {
-                                console.log(results);
+                                // console.log(results);
                                 return res
                                     .status(200)
-                                    .json("user registered successfully");
+                                    .json("User registered successfully");
                             }
                         }
                     );
@@ -61,8 +64,24 @@ const userController = async (req, res) => {
     }
 
     if (action === "resetPassword") {
-        // console.log("reset password");
-        return res.status(200).json("reset pasword");
+        console.log(req.body);
+        // console.log(newPassword);
+        // console.log(newPasswordConfirm);
+
+        if (newPassword !== newPasswordConfirm) {
+            return res.status(400).json("Passwords do not match!");
+        }
+
+        let hashPassword = await bcrypt.hash(newPassword, 8);
+
+        connection.query(
+            `update users set password = '${hashPassword}' where userId = ${userId}`,
+            (error, results) => {
+                if (error) return res.status(400).json({ error: error });
+
+                return res.status(200).json("Password changed successfully");
+            }
+        );
     }
 };
 module.exports = userController;

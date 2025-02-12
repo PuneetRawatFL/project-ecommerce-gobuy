@@ -11,6 +11,14 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 100); // Adjust the timeout if needed
+});
+
 // carousel scroll
 const carousel = document.querySelector(".carousel");
 const carouselItems = document.querySelectorAll(".carousel-item");

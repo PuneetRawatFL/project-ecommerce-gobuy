@@ -10,6 +10,17 @@
 body {
     background-color: #f6f2ff;
 }
+
+/* Add this CSS to your stylesheet */
+.fade-transition {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
 .login-container {
     margin-top: 120px;
     /* background-color: blue; */

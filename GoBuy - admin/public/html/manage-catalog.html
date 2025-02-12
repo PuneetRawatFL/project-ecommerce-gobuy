@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manage Users</title>
+        <title>Manage Catalog</title>
         <!-- css -->
-        <link rel="stylesheet" href="../css/manage-orders.css" />
+        <link rel="stylesheet" href="../css/manage-catalog.css" />
 
         <!-- font family -->
         <link
@@ -29,11 +29,10 @@
             });
         </script>
 
-        <!-- jwt decode -->
         <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 
         <!-- script -->
-        <script src="../js/manage-orders.js" defer></script>
+        <script src="../js/manage-catalog.js" defer></script>
     </head>
     <body>
         <!-- navbar -->
@@ -46,32 +45,22 @@
             <a href="./admin-homepage.html">Back</a>
         </p>
 
-        <div class="users-container">
-            <h1>List of Orders</h1>
+        <div class="products-container">
+            <h1>List of products</h1>
 
             <table>
                 <thead>
                     <th>ID</th>
-                    <th>UserId</th>
-                    <th>Booked On</th>
-                    <th>Total Amount</th>
-                    <th>Status</th>
-                    <th>Status Action</th>
-                    <th>Order Actions</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Rating rate</th>
+                    <th>Rating count</th>
+                    <!-- <th>SKU (Stock Keeping Unit)</th> -->
                 </thead>
-                <tbody>
-                    <!-- <tr>
-                        <td>1</td>
-                        <td>user1</td>
-                        <td>user1@gmail.com</td>
-                        <td>date</td>
-                        <td class="button-container">
-                            <button id="activateBtn">Activate</button>
-                            <button id="deactivateBtn">Deactivate</button>
-                            <button id="deleteBtn">Delete</button>
-                        </td>
-                    </tr> -->
-                </tbody>
+
+                <tbody></tbody>
             </table>
         </div>
 

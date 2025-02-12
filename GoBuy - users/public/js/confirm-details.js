@@ -10,6 +10,14 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 100); // Adjust the timeout if needed
+});
+
 const shoppingList = document.querySelector(".shopping-cart-list");
 const subtotalSpan = document.querySelector("#subtotalSpan");
 let totalCartPrice = 0;

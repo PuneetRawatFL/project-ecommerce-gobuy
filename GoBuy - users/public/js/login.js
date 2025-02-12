@@ -9,6 +9,14 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 100); // Adjust the timeout if needed
+});
+
 const loginContainer = document.querySelector("#login-container");
 const registerContainer = document.querySelector("#register-container");
 //heading
@@ -18,7 +26,14 @@ const registerHere = document.querySelector("#register-here");
 registerHere.addEventListener("click", () => {
     formHeading.innerText = "Register";
     loginContainer.style.display = "none";
+    // registerContainer.style.display = "block";
     registerContainer.style.display = "block";
+
+    // Trigger reflow to ensure the transition starts
+    registerContainer.offsetHeight; // Force reflow
+
+    // Add the show class to start the transition
+    registerContainer.classList.add("show");
 });
 
 //login here button
@@ -56,30 +71,41 @@ forms.forEach((form) => {
                 if (res.ok) {
                     const result = await res.json();
                     console.log(result);
-                    resultDiv.style.display = "block";
-                    resultDiv.style.backgroundColor = "green";
-                    resultDiv.innerText = result.message;
+
+                    toastr.success(
+                        `${result.message}`, //message
+                        "Successful", //title
+                        {
+                            timeOut: 2000,
+                            progressBar: true,
+                        } //timeout
+                    );
                     if (result.action === "register") {
                         setTimeout(() => {
                             window.location.href = "../html/login.html";
                         }, 2000);
                     } else {
-                        console.log(result.result.name);
+                        // console.log("object");
+                        // console.log(result.result.name);
                         window.userLoggedIn(result.result.name);
                         //acess token
                         document.cookie = `token = ${result.token}; path=/`;
-                        // console.log(document.cookie);
 
                         setTimeout(() => {
                             window.location.href = "../html/products.html";
                         }, 2000);
                     }
                 } else {
-                    // alert("Form submission failed.");
+                    // alert("Form submission fai/led.");
                     const result = await res.json();
-                    resultDiv.style.display = "block";
-                    resultDiv.style.backgroundColor = "red";
-                    resultDiv.innerText = result;
+                    toastr.error(
+                        `${result}`, //message
+                        "", //title
+                        {
+                            timeOut: 2000,
+                            progressBar: true,
+                        } //timeout
+                    );
                 }
             })
             .catch((err) => console.log("Error:", err));

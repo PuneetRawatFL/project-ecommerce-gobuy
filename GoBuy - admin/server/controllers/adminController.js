@@ -28,7 +28,7 @@ const adminController = async (req, res) => {
                     console.error(error);
                 }
                 if (results.length == 0) {
-                    return res.json("No such admin found!");
+                    return res.status(400).json("No such Admin exists");
                 }
 
                 const admin = results[0];
@@ -36,7 +36,7 @@ const adminController = async (req, res) => {
                 const isMatch = await bcrypt.compare(password, admin.password);
 
                 if (!isMatch) {
-                    return res.status(400).json("Invalid credentials");
+                    return res.status(400).json("Invalid Password");
                 }
 
                 //generating jwt
@@ -58,48 +58,10 @@ const adminController = async (req, res) => {
                 // console.log(token);
 
                 return res.status(200).json({
-                    message: "admin logged in successfully",
+                    message: "Admin logged in successfully",
                     result: admin,
                     token: token,
                 });
-            }
-        );
-    }
-
-    //for register
-    if (action === "register") {
-        connection.query(
-            "select email from admin where email = ?",
-            [email],
-            async (error, results) => {
-                if (error) {
-                    console.error(error);
-                }
-
-                if (results.length > 0) {
-                    return res.json("Email already in use");
-                }
-                if (password !== passwordConfirm) {
-                    return res.json("Password do not match");
-                } else {
-                    let hashPassword = await bcrypt.hash(password, 8);
-                    console.log(hashPassword);
-
-                    connection.query(
-                        "Insert into admin set ?",
-                        { name: fname, email: email, password: hashPassword },
-                        (error, results) => {
-                            if (error) {
-                                console.error(error);
-                            } else {
-                                console.log(results);
-                                return res
-                                    .status(200)
-                                    .json("admin registered successfully");
-                            }
-                        }
-                    );
-                }
             }
         );
     }

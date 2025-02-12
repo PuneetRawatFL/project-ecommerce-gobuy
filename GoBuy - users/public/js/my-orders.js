@@ -9,6 +9,14 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 100); // Adjust the timeout if needed
+});
+
 // query for the selected user orders``
 
 // select * from products p join order_items ot on ot.product_id = p.id join orders on ot.order_id = orders.order_id join users u on u.userId = orders.user_id where u.userId = 2

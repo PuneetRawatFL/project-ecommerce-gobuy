@@ -9,12 +9,12 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY;
 const connection = require("../config/dbConnection.js");
 
 const userController = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
 
     //destructuring
     const { action, fname, lname, email, password, passwordConfirm } = req.body;
 
-    console.log(action);
+    // console.log(action);
 
     //for login
     if (action === "login") {
@@ -28,20 +28,18 @@ const userController = async (req, res) => {
                     console.error(error);
                 }
                 if (results.length == 0) {
-                    return res.json("No such user found!");
+                    return res.status(400).json("No such user exists");
                 }
 
-                if (results.user_status === "inactive") {
-                    return res.json(
-                        "User is inactive. Please contact customer care!"
-                    );
+                if (results[0].user_status === "inactive") {
+                    return res.status(400).json("User account is inactive");
                 }
 
                 const user = results[0];
                 const isMatch = await bcrypt.compare(password, user.password);
 
                 if (!isMatch) {
-                    return res.status(400).json("Invalid credentials");
+                    return res.status(400).json("Wrong Password");
                 }
 
                 //generating jwt
@@ -83,10 +81,10 @@ const userController = async (req, res) => {
                 }
 
                 if (results.length > 0) {
-                    return res.json("Email already in use");
+                    return res.status(400).json("Email already in use");
                 }
                 if (password !== passwordConfirm) {
-                    return res.json("Password do not match");
+                    return res.status(400).json("Password do not match");
                 } else {
                     let hashPassword = await bcrypt.hash(password, 8);
                     console.log(hashPassword);
@@ -103,10 +101,13 @@ const userController = async (req, res) => {
                         (error, results) => {
                             if (error) {
                                 console.error(error);
+                                return res
+                                    .status(400)
+                                    .json("Error registering user");
                             } else {
                                 // console.log(results);
                                 return res.status(200).json({
-                                    message: "User Registered in successfully",
+                                    message: "User Registered successfully",
                                     action: "register",
                                     result: results,
                                     // token: token,

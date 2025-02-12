@@ -5,9 +5,9 @@ async function getUserList() {
         http://localhost:8001/mysql?mysqlQuery=select * from users
         `);
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     result.forEach((user) => {
-        console.log(user);
+        // console.log(user);
 
         // tbody-> row-> td
 
@@ -40,13 +40,12 @@ async function getUserList() {
         datetd.innerText = `${formattedDate}`;
         //stauts
         const statustd = document.createElement("td");
-        statustd.innerText = `${user.status}`;
-        if (user.status === "active") {
-            statustd.style.backgroundColor = "green";
-            statustd.style.color = "white";
+        statustd.innerText = `${user.user_status}`;
+        if (user.user_status === "active") {
+            statustd.style.color = "green";
         }
-        if (user.status === "inactive") {
-            statustd.style.backgroundColor = "red";
+        if (user.user_status === "inactive") {
+            statustd.style.color = "red";
         }
         //button td
         const buttontd = document.createElement("td");
@@ -54,31 +53,55 @@ async function getUserList() {
         //creating buttons - activate, deactivate, delete
         const resetBtn = document.createElement("button");
         resetBtn.innerText = "Reset Password";
+        //add user id
         //reset password
         resetBtn.onclick = function () {
             resetModal.style.display = "block";
+            const changePassUserId =
+                document.querySelector("#changePassUserId");
+            changePassUserId.innerText = user.userId;
         };
 
         const actBtn = document.createElement("button");
         actBtn.innerText = "Activate";
         actBtn.addEventListener("click", async () => {
-            console.log("activate: ", user.userId);
+            // console.log("activate: ", user.userId);
             const response = await fetch(
-                `http://localhost:8001/mysql?mysqlQuery=update users set status = 'active' where userId = ${user.userId}`
+                `http://localhost:8001/mysql?mysqlQuery=update users set user_status = 'active' where userId = ${user.userId}`
             );
             const result = await response.json();
-            console.log(result);
+            // console.log(result.affectedRows);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `User ${user.userId} activated successfully.`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getUserList();
         });
         const deactBtn = document.createElement("button");
         deactBtn.innerText = "Deactivate";
         deactBtn.addEventListener("click", async () => {
-            console.log("activate: ", user.userId);
+            // console.log("activate: ", user.userId);
             const response = await fetch(
-                `http://localhost:8001/mysql?mysqlQuery=update users set status = 'inactive' where userId = ${user.userId}`
+                `http://localhost:8001/mysql?mysqlQuery=update users set user_status = 'inactive' where userId = ${user.userId}`
             );
             const result = await response.json();
-            console.log(result);
+            // console.log(result.affectedRows);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `User ${user.userId} deactivated successfully.`,
+                    "",
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getUserList();
         });
         const delBtn = document.createElement("button");
@@ -90,7 +113,17 @@ async function getUserList() {
                 `http://localhost:8001/mysql?mysqlQuery=delete from users where userId = ${user.userId}`
             );
             const result = await response.json();
-            console.log(result);
+            if (result.affectedRows === 1) {
+                toastr.success(
+                    `User ${user.userId} deleted successfully.`, //message
+                    // "Login Successfull", //title
+                    {
+                        timeOut: 2000,
+                        closeButton: true,
+                        progressBar: true,
+                    } //timeout
+                );
+            }
             getUserList();
         });
 
@@ -155,19 +188,30 @@ form.addEventListener("submit", function (event) {
     })
         .then(async (res) => {
             console.log(res);
+            const result = await res.json();
             if (res.ok) {
-                const result = await res.json();
+                toastr.success(
+                    `${result}`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
 
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "green";
-                resultDiv.innerText = result.message;
-                console.log(result.result.name);
+                setTimeout(() => {
+                    window.location.href = "../html/manage-users.html";
+                }, 2000);
             } else {
                 // alert("Form submission failed.");
-                const result = await res.json();
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "red";
-                resultDiv.innerText = result;
+                toastr.error(
+                    `${result}`, //message
+                    "Error registering", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
             }
         })
         .catch((err) => console.log("Error:", err));
@@ -199,6 +243,7 @@ passwordFrom.addEventListener("submit", function (event) {
     formData.forEach((value, key) => {
         data[key] = value;
     });
+    data["userId"] = changePassUserId.innerText;
 
     fetch("http://localhost:8001/register", {
         method: "POST",
@@ -208,25 +253,32 @@ passwordFrom.addEventListener("submit", function (event) {
         body: JSON.stringify(data),
     })
         .then(async (res) => {
-            const resultDiv = document.querySelector("#reset-result");
             // console.log(res);
+            const result = await res.json();
             if (res.ok) {
-                const result = await res.json();
-                console.log(result);
+                toastr.success(
+                    `${result}`, //message
+                    "", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
 
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "green";
-                resultDiv.innerText = result;
-                // console.log(result.result.name);
+                setTimeout(() => {
+                    window.location.href = "../html/manage-users.html";
+                }, 2000);
             } else {
-                // alert("Form submission failed.");
-                const result = await res.json();
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "red";
-                resultDiv.innerText = result;
+                console.log(result);
+                toastr.error(
+                    `${result}`, //message
+                    "Error", //title
+                    {
+                        timeOut: 2000,
+                        progressBar: true,
+                    } //timeout
+                );
             }
         })
         .catch((err) => console.log("Error:", err));
 });
-
-//reset password

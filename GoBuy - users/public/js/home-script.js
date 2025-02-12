@@ -24,6 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 500); // Adjust the timeout if needed
+});
+
 var acc = document.getElementsByClassName("accordion");
 var i;
 for (i = 0; i < acc.length; i++) {

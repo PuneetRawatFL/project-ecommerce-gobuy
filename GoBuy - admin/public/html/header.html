@@ -1,8 +1,17 @@
 <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 
+<!-- toastr css -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+/>
+
+<!-- toastr js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 <!-- logo -->
 <div class="navbar-logo" style="display: flex">
-    <a href="./index.html">
+    <a>
         <img
             src="../images/Screenshot_2024-12-19_124340-removebg-preview.png"
             alt="GoBuy logo"
@@ -32,7 +41,7 @@
             <div class="user-logout-options">
                 <!-- <a href="../html/my-orders.html">Orders</a> -->
                 <a href="../html/my-account.html">Account</a>
-                <a href="./index.html" id="logout-btn"
+                <a href="" id="logout-btn"
                     >Logout
                     <span
                         ><img
@@ -63,7 +72,6 @@
 
     .navbar-logo {
         height: 80px;
-        cursor: pointer;
     }
     .navbar-logo img {
         margin-top: 10px;

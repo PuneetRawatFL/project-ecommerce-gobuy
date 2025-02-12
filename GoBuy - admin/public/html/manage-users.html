@@ -13,12 +13,23 @@
             rel="stylesheet"
         />
 
-        <!-- including header and footer using jquery -->
+        <!-- toastr css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        />
+
+        <!-- jquery -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"
         ></script>
+
+        <!-- toastr js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <!-- including header and footer using jquery -->
 
         <script>
             $(function () {
@@ -44,8 +55,17 @@
             <div id="header"></div>
         </nav>
 
+        <p class="navigation">
+            <
+            <a href="./admin-homepage.html">Back</a>
+        </p>
+
         <div class="users-container">
             <h1>List of users</h1>
+
+            <div class="add-user-container">
+                <button id="addUserBtn">Add User</button>
+            </div>
 
             <table>
                 <thead>
@@ -70,10 +90,6 @@
                     </tr> -->
                 </tbody>
             </table>
-        </div>
-
-        <div class="add-user-container">
-            <button id="addUserBtn">Add User</button>
         </div>
 
         <!-- Modal Structure -->
@@ -143,7 +159,7 @@
                         >
                         <input
                             type="password"
-                            id="password"
+                            id="passwordConfirm"
                             name="passwordConfirm"
                             placeholder="Enter password"
                             required
@@ -163,6 +179,10 @@
             <div class="modal-content">
                 <span id="closePasswordSpan" class="closeSpan">&times;</span>
                 <h2>Reset Password</h2>
+                <h4 style="margin-bottom: 10px">
+                    Change password for User:
+                    <span id="changePassUserId"></span>
+                </h4>
 
                 <form
                     method="post"
@@ -173,27 +193,27 @@
 
                     <div>
                         <!-- password -->
-                        <label for="password" class="required"
+                        <label for="newPassword" class="required"
                             >Enter New Password:</label
                         >
                         <input
                             type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter password"
+                            id="newPassword"
+                            name="newPassword"
+                            placeholder="Enter new password"
                             required
                         />
                     </div>
                     <div>
                         <!-- confirm password -->
-                        <label for="passwordConfirm" class="required"
+                        <label for="newPasswordConfirm" class="required"
                             >Comfirm Password:</label
                         >
                         <input
                             type="password"
-                            id="password"
-                            name="passwordConfirm"
-                            placeholder="Enter password"
+                            id="newPasswordConfirm"
+                            name="newPasswordConfirm"
+                            placeholder="Confirm new password"
                             required
                         />
                     </div>

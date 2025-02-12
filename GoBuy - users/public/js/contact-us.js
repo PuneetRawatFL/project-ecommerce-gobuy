@@ -9,6 +9,14 @@ $(function () {
     $("#footer").load("footer.html");
 });
 
+// Add this JavaScript code to your script
+document.addEventListener("DOMContentLoaded", (event) => {
+    document.body.classList.add("fade-transition");
+    setTimeout(() => {
+        document.body.classList.add("fade-in");
+    }, 100); // Adjust the timeout if needed
+});
+
 // function to add loading animaton to submit button
 function addToCartLoading() {
     const btn = document.getElementById("submitFeedbackBtn");

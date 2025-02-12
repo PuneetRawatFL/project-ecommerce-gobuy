@@ -20,9 +20,6 @@ $(function () {
     });
 });
 
-//creating global array
-// window.globalCartArray = [];
-
 let cartCountStorage = 0;
 //function to increase cart count
 const cartCount = document.querySelector(".cart-item-count");

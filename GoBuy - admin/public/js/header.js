@@ -33,23 +33,34 @@ window.userLoggedIn = userLoggedIn;
 //logout
 const logoutBtn = document.querySelector("#logout-btn");
 logoutBtn.addEventListener("click", () => {
+    event.preventDefault();
     userTag.innerText = `Not a user? Login`;
     userLoginOptions.style.display = "block";
     userLogoutOptions.style.display = "none";
     userBtn.src = "../images/user_logged_out.png";
 
-    console.log("logout");
+    $(function () {
+        // toastr.success("success message");
+        toastr.success(
+            "Logged out successfully.", //message
+            "", //title
+            { timeOut: 2000, closeButton: true, progressBar: true } //timeout
+        );
+    });
 
     //delete cookie
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-    document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie =
+        "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = "adminId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
-    // console.log(document.cookie);
+    setTimeout(() => {
+        window.location.href = "../html/index.html";
+    }, 2000);
 });
 
 //function to check if the user is logged in
 async function checkUser() {
-    const hasToken = document.cookie.includes("token=");
+    const hasToken = document.cookie.includes("adminToken=");
     console.log("User logged in - ", hasToken);
 
     if (hasToken) {
@@ -58,7 +69,7 @@ async function checkUser() {
         //calling function
         userLoggedIn(details.name);
 
-        document.cookie = `userId = ${details.id}; path=/`;
+        document.cookie = `adminId = ${details.id}; path=/`;
         return hasToken;
     } else {
         console.log("User not logged in");
@@ -69,7 +80,7 @@ checkUser();
 
 async function getDetailFromToken() {
     //extracting token value using regex
-    const match = document.cookie.match(/(^| )token=([^;]+)/);
+    const match = document.cookie.match(/(^| )adminToken=([^;]+)/);
     // console.log(match[2]);
 
     // Decode the JWT using jwt-decode script

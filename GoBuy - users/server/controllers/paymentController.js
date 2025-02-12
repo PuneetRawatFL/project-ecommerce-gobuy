@@ -14,8 +14,6 @@ const paymentController = async (req, res) => {
             submit_type: "pay",
             line_items: [
                 {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    // price: "price_1QmaSJD8RxU8tzk9Ugj9vRWg",
                     price_data: {
                         currency: "usd",
                         product_data: {

@@ -5,7 +5,6 @@ $(function () {
     $("#footer").load("footer.html");
 });
 //result
-const resultDiv = document.querySelector(".result-container");
 
 //form
 const form = document.querySelector("#form");
@@ -32,25 +31,38 @@ form.addEventListener("submit", function (event) {
                 const result = await res.json();
                 console.log(result);
 
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "green";
-                resultDiv.innerText = result.message;
-                console.log(result.result.name);
-                window.userLoggedIn(result.result.name);
+                $(function () {
+                    // toastr.success("success message");
+                    toastr.success(
+                        `${result.message}`, //message
+                        "Login Successfull", //title
+                        {
+                            timeOut: 2000,
+                            progressBar: true,
+                        } //timeout
+                    );
+                });
 
                 // acess token
-                document.cookie = `token = ${result.token}; path=/`;
+                document.cookie = `adminToken = ${result.token}; path=/`;
                 console.log(document.cookie);
 
                 setTimeout(() => {
                     window.location.href = "../html/admin-homepage.html";
                 }, 2000);
             } else {
-                // alert("Form submission failed.");
                 const result = await res.json();
-                resultDiv.style.display = "block";
-                resultDiv.style.backgroundColor = "red";
-                resultDiv.innerText = result;
+                // alert("Form submission failed.");
+                $(function () {
+                    toastr.error(
+                        `${result}`,
+                        "Error Loggin In",
+                        {
+                            timeOut: 2000,
+                            progressBar: true,
+                        } //timeout
+                    );
+                });
             }
         })
         .catch((err) => console.log("Error:", err));

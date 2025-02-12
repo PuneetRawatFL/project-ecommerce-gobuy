@@ -3,7 +3,7 @@ function getAdmin() {
     // const userId = parseInt(user[2], 10);
     // console.log(userId);
 
-    const match = document.cookie.match(/(^| )token=([^;]+)/);
+    const match = document.cookie.match(/(^| )adminToken=([^;]+)/);
     // console.log(match[2]);
 
     // Decode the JWT using jwt-decode script
