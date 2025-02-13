@@ -10,24 +10,22 @@
             rel="stylesheet"
         />
 
+        <!-- toastr css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        />
+
         <!-- including header and footer using jquery -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"
         ></script>
-        <script>
-            $(function () {
-                // $("#header").load("header.html");
-                // $(".navbar").load("header.html", function () {
-                //     $(".shopping-cart").on("click", function () {
-                //         popup();
-                //     });
-                // });
-                // $("#footer").load("footer.html");
-                // $(".cart-modal").load("cart.html");
-            });
-        </script>
+
+        <!-- toastr js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        '8'
 
         <!-- script -->
         <script src="../js/product-script.js" defer></script>
@@ -63,12 +61,12 @@
             <div class="product-filtering">
                 <!-- accordian -->
                 <button class="accordion">Categories</button>
-                <div class="panel">
-                    <p id="cat1">All</p>
-                    <p id="cat2">Electronics</p>
+                <div class="panel" id="categoryPanel">
+                    <!-- <p id="cat1">All</p> -->
+                    <!-- <p id="cat2">Electronics</p>
                     <p id="cat3">Jwellery</p>
                     <p id="cat4">Men's Clothing</p>
-                    <p id="cat5">Women's Clothing</p>
+                    <p id="cat5">Women's Clothing</p> -->
                 </div>
                 <button class="accordion" id="sort-btn">Sort by</button>
                 <div class="panel">
