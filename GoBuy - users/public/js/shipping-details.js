@@ -29,7 +29,6 @@ submitBtn.addEventListener("click", (event) => {
     if (form.checkValidity()) {
         // Prevent form submission
         event.preventDefault();
-
         const data = {};
         formData.forEach((value, key) => {
             data[key] = value;

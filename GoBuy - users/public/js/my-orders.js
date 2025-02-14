@@ -30,13 +30,13 @@ async function getMyOrders() {
         const userId = parseInt(user[2], 10);
 
         const response =
-            await fetch(`http://localhost:8000/mysql?mysqlQuery=select * from products p join order_items ot on ot.product_id = p.id join orders on ot.order_id = orders.order_id join users u on u.userId = orders.user_id join addresses a on u.userId = a.userId where u.userId = ${userId}
+            await fetch(`http://localhost:8000/mysql?mysqlQuery=select * from products p join order_items ot on ot.product_id = p.id join orders on ot.order_id = orders.order_id join users u on u.userId = orders.user_id where u.userId = ${userId}
         `);
         const result = await response.json();
         // console.log(result);
 
         result.forEach((order) => {
-            // console.log(order);
+            console.log(order);
 
             //container for each order
             const orderContainer = document.createElement("div");
@@ -83,7 +83,7 @@ async function getMyOrders() {
             orderItemImage.classList.add("order-item-image");
             //image tag
             const imagTag = document.createElement("img");
-            imagTag.src = `http://localhost:8000/product-images/product_${order.id}.jpg`;
+            imagTag.src = `http://localhost:8000/product-images/product_${order.id}-${order.prod_image_id}.jpg`;
             //appending
             orderItemImage.append(imagTag);
 
@@ -104,7 +104,7 @@ async function getMyOrders() {
             orderTitleDiv.append(priceTag);
 
             const shippingTag = document.createElement("p");
-            shippingTag.innerText = `Shipping Address: ${order.address}`;
+            shippingTag.innerText = `Shipping Address: ${order.delivery_address}`;
             orderTitleDiv.append(shippingTag);
 
             const orderStatusTag = document.createElement("p");
@@ -114,8 +114,8 @@ async function getMyOrders() {
             if (order.order_status === "shipped") {
                 orderStatusTag.innerText = `Your order has been shipped!`;
             }
-            if (order.order_status === "complete") {
-                orderStatusTag.innerText = `Your order has been delievered`;
+            if (order.order_status === "delivered") {
+                orderStatusTag.innerText = `Your order has been delivered`;
             }
             orderTitleDiv.append(orderStatusTag);
 

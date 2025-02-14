@@ -133,7 +133,7 @@ function getRandomNumber() {
                 // product.children[0].children[0].src = data[randArr[x]].image;
                 product.children[0].children[0].src = `http://localhost:8000/product-images/product_${
                     data[randArr[x]].id
-                }.jpg`;
+                }-1.jpg`;
                 //to display price
                 product.children[1].innerText = `$${data[randArr[x]].price}`;
                 x++;

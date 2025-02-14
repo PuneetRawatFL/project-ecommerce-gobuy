@@ -35,17 +35,60 @@ async function getProductList() {
 
         const imgtd = document.createElement("td");
         imgtd.style.display = "flex";
+        imgtd.style.flexDirection = "column";
         imgtd.style.gap = "10px";
+
+        const imgDiv1 = document.createElement("div");
+        imgDiv1.style.display = "flex";
+        imgDiv1.style.gap = "10px";
 
         const radioTag = document.createElement("input");
         radioTag.type = "radio";
+        radioTag.name = `active-image-${product.id}`;
+        if (product.prod_image_id === "1") {
+            radioTag.checked = true;
+        }
+        radioTag.addEventListener("change", async function () {
+            const response = await fetch(
+                `http://localhost:8001/mysql?mysqlQuery=update products set prod_image_id = 1 where id = ${product.id}`
+            );
+        });
 
         const prodImg = document.createElement("img");
-        prodImg.src = `http://localhost:8001/product-images/product_${product.id}.jpg`;
+        prodImg.src = `http://localhost:8001/product-images/product_${product.id}-1.jpg`;
+        // console.log(prodImg.src);
         prodImg.classList.add("product-image");
 
-        imgtd.append(radioTag);
-        imgtd.append(prodImg);
+        const imgDiv2 = document.createElement("div");
+        imgDiv2.style.display = "flex";
+        imgDiv2.style.gap = "10px";
+
+        const radioTag2 = document.createElement("input");
+        radioTag2.type = "radio";
+        radioTag2.name = `active-image-${product.id}`;
+        if (product.prod_image_id == "2") {
+            radioTag2.checked = true;
+        }
+        radioTag2.addEventListener("change", async function () {
+            const response = await fetch(
+                `http://localhost:8001/mysql?mysqlQuery=update products set prod_image_id = 2 where id = ${product.id}`
+            );
+        });
+
+        const prodImg2 = document.createElement("img");
+        prodImg2.src = `http://localhost:8001/product-images/product_${product.id}-2.jpg`;
+        // console.log(prodImg2.src);
+        prodImg2.classList.add("product-image");
+
+        //img 1
+        imgDiv1.append(radioTag);
+        imgDiv1.append(prodImg);
+        //img2
+        imgDiv2.append(radioTag2);
+        imgDiv2.append(prodImg2);
+        //appending to td
+        imgtd.append(imgDiv1);
+        imgtd.append(imgDiv2);
 
         // const skutd = document.createElement("td");
         // idtd.innerText = `${product.id}`;

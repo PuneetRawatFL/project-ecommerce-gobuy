@@ -76,7 +76,7 @@ function addItemInCart(json) {
     const itemImg = document.createElement("img");
     itemImg.id = "item-image";
     // itemImg.src = json.image;
-    itemImg.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+    itemImg.src = `http://localhost:8000/product-images/product_${json.id}-${json.prod_image_id}.jpg`;
     // console.log(json.id);
 
     //appending img tag to div

@@ -45,6 +45,8 @@ const paymentController = async (req, res) => {
 
             DELETE FROM cart WHERE user_id = ${req.body.userId};
 
+            INSERT INTO orders(delivery_address)
+            SELECT CONCAT(fname, ', ', lname, ', ', email, ', ', mobileno, ', ', address, ', ', landmark, ', ', state, ', ', city, ', ', zipcode) AS delivery_address FROM shipping_details ORDER BY created_on DESC LIMIT 1;
             `;
         // console.log(query);
 

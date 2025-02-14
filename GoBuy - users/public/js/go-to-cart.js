@@ -55,7 +55,7 @@ function refreshShoppingCart() {
                 shoppingItemImage.classList.add("shoppingItemImage");
                 //image tag
                 const imagTag = document.createElement("img");
-                imagTag.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+                imagTag.src = `http://localhost:8000/product-images/product_${json.id}-${json.prod_image_id}.jpg`;
                 //appending
                 shoppingItemImage.append(imagTag);
 

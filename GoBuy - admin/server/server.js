@@ -4,7 +4,6 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const fs = require("fs");
 
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 const PORT = process.env.PORT;
@@ -30,10 +29,7 @@ const userController = require("./controllers/userController.js");
 app.use(
     "/product-images",
     express.static(
-        path.join(
-            __dirname,
-            "../../GoBuy - users/public/                                                                                                                                                                                 "
-        )
+        path.join(__dirname, "../../GoBuy - users/public/product-images")
     )
 );
 
@@ -59,21 +55,6 @@ app.post("/admin-login", adminController);
 
 //endpoint for user
 app.post("/register", userController);
-
-const directoryPath =
-    "D:\\Project\\GoBuy\\GoBuy - users\\public\\product-images";
-//endpoint to change image
-app.post("/change-image", (req, res) => {
-    const fileName = req.body.fileName;
-    console.log(fileName);
-    //checking if file exists
-    const filePath = path.join(directoryPath, fileName);
-    if (fs.existsSync(filePath)) {
-        res.status(200).send("File exists");
-    } else {
-        res.status(400).send("No such file exists");
-    }
-});
 
 app.listen(PORT, () => {
     console.log(`admin server started on ${PORT} ......`);

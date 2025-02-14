@@ -3,8 +3,9 @@ const connection = require("../config/dbConnection.js");
 const shippingController = (req, res) => {
     const formData = req.body;
 
-    const query = "insert into shipping_details values (?,?,?,?,?,?,?,?,?)";
+    const query = "insert into shipping_details values (?,?,?,?,?,?,?,?,?,?)";
     const values = [
+        new Date(),
         formData.fname,
         formData.lname,
         formData.email,

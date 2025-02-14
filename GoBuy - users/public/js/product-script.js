@@ -90,7 +90,7 @@ function getProducts(url) {
 
             //creating loop for each product
             products.forEach((product) => {
-                // console.log(product.id);
+                // console.log(product.prod_image_id);
 
                 //creating a div for link navigation
 
@@ -113,7 +113,7 @@ function getProducts(url) {
                 const image = document.createElement("img");
                 image.classList.add("prod-image");
                 // image.src = product.image;
-                image.src = `http://localhost:8000/product-images/product_${product.id}.jpg`;
+                image.src = `http://localhost:8000/product-images/product_${product.id}-${product.prod_image_id}.jpg`;
                 image.alt = product.title;
                 imgDiv.appendChild(image);
 

@@ -24,11 +24,11 @@ let totalCartPrice = 0;
 
 function savedAddress() {
     fetch(
-        `http://localhost:8000/mysql?mysqlQuery=select * from shipping_details limit 1`
+        `http://localhost:8000/mysql?mysqlQuery=select * from shipping_details order by created_on desc limit 1`
     )
         .then((res) => res.json())
         .then((results) => {
-            // console.log(results[0]);
+            console.log(results[0]);
 
             const fullName = document.querySelector("#fullName");
             const mobileno = document.querySelector("#mobileno");
@@ -69,7 +69,7 @@ function refreshShoppingCart() {
                 shoppingItemImage.classList.add("shoppingItemImage");
                 //image tag
                 const imagTag = document.createElement("img");
-                imagTag.src = `http://localhost:8000/product-images/product_${json.id}.jpg`;
+                imagTag.src = `http://localhost:8000/product-images/product_${json.id}-${json.prod_image_id}.jpg`;
                 //appending
                 shoppingItemImage.append(imagTag);
 
@@ -136,7 +136,7 @@ function refreshShoppingCartValue() {
 
 let confirmPay = document.querySelector("#confirmPay");
 
-confirmPay.addEventListener("click", () => {
+confirmPay.addEventListener("click", async () => {
     //adding loading button
     confirmPay.classList.add("addButtonLoadingExtra");
     confirmPay.style.backgroundColor = "#36558f";
