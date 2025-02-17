@@ -41,7 +41,7 @@ const productId = urlParams.get("id");
 fetch(`http://localhost:8000/products/${productId}`)
     .then((res) => res.json())
     .then((json) => {
-        // console.log(json[0]);
+        console.log(json[0]);
         //making body visible
         document.querySelector(".product-container").style.visibility =
             "visible";
@@ -98,59 +98,75 @@ fetch(`http://localhost:8000/products/${productId}`)
         removeLoadingBar();
 
         //event listener for add to cart
-        addToCart.addEventListener("click", () => {
-            // console.log("cart");
+        function addToCartHandler() {
+            const user = document.cookie.match(/(^| )userId=([^;]+)/);
+            if (user) {
+                const userId = parseInt(user[2], 10);
 
-            //creating flag
-            // let itemExist = false;
+                // to check if the item already exists
+                fetch(
+                    `http://localhost:8000/mysql?mysqlQuery=select * from cart c join users u on c.user_id = u.userId where u.userId =${userId} and product_id = ${json[0].id}`
+                )
+                    .then((res) => res.json())
+                    .then((result) => {
+                        if (result.length === 0) {
+                            console.log("item don't exist");
 
-            // to check if the item already exists
-            fetch(
-                `http://localhost:8000/mysql?mysqlQuery=select * from temp_table where product_id = ${json[0].id}`
-            )
-                .then((res) => res.json())
-                .then((result) => {
-                    // console.log(result);
+                            // to increase cart item number
+                            window.updateCartItem();
 
-                    if (result.length === 0) {
-                        console.log(result.length);
-                        console.log("item dont exists");
-
-                        //to increase cart item number
-                        window.updateCartItem("increase");
-
-                        //add to mysql database
-                        fetch("http://localhost:8000/addToCart", {
-                            method: "POST",
-                            headers: {
-                                "Content-type": "application/json",
-                            },
-                            body: JSON.stringify({ data: json[0] }),
-                        })
-                            .then((res) => res.json())
-                            .then((data) => {
-                                console.log("Success:", data);
-                                window.refreshCart();
+                            // add to mysql database
+                            fetch("http://localhost:8000/addToCart", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    data: json[0],
+                                    userId: userId,
+                                }),
                             })
-                            .catch((err) => console.log("Error:", err));
-                    }
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    console.log("Success:", data);
+                                    window.refreshCart();
+                                })
+                                .catch((err) => console.log("Error:", err));
+                        } else {
+                            console.log("item exists");
+                            fetch(
+                                `http://localhost:8000/mysql?mysqlQuery=update cart c join users u on c.user_id = u.userId set product_quantity = product_quantity %2B 1 where product_id = ${json[0].id}`
+                            )
+                                .then((res) => res.json())
+                                .then((result) => {
+                                    console.log(result);
+                                    window.updateCartItem();
+                                    window.refreshCart();
+                                });
+                        }
+                    });
+            }
+        }
 
-                    //if item exist -> increase quantity in mysql table
-                    else {
-                        console.log("item exists");
-                        fetch(
-                            `http://localhost:8000/mysql?mysqlQuery=update temp_table set product_quantity = product_quantity %2B 1 where product_id = ${json[0].id}`
-                        )
-                            .then((res) => res.json())
-                            .then((result) => {
-                                console.log(result);
-                                //to increase cart item number
-                                window.updateCartItem();
+        addToCart.addEventListener("click", addToCartHandler);
 
-                                //window
-                                window.refreshCart();
-                            });
-                    }
-                });
-        });
+        const stockTag = document.querySelector(".stock-tag");
+        if (json[0].sku == 0) {
+            stockTag.innerText = `Out of Stock`;
+            stockTag.style.color = "red";
+            addToCart.style.backgroundColor = "#cccccc";
+            addToCart.style.color = "#666666";
+            addToCart.style.cursor = "not-allowed";
+            addToCart.style.opacity = "0.5";
+            addToCart.removeEventListener("click", addToCartHandler);
+
+            const buyNow = document.querySelector("#buyNow");
+            buyNow.style.backgroundColor = "#cccccc";
+            buyNow.style.color = "#666666";
+            buyNow.style.cursor = "not-allowed";
+            buyNow.style.opacity = "0.5";
+        } else {
+            stockTag.innerText = `In Stock`;
+            stockTag.style.color = "green";
+        }
     });

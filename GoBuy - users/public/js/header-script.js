@@ -86,6 +86,7 @@ window.userLoggedIn = userLoggedIn;
 //logout
 const logoutBtn = document.querySelector("#logout-btn");
 logoutBtn.addEventListener("click", () => {
+    event.preventDefault();
     userTag.innerText = `Not a user? Login`;
     userLoginOptions.style.display = "block";
     userLogoutOptions.style.display = "none";
@@ -97,13 +98,22 @@ logoutBtn.addEventListener("click", () => {
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
     document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 
-    console.log(document.cookie);
+    // console.log(document.cookie);
 
-    window.location.href = "../html/index.html";
+    // window.location.href = "../html/index.html";
 
-    // setTimeout(() => {
-    //     window.location.href = "../html/index.html";
-    // }, 1000);
+    toastr.success(
+        ``, //message
+        "You have been logged out successfully", //title
+        {
+            timeOut: 2000,
+            progressBar: true,
+        } //timeout
+    );
+
+    setTimeout(() => {
+        window.location.href = "../html/index.html";
+    }, 2000);
 
     // window.refreshCart();
 });

@@ -248,6 +248,22 @@ body {
     z-index: 1;
     border: 2px solid #36558f;
 }
+.product-listing .product-item .disableButton {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    height: 30px;
+    width: 90%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    cursor: not-allowed;
+
+    position: absolute;
+    bottom: 10px;
+    overflow: hidden;
+    z-index: 1;
+    border: 2px solid #666666;
+    color: red;
+}
 .product-listing .product-item .addButton:hover {
     color: white;
 }

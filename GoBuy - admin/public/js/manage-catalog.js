@@ -90,8 +90,8 @@ async function getProductList() {
         imgtd.append(imgDiv1);
         imgtd.append(imgDiv2);
 
-        // const skutd = document.createElement("td");
-        // idtd.innerText = `${product.id}`;
+        const skutd = document.createElement("td");
+        skutd.innerText = `${product.sku}`;
 
         tr.append(idtd);
         tr.append(titletd);
@@ -101,6 +101,7 @@ async function getProductList() {
         tr.append(ratetd);
         tr.append(counttd);
         tr.append(imgtd);
+        tr.append(skutd);
         // tr.append(skutd);
 
         prodTable.append(tr);

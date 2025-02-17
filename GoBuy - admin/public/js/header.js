@@ -44,7 +44,7 @@ logoutBtn.addEventListener("click", () => {
         toastr.success(
             "Logged out successfully.", //message
             "", //title
-            { timeOut: 2000, closeButton: true, progressBar: true } //timeout
+            { timeOut: 2000, progressBar: true } //timeout
         );
     });
 
@@ -70,6 +70,11 @@ async function checkUser() {
         userLoggedIn(details.name);
 
         document.cookie = `adminId = ${details.id}; path=/`;
+
+        //home button
+        const homeBtn = document.querySelector("#home-button");
+        homeBtn.style.display = "block";
+
         return hasToken;
     } else {
         console.log("User not logged in");

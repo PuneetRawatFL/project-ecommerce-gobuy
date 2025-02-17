@@ -25,10 +25,20 @@
 
         <!-- toastr js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        '8'
+        <!-- '8' -->
 
         <!-- script -->
         <script src="../js/product-script.js" defer></script>
+
+        <script>
+            // This script will reload the page automatically when it loads
+            window.onload = function () {
+                if (!window.location.hash) {
+                    window.location = window.location + "#loaded";
+                    window.location.reload();
+                }
+            };
+        </script>
     </head>
     <body>
         <!-- announcement bar -->
