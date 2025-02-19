@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Manage Catalog</title>
         <!-- css -->
-        <link rel="stylesheet" href="../css/manage-catalog.css" />
+        <link rel="stylesheet" href="../css/manage-products.css" />
 
         <!-- font family -->
         <link
@@ -32,7 +32,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 
         <!-- script -->
-        <script src="../js/manage-catalog.js" defer></script>
+        <script src="../js/manage-products.js" defer></script>
     </head>
     <body>
         <!-- navbar -->
@@ -45,22 +45,17 @@
             <a href="./admin-homepage.html">Back</a>
         </p>
 
-        <div class="categories-container">
-            <h1>List of categories</h1>
-
-            <table>
-                <thead>
-                    <th>Category ID</th>
-                    <th>Category Name</th>
-                    <th>Category Status</th>
-                    <th>Show in Menu</th>
-                </thead>
-                <tbody id="category-table"></tbody>
-            </table>
-        </div>
-
         <div class="products-container">
             <h1>List of products</h1>
+
+            <div class="add-product-container">
+                <button
+                    id="addProductBtn"
+                    onclick="window.location.href='./add-product.html'"
+                >
+                    Add New Product
+                </button>
+            </div>
 
             <table>
                 <thead>

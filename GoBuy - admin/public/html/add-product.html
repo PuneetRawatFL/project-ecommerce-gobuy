@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manage Catalog</title>
+        <!-- css -->
+        <link rel="stylesheet" href="../css/add-product.css" />
+
+        <!-- font family -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- toastr css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        />
+
+        <!-- toastr js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <!-- including header and footer using jquery -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            $(function () {
+                $(".navbar").load("header.html", function () {
+                    $.getScript("../js/header.js");
+                });
+                $("#footer").load("footer.html");
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+        <!-- script -->
+        <script src="../js/add-product.js" defer></script>
+    </head>
+    <body>
+        <!-- navbar -->
+        <nav class="navbar">
+            <div id="header"></div>
+        </nav>
+
+        <p class="navigation">
+            <
+            <a href="./admin-homepage.html">Back</a>
+        </p>
+
+        <div class="form-container">
+            <div style="width: 75%">
+                <h1>Add New Product</h1>
+            </div>
+
+            <form method="post" id="product-form">
+                <!-- title -->
+                <label for="title">Enter Product Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    placeholder="Enter title"
+                />
+
+                <!-- price -->
+                <label for="price">Enter Product Price</label>
+                <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    placeholder="Enter price"
+                />
+
+                <!-- description -->
+                <label for="description">Enter Product Description</label>
+                <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Enter description"
+                />
+
+                <!-- select category -->
+                <label for="category">Choose Category:</label>
+                <select name="category" id="category">
+                    <option value="men's category">Men's clothing</option>
+                    <option value="women's category">Women's clothing</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="jewelery">Jewelery</option>
+                </select>
+
+                <!-- rating rate -->
+                <label for="rating">Enter Product rating</label>
+                <input
+                    type="text"
+                    name="rating"
+                    id="rating"
+                    placeholder="Enter rating"
+                />
+
+                <!-- rating count -->
+                <label for="count">Enter Product rating count</label>
+                <input
+                    type="text"
+                    name="count"
+                    id="count"
+                    placeholder="Enter rating count"
+                />
+
+                <label for="image">Upload Product Image</label>
+                <input type="file" name="image" id="image" />
+
+                <div class="button-container">
+                    <button type="submit" value="Submit" id="submitBtn">
+                        Submit
+                    </button>
+                </div>
+            </form>
+
+            <!-- <button id="submit">Add Product</button> -->
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div id="footer"></div>
+        </footer>
+    </body>
+</html>

@@ -43,6 +43,9 @@ async function getOrderList() {
         const amounttd = document.createElement("td");
         amounttd.innerText = `$${order.total_amount}`;
 
+        const addresstd = document.createElement("td");
+        addresstd.innerText = `${order.delivery_address}`;
+
         //stauts
         const statustd = document.createElement("td");
         statustd.innerText = `${order.order_status}`;
@@ -165,6 +168,7 @@ async function getOrderList() {
         tr.append(usertd);
         tr.append(datetd);
         tr.append(amounttd);
+        tr.append(addresstd);
         tr.append(statustd);
         tr.append(buttontd);
         tr.append(deltd);

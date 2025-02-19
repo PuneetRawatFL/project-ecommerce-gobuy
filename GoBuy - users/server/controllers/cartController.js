@@ -10,7 +10,7 @@ exports.getCart = (req, res) => {
 };
 
 exports.addToCart = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const itemReceived = req.body.data;
     const userId = req.body.userId;
     // res.json({ message: "Data received successfully!", data: itemReceived });
