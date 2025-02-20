@@ -39,4 +39,8 @@ submitBtn.addEventListener("click", async () => {
             );
         });
     }
+
+    setTimeout(() => {
+        window.location.href = "../html/manage-products.html";
+    }, 2000);
 });

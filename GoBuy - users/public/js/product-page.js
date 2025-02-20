@@ -89,7 +89,7 @@ fetch(`http://localhost:8000/products/${productId}`)
         discountOffer.style.fontWeight = "400";
 
         productPriceMrp.innerText = "MRP(Inclusive of all taxes)";
-        productImage.src = `http://localhost:8000/product-images/product_${json[0].id}-${json[0].prod_image_id}.jpg`;
+        productImage.src = `http://localhost:8001/uploads/${json[0].product_image}`;
 
         productDescription.innerText = json[0].description;
         productRatingCount.innerText = json[0].rating_count;

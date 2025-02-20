@@ -111,6 +111,10 @@ body {
     height: 350px;
 }
 
+.details-container {
+    width: 100%;
+}
+
 /*  */
 
 /* product title */

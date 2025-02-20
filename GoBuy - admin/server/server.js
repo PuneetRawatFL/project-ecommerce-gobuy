@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads");
+        cb(null, "D:\\Project\\GoBuy\\GoBuy - admin\\public\\uploads");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -44,6 +44,11 @@ app.use(
     express.static(
         path.join(__dirname, "../../GoBuy - users/public/product-images")
     )
+);
+
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "../../GoBuy - admin/public/uploads"))
 );
 
 //endpoint for sql queries
@@ -95,34 +100,6 @@ app.get("/get-image/:id", (req, res) => {
 
 app.post("/add-product", upload.single("image"), productController);
 
-app.get("/upload", (req, res) => {
-    const query = `select image_status, product_images.product_image from product_images join products on product_images.product_id = products.id where products.id = 1`;
-
-    connection.query(query, (error, results) => {
-        if (error) return res.status(400).json({ error: error });
-        console.log(results[0].image_status);
-
-        res.send({
-            result: results,
-            image_status: results[0].image_status,
-            image: `data:image/jpeg;base64,${results[0].product_image.toString(
-                "base64"
-            )}`,
-        });
-        // if (results.length > 0) {
-        //     console.log("status", results[1].image_status);
-        //     const images = results.map((row) => {
-        //         // console.log(row.image_status);
-        //         return `data:image/jpeg;base64,${row.product_image.toString(
-        //             "base64"
-        //         )}`;
-        //     });
-
-        //     res.json(images);
-        // }
-    });
-});
-
 app.get("/products", (req, res) => {
     const query = "SELECT * FROM products";
     connection.query(query, (error, results) => {
@@ -139,8 +116,6 @@ app.get("/products", (req, res) => {
         res.json(results);
     });
 });
-
-//  update products SET product_image = LOAD_FILE('C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\product_8-2.jpg') where id = 1;
 
 app.listen(PORT, () => {
     console.log(`admin server started on ${PORT} ......`);

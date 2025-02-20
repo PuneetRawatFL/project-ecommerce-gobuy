@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manage Catalog</title>
+        <title>Manage Products</title>
         <!-- css -->
         <link rel="stylesheet" href="../css/manage-products.css" />
 
@@ -68,10 +68,27 @@
                     <th>Rating count</th>
                     <th>Images</th>
                     <th>SKU (Stock Keeping Unit)</th>
+                    <th>Actions</th>
                 </thead>
 
                 <tbody id="products-table"></tbody>
             </table>
+        </div>
+
+        <!-- delete product modal -->
+        <div class="modal" id="deleteProduct">
+            <div class="modal-content">
+                <!-- <span id="close-delete-product" class="closeSpan">&times;</span> -->
+                <p id="close-delete-product" class="closeSpan">&times;</p>
+                <h3>
+                    Are you sure you want to delete product
+                    <span id="product-id"></span>
+                </h3>
+                <div class="button-container">
+                    <button>Yes</button>
+                    <button>No</button>
+                </div>
+            </div>
         </div>
 
         <!-- footer -->

@@ -113,7 +113,9 @@ function getProducts(url) {
                 const image = document.createElement("img");
                 image.classList.add("prod-image");
                 // image.src = product.image;
-                image.src = `http://localhost:8000/product-images/product_${product.id}-${product.prod_image_id}.jpg`;
+                // image.src = `http://localhost:8000/product-images/product_${product.id}-${product.prod_image_id}.jpg`;
+                image.src = `http://localhost:8001/uploads/${product.product_image}`;
+                // console.log(image.src);
                 image.alt = product.title;
                 imgDiv.appendChild(image);
 
