@@ -156,6 +156,9 @@ async function getProductList() {
         editImg.style.width = "20px";
         editImg.style.cursor = "pointer";
         editImg.src = "../images/edit.png";
+        editImg.addEventListener("click", () => {
+            window.location.href = `edit-product.html?id=${product.id}`;
+        });
 
         const delImg = document.createElement("img");
         delImg.style.height = "20px";
@@ -166,6 +169,41 @@ async function getProductList() {
             console.log(product.id);
             document.querySelector("#deleteProduct").style.display = "block";
             document.querySelector("#product-id").innerText = `${product.id}`;
+
+            //yes button
+            const yesBtn = document.querySelector("#yes-delete");
+            yesBtn.addEventListener("click", () => {
+                // console.log(product.id);
+                fetch(`http://localhost:8001/delete-product/${product.id}`)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        console.log(result);
+                        if ((result.message = "success")) {
+                            toastr.success(
+                                "Product deleted successfully.", //message
+                                "", //title
+                                {
+                                    timeOut: 2000,
+                                    progressBar: true,
+                                } //timeout
+                            );
+
+                            setTimeout(() => {
+                                window.location.href =
+                                    "../html/manage-products.html";
+                            }, 2000);
+                        } else {
+                            toastr.error(
+                                "Error deleting product.", //message
+                                "", //title
+                                {
+                                    timeOut: 2000,
+                                    progressBar: true,
+                                } //timeout
+                            );
+                        }
+                    });
+            });
         });
 
         btnDiv.append(editImg);

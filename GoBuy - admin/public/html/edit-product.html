@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Add Product</title>
+        <title>Manage Products</title>
         <!-- css -->
-        <link rel="stylesheet" href="../css/add-product.css" />
+        <link rel="stylesheet" href="../css/edit-product.css" />
 
         <!-- font family -->
         <link
@@ -19,15 +19,15 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         />
 
-        <!-- toastr js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
         <!-- including header and footer using jquery -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"
         ></script>
+
+        <!-- toastr js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
         <script>
             $(function () {
@@ -41,7 +41,7 @@
         <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 
         <!-- script -->
-        <script src="../js/add-product.js" defer></script>
+        <script src="../js/edit-product.js" defer></script>
     </head>
     <body>
         <!-- navbar -->
@@ -51,44 +51,31 @@
 
         <p class="navigation">
             <
-            <a href="./admin-homepage.html">Back</a>
+            <!-- <a href="./admin-homepage.html">Back</a> -->
+            <a href="manage-products.html">Back</a>
         </p>
 
         <div class="form-container">
             <div style="width: 75%">
-                <h1>Add New Product</h1>
+                <h1>Edit Product</h1>
             </div>
 
-            <form method="post" id="product-form">
+            <form method="post" id="edit-form">
                 <!-- title -->
-                <label for="title">Enter Product Title</label>
-                <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    placeholder="Enter title"
-                />
+                <label for="title">Product Title</label>
+                <input type="text" name="title" id="title" />
 
                 <!-- price -->
-                <label for="price">Enter Product Price</label>
-                <input
-                    type="text"
-                    name="price"
-                    id="price"
-                    placeholder="Enter price"
-                />
+                <label for="price">Product Price</label>
+                <input type="text" name="price" id="price" />
 
                 <!-- description -->
-                <label for="description">Enter Product Description</label>
-                <input
-                    type="text"
-                    name="description"
-                    id="description"
-                    placeholder="Enter description"
-                />
+                <label for="description">Product Description</label>
+                <input type="text" name="description" id="description" />
 
-                <!-- select category -->
-                <label for="category">Choose Category:</label>
+                <!-- category -->
+                <label for="category">Product Category</label>
+                <!-- <input type="text" name="category" id="category" /> -->
                 <select name="category" id="category">
                     <option value="men's clothing">Men's clothing</option>
                     <option value="women's clothing">Women's clothing</option>
@@ -97,28 +84,29 @@
                 </select>
 
                 <!-- rating rate -->
-                <label for="rating">Enter Product rating</label>
-                <input
-                    type="text"
-                    name="rating"
-                    id="rating"
-                    placeholder="Enter rating"
-                />
+                <label for="rating_rate">Product Rating Rate</label>
+                <input type="text" name="rating_rate" id="rating_rate" />
 
                 <!-- rating count -->
-                <label for="count">Enter Product rating count</label>
-                <input
-                    type="text"
-                    name="count"
-                    id="count"
-                    placeholder="Enter rating count"
-                />
+                <label for="rating_count">Product Rating Count</label>
+                <input type="text" name="rating_count" id="rating_count" />
 
-                <label for="image">Upload Product Image 1:</label>
-                <input type="file" name="image" id="image" />
+                <!-- sku -->
+                <label for="sku">Product SKU(Inventory)</label>
+                <input type="text" name="sku" id="sku" />
 
-                <label for="image">Upload Product Image 2:</label>
-                <input type="file" name="image" id="image" />
+                <div class="images-container">
+                    <div class="image-1">
+                        <p>Image 1:</p>
+                        <img src="" alt="image-1" id="img1" />
+                        <input type="file" name="image1" />
+                    </div>
+                    <div class="image-2">
+                        <p>Image 2:</p>
+                        <img src="" alt="image-2" id="img2" />
+                        <input type="file" name="image2" />
+                    </div>
+                </div>
 
                 <div class="button-container">
                     <button type="submit" value="Submit" id="submitBtn">
@@ -126,8 +114,6 @@
                     </button>
                 </div>
             </form>
-
-            <!-- <button id="submit">Add Product</button> -->
         </div>
 
         <!-- footer -->
