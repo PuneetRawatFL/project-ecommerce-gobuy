@@ -49,6 +49,7 @@ button {
     color: white;
     border-radius: 10px;
     /* margin: 2px; */
+    height: 30px;
     cursor: pointer;
 }
 button:hover {
@@ -57,7 +58,9 @@ button:hover {
 }
 
 .button-container {
+    height: 60px;
     display: flex;
     justify-content: space-evenly;
-    /* gap: 100px; */
+    align-items: center;
+    gap: 20px;
 }

@@ -50,9 +50,10 @@ async function getProductList() {
         const radioTag1 = document.createElement("input");
         radioTag1.type = "radio";
         radioTag1.name = `active-image-${product.id}`;
-        //    if (image1.image_status === "active") {
-        //        radioTag1.checked = true;
-        //    }
+        // console.log(img1.id);
+        if (product.prod_image_id == "1") {
+            radioTag1.checked = true;
+        }
 
         div1.append(radioTag1);
 
@@ -69,17 +70,12 @@ async function getProductList() {
         img1.classList.add("product-image");
         div1.append(img1);
 
-        // console.log(img1.id);
-        // if (result[0].image_status === "active") {
-        //     radioTag1.checked = true;
-        // }
-
         radioTag1.addEventListener("change", async () => {
             // console.log("tag 1", radioTag1.checked);
             // console.log(img1.id);
 
             const response = await fetch(
-                `http://localhost:8001/mysql?mysqlQuery= update products set product_image = '${img1.id}' where id = ${product.id}; `
+                `http://localhost:8001/mysql?mysqlQuery= update products set product_image = '${img1.id}', prod_image_id = 1 where id = ${product.id}; `
             );
             const result = await response.json();
             console.log(result);
@@ -112,9 +108,9 @@ async function getProductList() {
             const radioTag2 = document.createElement("input");
             radioTag2.type = "radio";
             radioTag2.name = `active-image-${product.id}`;
-            //    if (image1.image_status === "active") {
-            //        radioTag1.checked = true;
-            //    }
+            if (product.prod_image_id == "2") {
+                radioTag2.checked = true;
+            }
 
             div2.append(radioTag2);
 
@@ -129,7 +125,7 @@ async function getProductList() {
                 // console.log(img2.id);
 
                 const response = await fetch(
-                    `http://localhost:8001/mysql?mysqlQuery= update products set product_image = '${img2.id}' where id = ${product.id}`
+                    `http://localhost:8001/mysql?mysqlQuery= update products set product_image = '${img2.id}', prod_image_id = 2 where id = ${product.id}`
                 );
             });
 

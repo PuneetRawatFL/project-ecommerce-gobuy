@@ -96,18 +96,19 @@ async function getMyOrders() {
 
             // const quantityDiv = document.createElement("div");
             const quantityTag = document.createElement("p");
-            quantityTag.innerText = `Quantity: ${order.quantity}`;
+            quantityTag.innerHTML = `<p> <span class = "highlight"> Quantity:</span> ${order.quantity} </p>`;
             orderTitleDiv.append(quantityTag);
 
             const priceTag = document.createElement("p");
-            priceTag.innerText = `Price: $${order.total_price}`;
+            priceTag.innerHTML = `<p> <span class = "highlight"> Price:</span> $${order.total_price} </p>`;
             orderTitleDiv.append(priceTag);
 
             const shippingTag = document.createElement("p");
-            shippingTag.innerText = `Shipping Address: ${order.delivery_address}`;
+            shippingTag.innerHTML = `<p> <span class = "highlight"> Shipping Address:</span> ${order.delivery_address} </p>`;
             orderTitleDiv.append(shippingTag);
 
             const orderStatusTag = document.createElement("p");
+            orderStatusTag.classList.add("highlight");
             if (order.order_status === "pending") {
                 orderStatusTag.innerText = `Your order will be shipped soon!`;
             }
@@ -115,7 +116,7 @@ async function getMyOrders() {
                 orderStatusTag.innerText = `Your order has been shipped!`;
             }
             if (order.order_status === "delivered") {
-                orderStatusTag.innerText = `Your order has been delivered`;
+                orderStatusTag.innerText = `Your order has been delivered!`;
             }
             orderTitleDiv.append(orderStatusTag);
 

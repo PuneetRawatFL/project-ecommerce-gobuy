@@ -14,7 +14,7 @@ const shippingController = (req, res) => {
         formData.landmark,
         formData.state,
         formData.city,
-        formData.city,
+        formData.zipcode,
     ];
 
     connection.query(query, values, (err, results) => {

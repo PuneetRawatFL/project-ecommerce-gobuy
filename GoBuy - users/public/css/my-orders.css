@@ -54,6 +54,7 @@ body {
     /* height: 20vh; */
     height: auto;
     /* background-color: aqua; */
+    margin-bottom: 20px;
 }
 
 .order-heading {
@@ -66,6 +67,7 @@ body {
 
 /* img */
 .order-item-image {
+    margin-right: 20px;
     height: 100px;
     width: 10%;
 }
@@ -81,6 +83,6 @@ p {
 }
 
 .highlight {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 400;
 }

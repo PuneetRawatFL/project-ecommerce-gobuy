@@ -45,31 +45,34 @@ const paymentController = async (req, res) => {
 
             DELETE FROM cart WHERE user_id = ${req.body.userId};
 
-            INSERT INTO orders(delivery_address)
-            SELECT CONCAT(fname, ', ', lname, ', ', email, ', ', mobileno, ', ', address, ', ', landmark, ', ', state, ', ', city, ', ', zipcode) AS delivery_address FROM shipping_details ORDER BY created_on DESC LIMIT 1;
+            UPDATE orders SET delivery_address = (
+            SELECT CONCAT(fname, ', ', lname, ', ', email, ', ', mobileno, ', ', address, ', ', landmark, ', ', state, ', ', city, ', ', zipcode) AS delivery_address FROM shipping_details) where order_id = @order_id;
+
+            delete from shipping_details;
+
             `;
         // console.log(query);
 
         connection.query(query, (error, results) => {
             if (error) {
-                console.log("ERROOORRRR");
-                console.error("Database query error:", error.sqlMessage);
-                console.error("SQL State:", error.sqlState);
-                console.error("Error Code:", error.code);
-                console.error("Query:", error.sql);
+                // console.log("ERROOORRRR");
+                // console.error("Database query error:", error.sqlMessage);
+                // console.error("SQL State:", error.sqlState);
+                // console.error("Error Code:", error.code);
+                // console.error("Query:", error.sql);
                 return res.status(500).json({ error: error.sqlMessage });
                 // return res.status(500).json({ error: error });
             }
-            console.log("Payment added to database");
+            // console.log("Payment added to database");
             // console.log(results);
             console.log(session);
 
             // res.redirect(303, session.url);
         });
-        console.log("redirecting");
+        // console.log("redirecting");
         res.json({ url: session.url });
     } catch (error) {
-        console.error("Error executing query:", error);
+        // console.error("Error executing query:", error);
         return res.status(500).send(`Error executing query: ${error.message}`);
     }
 };

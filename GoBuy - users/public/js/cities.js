@@ -1,16 +1,4 @@
-//loading header script
-$(function () {
-    //announcement bar
-    $(".announcement-bar").load("announcement-bar.html");
-    //header
-    $(".navbar").load("header.html", function () {
-        $.getScript("../js/header-script.js");
-    });
-    //footer
-    $("#footer").load("footer.html");
-});
-
-var state_arr = new Array(
+export var state_arr = new Array(
     "Andaman & Nicobar",
     "Andhra Pradesh",
     "Arunachal Pradesh",
@@ -48,7 +36,7 @@ var state_arr = new Array(
     "West Bengal"
 );
 
-var s_a = new Array();
+export var s_a = new Array();
 s_a[0] = "";
 s_a[1] =
     " Alipur | Andaman Island | Anderson Island | Arainj-Laka-Punga | Austinabad | Bamboo Flat | Barren Island | Beadonabad | Betapur | Bindraban | Bonington | Brookesabad | Cadell Point | Calicut | Chetamale | Cinque Islands | Defence Island | Digilpur | Dolyganj | Flat Island | Geinyale | Great Coco Island | Haddo | Havelock Island | Henry Lawrence Island | Herbertabad | Hobdaypur | Ilichar | Ingoie | Inteview Island | Jangli Ghat | Jhon Lawrence Island | Karen | Kartara | KYD Islannd | Landfall Island | Little Andmand | Little Coco Island | Long Island | Maimyo | Malappuram | Manglutan | Manpur | Mitha Khari | Neill Island | Nicobar Island | North Brother Island | North Passage Island | North Sentinel Island | Nothen Reef Island | Outram Island | Pahlagaon | Palalankwe | Passage Island | Phaiapong | Phoenix Island | Port Blair | Preparis Island | Protheroepur | Rangachang | Rongat | Rutland Island | Sabari | Saddle Peak | Shadipur | Smith Island | Sound Island | South Sentinel Island | Spike Island | Tarmugli Island | Taylerabad | Titaije | Toibalawe | Tusonabad | West Island | Wimberleyganj | Yadita";
@@ -119,82 +107,3 @@ s_a[34] =
     " Almora | Bageshwar | Bhatwari | Chakrata | Chamoli | Champawat | Dehradun | Deoprayag | Dharchula | Dunda | Haldwani | Haridwar | Joshimath | Karan Prayag | Kashipur | Khatima | Kichha | Lansdown | Munsiari | Mussoorie | Nainital | Pantnagar | Partapnagar | Pauri Garhwal | Pithoragarh | Purola | Rajgarh | Ranikhet | Roorkee | Rudraprayag | Tehri Garhwal | Udham Singh Nagar | Ukhimath | Uttarkashi ";
 s_a[35] =
     " Adra | Alipurduar | Amlagora | Arambagh | Asansol | Balurghat | Bankura | Bardhaman | Basirhat | Berhampur | Bethuadahari | Birbhum | Birpara | Bishanpur | Bolpur | Bongoan | Bulbulchandi | Burdwan | Calcutta | Canning | Champadanga | Contai | Cooch Behar | Daimond Harbour | Dalkhola | Dantan | Darjeeling | Dhaniakhali | Dhuliyan | Dinajpur | Dinhata | Durgapur | Gangajalghati | Gangarampur | Ghatal | Guskara | Habra | Haldia | Harirampur | Harishchandrapur | Hooghly | Howrah | Islampur | Jagatballavpur | Jalpaiguri | Jhalda | Jhargram | Kakdwip | Kalchini | Kalimpong | Kalna | Kandi | Karimpur | Katwa | Kharagpur | Khatra | Krishnanagar | Mal Bazar | Malda | Manbazar | Mathabhanga | Medinipur | Mekhliganj | Mirzapur | Murshidabad | Nadia | Nagarakata | Nalhati | Nayagarh | Parganas | Purulia | Raiganj | Rampur Hat | Ranaghat | Seharabazar | Siliguri | Suri | Takipur | Tamluk";
-
-// Add this JavaScript code to your script
-document.addEventListener("DOMContentLoaded", (event) => {
-    document.body.classList.add("fade-transition");
-    setTimeout(() => {
-        document.body.classList.add("fade-in");
-    }, 100); // Adjust the timeout if needed
-});
-
-const stateSelect = document.querySelector("#state");
-state_arr.forEach((state) => {
-    // console.log(state, state_arr.indexOf(state));
-    const opt = document.createElement("option");
-    opt.id = state_arr.indexOf(state);
-    opt.value = state;
-    opt.innerText = state;
-
-    stateSelect.append(opt);
-});
-
-const citySelect = document.querySelector("#city");
-
-stateSelect.addEventListener("change", () => {
-    citySelect.innerHTML = "";
-    citySelect.innerHTML = `  <option value="">Select City</option>`;
-
-    console.log(stateSelect.selectedIndex);
-    console.log(stateSelect.options[stateSelect.selectedIndex].value);
-    // console.log(s_a[stateSelect.selectedIndex]);
-
-    const places = s_a[stateSelect.selectedIndex].split(" | ");
-    places.forEach((city) => {
-        // console.log(city);
-        const opt = document.createElement("option");
-        opt.innerText = city;
-        opt.value = city;
-        opt.id = city;
-
-        citySelect.append(opt);
-    });
-});
-
-const submitBtn = document.querySelector("#submitBtn");
-submitBtn.addEventListener("click", (event) => {
-    const form = document.querySelector(".shipping-form");
-    const formData = new FormData(form);
-
-    form.reportValidity();
-
-    // form.submit();
-    if (form.checkValidity()) {
-        // Prevent form submission
-        event.preventDefault();
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        fetch("http://localhost:8000/submit-shipping-details", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => {
-                if (res.ok) {
-                    // If form submission is successful, redirect to the new page
-                    window.location.href = "./confirm-details.html";
-                } else {
-                    alert("Form submission failed.");
-                }
-            })
-            .catch((err) => console.log("Error:", err));
-    } else {
-        event.preventDefault(); // Prevent form submission
-        // alert("Please fill in all required fields.");
-    }
-});
