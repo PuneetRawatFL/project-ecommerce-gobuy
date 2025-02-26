@@ -134,7 +134,10 @@ function addItemInCart(json) {
             const userId = parseInt(user[2], 10);
 
             fetch(
-                `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId}`
+                `http://localhost:8000/mysql?mysqlQuery=
+                update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2B 1 where product_id =  ${json.id} and users.userId =${userId};
+                update products set sku = sku %2D 1 where id = ${json.id};
+                `
             )
                 .then((res) => res.json())
                 .then((result) => {
@@ -182,7 +185,10 @@ function addItemInCart(json) {
 
             if (json.product_quantity - 1 == 0) {
                 fetch(
-                    `http://localhost:8000/mysql?mysqlQuery=delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId}`
+                    `http://localhost:8000/mysql?mysqlQuery=
+                    delete cart from cart join users on cart.user_id = users.userId where cart.product_id = ${json.id} and users.userId = ${userId};
+                    update products set sku = sku %2B 1 where id = ${json.id};
+                    `
                 )
                     .then((res) => res.json())
                     .then((result) => {
@@ -206,7 +212,10 @@ function addItemInCart(json) {
                     });
             } else {
                 fetch(
-                    `http://localhost:8000/mysql?mysqlQuery=update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId}`
+                    `http://localhost:8000/mysql?mysqlQuery=
+                    update cart c join users on c.user_id = users.userId set product_quantity = product_quantity %2D 1 where product_id =  ${json.id} and users.userId =${userId};
+                    update products set sku = sku %2B 1 where id = ${json.id};
+                    `
                 )
                     .then((res) => res.json())
                     .then((result) => {

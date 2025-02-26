@@ -15,8 +15,8 @@ exports.addToCart = (req, res) => {
     const userId = req.body.userId;
     // res.json({ message: "Data received successfully!", data: itemReceived });
 
-    const query =
-        "insert into cart(product_id, product_price, product_quantity, user_id) values (?,?,?,?)";
+    const query = `insert into cart(product_id, product_price, product_quantity, user_id) values (?,?,?,?);
+        update products set sku = sku - 1 where id = ${itemReceived.id}`;
     const values = [itemReceived.id, itemReceived.price, "1", userId];
 
     connection.query(query, values, (error, results) => {

@@ -162,18 +162,7 @@ confirmPay.addEventListener("click", async () => {
         .then((response) => response.json())
         .then((data) => {
             if (data.url) {
-                // console.log(data.shipping_details);
-                // console.log(data.url);
-
-                // fetch(
-                //     `http://localhost:8000/mysql?mysqlQuery=select sum(total_price) as cart_total from cart where cart.user_id =  ${userId}`
-                // )
-                //     .then((res) => res.json())
-                //     .then((result) => {
-                //         subtotalSpan.innerText = `$${result[0].cart_total}`;
-                //         totalCartPrice = `${result[0].cart_total}`;
-                //     });
-                window.location.href = data.url; // Redirect to Stripe Checkout
+                window.location.href = data.url; // Redirect to Stripe success page
             } else {
                 console.error("Checkout session creation failed:", data);
             }

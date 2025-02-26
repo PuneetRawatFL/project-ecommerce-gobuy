@@ -69,6 +69,21 @@ app.post("/register", userController);
 //endpoint to place order
 app.post("/create-checkout-session", paymentController);
 
+//edit user
+app.post("/edit-user", (req, res) => {
+    const { name, email, gender, userId } = req.body;
+    console.log(userId);
+
+    const query = `update users set name = ?, email = ?, gender = ? where userId = ?`;
+    const values = [name, email, gender, userId];
+
+    connection.query(query, values, (error, results) => {
+        if (error)
+            return res.status(500).json({ message: "error editing user" });
+        return res.status(200).json({ message: "success" });
+    });
+});
+
 //starting server
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);

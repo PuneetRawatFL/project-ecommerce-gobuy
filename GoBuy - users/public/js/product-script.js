@@ -1,10 +1,12 @@
+let userId = "";
 try {
     const user = document.cookie.match(/(^| )userId=([^;]+)/);
-    const userId = parseInt(user[2], 10);
+    userId = parseInt(user[2], 10);
     console.log("userid", userId);
 } catch {
     console.error("user not logged in");
 }
+console.log(userId);
 
 document.addEventListener("DOMContentLoaded", () => {
     //fetch announcement bar
@@ -98,6 +100,26 @@ function getProducts(url) {
                 const productDiv = document.createElement("div");
                 productDiv.classList.add("product-item");
 
+                const heartImgDiv = document.createElement("div");
+                heartImgDiv.style.display = "flex";
+                heartImgDiv.style.justifyContent = "flex-end";
+
+                const heartImg = document.createElement("img");
+                heartImg.classList.add("heartImg");
+                heartImg.id = `heart-${product.id}`;
+                heartImg.src = "../images/heart.png";
+
+                heartImg.addEventListener("click", () => {
+                    console.log("product: ", product.id);
+                    heartImg.src = "../images/heart (1).png";
+                    fetch(
+                        `http://localhost:8000/mysql?mysqlQuery=insert into wishlist values(${product.id}, ${userId})`
+                    );
+                });
+
+                heartImgDiv.append(heartImg);
+                productDiv.append(heartImgDiv);
+
                 // adding title
                 const title = document.createElement("p");
                 title.classList.add("product-name");
@@ -188,7 +210,10 @@ function getProducts(url) {
                                 else {
                                     console.log("item exists");
                                     fetch(
-                                        `http://localhost:8000/mysql?mysqlQuery=update cart c join users u on c.user_id = u.userId set product_quantity = product_quantity %2B 1 where product_id = ${btn.id}`
+                                        `http://localhost:8000/mysql?mysqlQuery=
+                                        update cart c join users u on c.user_id = u.userId set product_quantity = product_quantity %2B 1 where product_id = ${btn.id};
+                                        update products set sku = sku %2D 1 where id = ${btn.id};
+                                        `
                                     )
                                         .then((res) => res.json())
                                         .then((result) => {
@@ -336,3 +361,18 @@ function removeAddButtonLoading(btnId) {
     btn.innerHTML = "";
     btn.textContent = "Add to Cart";
 }
+
+async function checkWishlist() {
+    const res = await fetch(
+        `http://localhost:8000/mysql?mysqlQuery=select product_id from wishlist where user_id = ${userId}`
+    );
+    const result = await res.json();
+    // console.log(result);
+    result.forEach((prodId) => {
+        // console.log(prodId.product_id);
+        const img = document.querySelector(`#heart-${prodId.product_id}`);
+        // console.log(img);
+        img.src = "../images/heart (1).png";
+    });
+}
+checkWishlist();

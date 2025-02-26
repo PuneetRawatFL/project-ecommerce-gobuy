@@ -73,11 +73,31 @@ const userLogoutOptions = document.querySelector(".user-logout-options");
 const userLoginOptions = document.querySelector(".user-login-options");
 // console.log(userBtn);
 
-function userLoggedIn(userName) {
+async function userLoggedIn(userName, userId) {
     userTag.innerText = `Hello, ${userName}`;
     userLoginOptions.style.display = "none";
     userLogoutOptions.style.display = "block";
-    userBtn.src = "../images/user_logged_in.png";
+
+    // const response = await fetch(
+    //     `http://localhost:8000/mysql?mysqlQuery=select gender from users where userId = ${userId};`
+    // );
+    // const result = await response.json();
+    // console.log(result[0].gender);
+
+    fetch(
+        `http://localhost:8000/mysql?mysqlQuery=select gender from users where userId = ${userId};`
+    )
+        .then((response) => response.json())
+        .then((result) => {
+            // console.log(result[0].gender);
+
+            if (result[0].gender == "male") {
+                userBtn.src = "../images/male-icon.png";
+            }
+            if (result[0].gender == "female") {
+                userBtn.src = "../images/female-icon.png";
+            }
+        });
 
     // console.log((document.cookie = "token"));
 }
@@ -90,7 +110,7 @@ logoutBtn.addEventListener("click", () => {
     userTag.innerText = `Not a user? Login`;
     userLoginOptions.style.display = "block";
     userLogoutOptions.style.display = "none";
-    userBtn.src = "../images/user_logged_out.png";
+    userBtn.src = "../images/notLoggedIn.png";
 
     console.log("logout");
 
@@ -127,7 +147,7 @@ async function checkUser() {
         const details = await getDetailFromToken();
         // console.log("details", details);
         //calling function
-        userLoggedIn(details.name);
+        userLoggedIn(details.name, details.userId);
 
         document.cookie = `userId = ${details.userId}; path=/`;
     }
